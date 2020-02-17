@@ -4,12 +4,12 @@ package com.ensimag.Models;
  * Created by houdee on 2/17/20.
  */
 public class Rectangle {
-    private int h; // hauteur
-    private int l; // largeur
+    private int h; // height
+    private int w; // width
 
-    public Rectangle(int _h, int _l) {
+    public Rectangle(int _h, int _w) {
         this.h = _h;
-        this.l = _l;
+        this.w = _w;
     }
 
     public int getH() {
@@ -20,11 +20,11 @@ public class Rectangle {
         this.h = h;
     }
 
-    public int getL() {
-        return l;
+    public int getW() {
+        return w;
     }
 
-    public void setL(int l) {
-        this.l = l;
+    public void setW(int w) {
+        this.w = w;
     }
 }
