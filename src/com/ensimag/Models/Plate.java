@@ -15,8 +15,6 @@ public class Plate extends Rectangle {
     }
 
     public void BL(Map<Rectangle, Integer> pieces) {
-        String entriesFileName = "entries.txt";
-        getFileEntries(entriesFileName);
         int lineH = 0;
         int lineW = 0;
         boolean newLine = true;
@@ -33,6 +31,7 @@ public class Plate extends Rectangle {
                         hRest -= p.getH();
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p)-1);
+                        System.out.println("Nouvelle ligne, une pièce a été placée !");
                     }
                     nbPieces = getLineWRest(lineW) / p.getW();
                     if (nbPieces > 0) {
@@ -40,10 +39,13 @@ public class Plate extends Rectangle {
                             // On place toutes les pièces que l'on peut placer (nbPieces)
                             lineW += nbPieces * p.getW();
                             pieces.put(p, pieces.get(p) - nbPieces);
+                            System.out.println(nbPieces+" ont été découpées (toutes les pièces pouvant etre" +
+                                    "placées sur la ligne).");
                         } else {
                             // On place toutes les pièces qu'il nous reste à placer (pieces.get(p))
                             lineW += pieces.get(p) * p.getW();
                             pieces.put(p, 0);
+                            System.out.println(pieces.get(p)+" ont été découpées (toutes les pièces restantes).");
                         }
                     }
                 }
@@ -59,18 +61,5 @@ public class Plate extends Rectangle {
 
     private int getLineWRest(int lineW) {
         return this.getW() - lineW;
-    }
-
-    public void getFileEntries(String fileName) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String st;
-            while ((st = br.readLine()) != null) {
-                System.out.println(st);
-            }
-        } catch (Exception e) {
-            System.out.println("There is a problem with EntriesFile");
-            e.printStackTrace();
-        }
     }
 }

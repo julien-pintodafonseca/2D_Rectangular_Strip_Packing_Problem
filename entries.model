@@ -1,0 +1,9 @@
+nbTypesPlaques nbTypesPieces
+WidthPlaqueType1 HeightPlaqueType1 nbPlaquesType1
+WidthPlaqueType2 HeightPlaqueType2 nbPlaquesType2
+...
+widthPlaqueTypeN HeightPlaqueTypeN nbPlaquesTypeN
+widthPieceType1 HeightPieceType1 nbPiecesType1
+widthPieceType2 HeightPieceType2 nbPiecesType2
+...
+widthPieceTypeN HeightPieceTypeN nbPiecesTypeN

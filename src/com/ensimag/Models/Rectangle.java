@@ -3,7 +3,7 @@ package com.ensimag.Models;
 /**
  * Created by houdee on 2/17/20.
  */
-public class Rectangle {
+public class Rectangle implements Comparable<Rectangle> {
     private int h; // height
     private int w; // width
 
@@ -26,5 +26,10 @@ public class Rectangle {
 
     public void setW(int w) {
         this.w = w;
+    }
+
+    @Override
+    public int compareTo(Rectangle o) {
+        return this.h - o.getH();
     }
 }
