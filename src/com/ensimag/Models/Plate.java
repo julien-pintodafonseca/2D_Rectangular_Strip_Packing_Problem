@@ -62,8 +62,6 @@ public class Plate extends Rectangle {
     }
 
     public void getFileEntries(String fileName) {
-        //File file = new File(fileName);
-        System.out.printf("good\n");
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String st;
