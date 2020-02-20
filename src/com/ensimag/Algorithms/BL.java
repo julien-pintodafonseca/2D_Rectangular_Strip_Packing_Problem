@@ -24,6 +24,8 @@ public class BL {
     public void start() {
         Map<Plate, Integer> plates = fileIn.getPlates();
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
+        int resultBLForOnePlate;
+        Integer chutes = 0;
 
         int plateNumber = 0;
         for (Plate pType : plates.keySet()) {
@@ -32,8 +34,10 @@ public class BL {
                 Plate plate = new Plate(pType.getH(), pType.getW());
 
                 endResults.add("Plaque "+plateNumber+" :");
-                if (BLForOnePlate(plate, pieces)) {
+                resultBLForOnePlate = BLForOnePlate(plate, pieces);
+                if (resultBLForOnePlate != -1) {
                     plates.put(pType, plates.get(pType) - 1);
+                    chutes += resultBLForOnePlate;
                 } else {
                     endResults.add("Pas utilisée.");
                 }
@@ -42,11 +46,31 @@ public class BL {
             }
         }
 
+        endResults.add("Pièces restantes à couper :");
+        String piecesRestantes = "";
+        for (Plate p : plates.keySet()) {
+            for (int i=0; i<plates.get(p); i++) {
+                piecesRestantes += p.getH()+" "+p.getW()+", ";
+            }
+        }
+        if (!piecesRestantes.equals("")) {
+            endResults.add(piecesRestantes);
+        } else {
+            endResults.add("Aucune.");
+        }
+
+        endResults.add("Chutes:");
+        if (chutes != 0) {
+            endResults.add(chutes.toString());
+        } else {
+            endResults.add("Aucune.");
+        }
+
         FileOut fileOut = new FileOut("resultsBL.txt", endResults);
         fileOut.writeFile();
     }
 
-    private boolean BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
+    private int BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
         int lineH = 0;
         int lineW = 0;
         boolean plateIsUsed = false; // vrai si la plaque a été utilisé (même partiellement), faux sinon
@@ -54,6 +78,7 @@ public class BL {
         boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placer toutes les pièces
         int nbPieces; // nombre de pièces à découper dans la ligne actuelle
         String piecesDecoupes = "";
+        int chutes = getSize(plate);
 
         while (plate.getHRest() > 0 && !end) {
             end = true;
@@ -69,6 +94,7 @@ public class BL {
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
                         piecesDecoupes += lineW+" "+p.getH()+" "+p.getW()+", ";
+                        chutes -= getSize(p);
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p)-1);
                         System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
@@ -82,6 +108,7 @@ public class BL {
                                     "(toutes les pièces pouvant etre placées sur la ligne).");
                             for (int i=0; i<nbPieces; i++) {
                                 piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
+                                chutes -= getSize(p);
                                 lineW += p.getW();
                             }
                             pieces.put(p, pieces.get(p) - nbPieces);
@@ -90,15 +117,18 @@ public class BL {
                             System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
                             for (int i=0; i<pieces.get(p); i++) {
                                 piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
+                                chutes -= getSize(p);
                                 lineW += p.getW();
                             }
                             pieces.put(p, 0);
                         }
                     }
                 }
-                endResults.add(piecesDecoupes);
-                piecesDecoupes = "";
             }
+            if (!piecesDecoupes.equals("")) {
+                endResults.add(piecesDecoupes);
+            }
+            piecesDecoupes = "";
             if (!end) {
                 newLine = true;
                 lineW = 0;
@@ -106,6 +136,10 @@ public class BL {
             }
         }
 
-        return plate.getHRest() < plate.getH();
+        return plateIsUsed ? chutes : -1;
+    }
+
+    private int getSize(Rectangle o) {
+        return o.getH()*o.getW();
     }
 }
