@@ -20,19 +20,21 @@ public class BL {
         Map<Plate, Integer> plates = fileIn.getPlates();
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
 
-        for (Plate p : plates.keySet()) {
-            int nbPlatesAtStart = plates.get(p);
+        for (Plate pType : plates.keySet()) {
+            int nbPlatesAtStart = plates.get(pType);
             for (int i=0; i<nbPlatesAtStart; i++) {
-                System.out.println("+++ NOUVELLE PLAQUE ["+p.getH()+"/"+p.getW()+"]+++");
-                BLForOnePlate(p, pieces);
-                plates.put(p, plates.get(p)-1);
+                Plate plate = new Plate(pType.getH(), pType.getW());
+                if (BLForOnePlate(plate, pieces)) {
+                    plates.put(pType, plates.get(pType) - 1);
+                }
             }
         }
     }
 
-    private void BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
+    private boolean BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
         int lineH = 0;
         int lineW = 0;
+        boolean plateIsUsed = false; // vrai si la plaque a été utilisé (même partiellement), faux sinon
         boolean newLine = true;
         boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placer toutes les pièces
         int nbPieces; // nombre de pièces à découper dans la ligne actuelle
@@ -43,6 +45,11 @@ public class BL {
                 if (p.getH() <= plate.getHRest() && p.getW() <= plate.getLineWRest(lineW) && pieces.get(p) > 0) {
                     end = false;
                     if (newLine) {
+                        if (!plateIsUsed) {
+                            plateIsUsed = true;
+                            System.out.println();
+                            System.out.println("+++ NOUVELLE PLAQUE ["+plate.getH()+"/"+plate.getW()+"]+++");
+                        }
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
                         lineW += p.getW();
@@ -53,7 +60,7 @@ public class BL {
                     if (nbPieces > 0) {
                         if (pieces.get(p) - nbPieces > 0) {
                             // On place toutes les pièces que l'on peut placer (nbPieces)
-                            System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées" +
+                            System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées " +
                                     "(toutes les pièces pouvant etre placées sur la ligne).");
                             lineW += nbPieces * p.getW();
                             pieces.put(p, pieces.get(p) - nbPieces);
@@ -73,5 +80,6 @@ public class BL {
             }
         }
 
+        return plate.getHRest() < plate.getH();
     }
 }
