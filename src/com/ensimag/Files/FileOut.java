@@ -15,14 +15,14 @@ public class FileOut {
         this.endResults = _endResults;
     }
 
-    public void writeFile(){
-        try{
+    public void writeFile() {
+        try {
             FileWriter writer = new FileWriter(fileName);
             for(String str: endResults) {
                 writer.write(str + System.lineSeparator());
             }
             writer.close();
-        }catch(Exception e) {
+        } catch(Exception e) {
             System.out.println("There is a problem in writing the files");
         }
     }
