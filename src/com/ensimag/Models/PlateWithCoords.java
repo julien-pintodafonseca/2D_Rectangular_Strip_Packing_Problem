@@ -12,4 +12,26 @@ public class PlateWithCoords extends Plate{
         this.x = _x;
         this.y = _y;
     }
+
+    public PlateWithCoords(int _h, int _w,int _x, int _y) {
+        super(_h, _w);
+        this.x = _x;
+        this.y = _y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

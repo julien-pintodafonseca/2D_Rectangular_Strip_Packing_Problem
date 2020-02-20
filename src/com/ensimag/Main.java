@@ -1,20 +1,30 @@
 package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
+import com.ensimag.Algorithms.BLAdvanced;
 import com.ensimag.Files.FileIn;
+import com.ensimag.Models.Decoupe;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
+
+import javax.swing.plaf.synth.SynthTextAreaUI;
 
 public class Main {
 
     public static void main(String[] args) {
         FileIn myFileIn = new FileIn("entries.txt");
         myFileIn.loadEntries();
-        BL myBL = new BL(myFileIn);
+        /*BL myBL = new BL(myFileIn);
 
         printStatus(myFileIn);
         myBL.start();
+        printStatus(myFileIn);*/
+
+        BLAdvanced myBLA = new BLAdvanced(myFileIn);
         printStatus(myFileIn);
+        myBLA.start();
+        printStatus(myFileIn);
+
     }
 
     private static void printStatus(FileIn myFileIn) {
