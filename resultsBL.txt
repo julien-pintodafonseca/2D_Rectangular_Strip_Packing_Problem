@@ -1,0 +1,13 @@
+Plaque 0 :
+LS=0
+0 20 10, 10 20 10, 20 20 10, 30 10 10, 40 10 10, 
+LS=20
+0 10 10, 10 10 10, 20 5 18, 
+LS=30
+0 5 18, 
+Plaque 1 :
+Pas utilisée.
+Pièces restantes à couper :
+40 55, 
+Chutes:
+1020
