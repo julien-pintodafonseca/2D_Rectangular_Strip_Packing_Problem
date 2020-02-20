@@ -3,6 +3,7 @@ package com.ensimag.Algorithms;
 import com.ensimag.Files.FileIn;
 import com.ensimag.Models.Decoupe;
 import com.ensimag.Models.Plate;
+import com.ensimag.Models.PlateWithCoords;
 import com.ensimag.Models.Rectangle;
 
 import java.util.Iterator;
@@ -21,11 +22,13 @@ public class BLAdvanced {
 
     public void start() {
         Plate plate = fileIn.getPlates().keySet().iterator().next();
+        PlateWithCoords plate2 = new PlateWithCoords(plate, 0, 0);
         this.pieces = fileIn.getPieces();
-        this.cutCutCut(plate);
+        Decoupe result = this.cutCutCut(plate2);
+        System.out.println(result.toString());
     }
 
-    public Decoupe cutCutCut(Plate Plate) {
+    private Decoupe cutCutCut(PlateWithCoords plate) {
         Iterator<Rectangle> it = this.pieces.keySet().iterator();
         Rectangle p = new Rectangle(0,0);
         boolean toward = false;
@@ -33,43 +36,48 @@ public class BLAdvanced {
 
         while (!enoughPlace && it.hasNext()) {
             p = it.next();
-            if (p.getH() <= Plate.getH() && p.getW() <= Plate.getW() && pieces.get(p) > 0) {
+            if (p.getH() <=plate.getH() && p.getW() <= plate.getW() && pieces.get(p) > 0) {
                 enoughPlace=true;
-            }else if(p.getH() <= Plate.getW() && p.getW() <= Plate.getH() && pieces.get(p) > 0){
+            }else if(p.getH() <= plate.getW() && p.getW() <= plate.getH() && pieces.get(p) > 0){
                 enoughPlace=true;
                 toward = true;
             }
         }
 
         if(!enoughPlace){
-            return new Decoupe(Plate.getH()*Plate.getW(), "");
+            return new Decoupe(plate.getH()*plate.getW(), "");
         }else{
             this.pieces.put(p, this.pieces.get(p) - 1);
             if(toward) {
-                Decoupe subPlate1 = new Decoupe(this.cutCutCut(new Plate(Plate.getH()-p.getW(), p.getH())));
-                Decoupe subPlate2 = new Decoupe(this.cutCutCut(new Plate(Plate.getH(), Plate.getW()-p.getH())));
-                Decoupe subPlate3 = new Decoupe(this.cutCutCut(new Plate(Plate.getH()-p.getW(), Plate.getW())));
-                Decoupe subPlate4 = new Decoupe(this.cutCutCut(new Plate(p.getW(), Plate.getW()-p.getH())));
-                if(subPlate1.getLost()+subPlate2.getLost()> subPlate1.getLost()+subPlate2.getLost()) {
+                Decoupe subPlate1 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH()-p.getW(), p.getH(),plate.getX(), plate.getY() + p.getW())));
+                Decoupe subPlate2 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-p.getH(), plate.getX() + p.getH(), plate.getY())));
+                Decoupe subPlate3 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH()-p.getW(), plate.getW(), plate.getX(), plate.getY() + p.getW())));
+                Decoupe subPlate4 = new Decoupe(this.cutCutCut(new PlateWithCoords(p.getW(), plate.getW()-p.getH(), plate.getX() + p.getH(), plate.getY())));
+                if(subPlate1.getLost()+subPlate2.getLost() < subPlate3.getLost()+subPlate4.getLost()) {
                     subPlate1.fusion(subPlate2);
+                    System.out.println(" dr" + subPlate1.getInfo());
+                    subPlate1.setInfo("Piece H=" + p.getH() + " / W=" + p.getW() + " / Position X=" + plate.getX() + " / Y=" + plate.getY() + "\n" + subPlate1.getInfo());
                     return subPlate1;
                 }
                 else {
                     subPlate3.fusion(subPlate4);
+                    System.out.println(" dr" + subPlate3.getInfo());
+                    subPlate3.setInfo("Piece H=" + p.getW() + " / W=" + p.getH() +  " / Position X=" + plate.getX() + " / Y=" + plate.getY() + "\n" + subPlate3.getInfo());
                     return subPlate3;
                 }
             }else {
-                Decoupe subPlate1 = new Decoupe(this.cutCutCut(new Plate(Plate.getH()-p.getH(), p.getW())));
-                Decoupe subPlate2 = new Decoupe(this.cutCutCut(new Plate(Plate.getH(), Plate.getW()-p.getW())));
-                Decoupe subPlate3 = new Decoupe(this.cutCutCut(new Plate(Plate.getH()-p.getH(), Plate.getW())));
-                Decoupe subPlate4 = new Decoupe(this.cutCutCut(new Plate(p.getH(), Plate.getW()-p.getW())));
-                if(subPlate1.getLost()+subPlate2.getLost()> subPlate1.getLost()+subPlate2.getLost()) {
+                Decoupe subPlate1 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH()-p.getH(), p.getW(),plate.getX(), plate.getY() + p.getH())));
+                Decoupe subPlate2 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-p.getW(), plate.getX() + p.getW(), plate.getY())));
+                Decoupe subPlate3 = new Decoupe(this.cutCutCut(new PlateWithCoords(plate.getH()-p.getH(), plate.getW(), plate.getX(), plate.getY() + p.getH())));
+                Decoupe subPlate4 = new Decoupe(this.cutCutCut(new PlateWithCoords(p.getH(), plate.getW()-p.getW(), plate.getX() + p.getW(), plate.getY())));
+                if(subPlate1.getLost()+subPlate2.getLost() < subPlate3.getLost()+subPlate4.getLost()) {
                     subPlate1.fusion(subPlate2);
-                    subPlate1.setInfo("Piece H=" + p.getH() + " / W=" + p.getW() + " / " + subPlate1.getInfo());
+                    subPlate1.setInfo("Piece H=" + p.getH() + " / W=" + p.getW() +  " / Position X=" + plate.getX() + " / Y=" + plate.getY() + "\n" + subPlate1.getInfo());
                     return subPlate1;
                 }
                 else {
                     subPlate3.fusion(subPlate4);
+                    subPlate3.setInfo("Piece H=" + p.getH() + " / W=" + p.getW() +  " / Position X=" + plate.getX() + " / Y=" + plate.getY() + "\n" + subPlate3.getInfo());
                     return subPlate3;
                 }
             }

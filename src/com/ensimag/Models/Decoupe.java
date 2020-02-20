@@ -38,8 +38,13 @@ public class Decoupe {
         this.info = info;
     }
 
+    public String toString(){
+        return " La chute est de : " + this.lost+".\n" +
+                " Les infos : " + this.info;
+    }
+
     public void fusion(Decoupe toFusion){
-        this.setInfo(this.getInfo() + " " + toFusion.getInfo());
-        this.setLost(this.getLost() + toFusion.getLost());
+        this.info = this.info + " " + toFusion.getInfo();
+        this.lost = this.lost + toFusion.getLost();
     }
 }
