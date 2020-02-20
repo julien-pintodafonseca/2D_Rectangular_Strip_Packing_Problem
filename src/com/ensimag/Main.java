@@ -2,12 +2,8 @@ package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
 import com.ensimag.Files.FileIn;
-import com.ensimag.Files.FileOut;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
