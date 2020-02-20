@@ -21,9 +21,8 @@ public class BL {
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
 
         for (Plate p : plates.keySet()) {
-            for (int i=0; i<plates.get(p); i++) {
-                System.out.println(i);
-                System.out.println(plates.get(p));
+            int nbPlatesAtStart = plates.get(p);
+            for (int i=0; i<nbPlatesAtStart; i++) {
                 System.out.println("+++ NOUVELLE PLAQUE ["+p.getH()+"/"+p.getW()+"]+++");
                 BLForOnePlate(p, pieces);
                 plates.put(p, plates.get(p)-1);
