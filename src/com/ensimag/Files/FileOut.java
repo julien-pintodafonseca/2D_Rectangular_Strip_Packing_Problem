@@ -1,6 +1,6 @@
 package com.ensimag.Files;
 
-import java.util.ArrayList;
+import java.io.FileWriter;
 import java.util.List;
 
 /**
@@ -14,4 +14,20 @@ public class FileOut {
         this.fileName = _fileName;
         this.endResults = _endResults;
     }
+
+    public void writeFile(){
+        try{
+            FileWriter writer = new FileWriter(fileName);
+            for(String str: endResults) {
+                writer.write(str + System.lineSeparator());
+            }
+            writer.close();
+        }catch(Exception e) {
+            System.out.println("There is a problem in writing the files");
+        }
+    }
+
+
 }
+
+

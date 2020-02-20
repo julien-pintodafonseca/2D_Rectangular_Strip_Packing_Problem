@@ -2,8 +2,12 @@ package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
 import com.ensimag.Files.FileIn;
+import com.ensimag.Files.FileOut;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -15,6 +19,9 @@ public class Main {
         printStatus(myFileIn);
         myBL.start();
         printStatus(myFileIn);
+
+
+
     }
 
     private static void printStatus(FileIn myFileIn) {

@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * Created by solokwal on 2/20/20.
  */
+
 public class BLAdvanced {
 
     public Decoupe BLAdvanced(Plaque plaque, Map<Rectangle, Integer> pieces) {
