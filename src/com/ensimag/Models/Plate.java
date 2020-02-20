@@ -31,21 +31,21 @@ public class Plate extends Rectangle {
                         hRest -= p.getH();
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p)-1);
-                        System.out.println("Nouvelle ligne, une pièce a été placée !");
+                        System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
                     }
                     nbPieces = getLineWRest(lineW) / p.getW();
                     if (nbPieces > 0) {
                         if (pieces.get(p) - nbPieces > 0) {
                             // On place toutes les pièces que l'on peut placer (nbPieces)
+                            System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées" +
+                                    "(toutes les pièces pouvant etre placées sur la ligne).");
                             lineW += nbPieces * p.getW();
                             pieces.put(p, pieces.get(p) - nbPieces);
-                            System.out.println(nbPieces+" ont été découpées (toutes les pièces pouvant etre" +
-                                    "placées sur la ligne).");
                         } else {
                             // On place toutes les pièces qu'il nous reste à placer (pieces.get(p))
+                            System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
                             lineW += pieces.get(p) * p.getW();
                             pieces.put(p, 0);
-                            System.out.println(pieces.get(p)+" ont été découpées (toutes les pièces restantes).");
                         }
                     }
                 }

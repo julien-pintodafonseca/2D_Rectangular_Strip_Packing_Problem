@@ -52,17 +52,18 @@ public class FileIn {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             int line = 0;
             String st;
-            int nbTypePlates = 0;
+            int nbTypePlates = 0, nbTypePieces = 0;
             while ((st = br.readLine()) != null) {
                 StringTokenizer tk = new StringTokenizer(st);
                 if (line == 0) {
                     nbTypePlates = Integer.parseInt(tk.nextToken());
+                    nbTypePieces = Integer.parseInt(tk.nextToken());
                 } else if (line <= nbTypePlates) {
                     int h = Integer.parseInt(tk.nextToken());
                     int w = Integer.parseInt(tk.nextToken());
                     int nbPlates = Integer.parseInt(tk.nextToken());
                     plates.put(new Plate(h, w), nbPlates);
-                } else {
+                } else if (line <= nbTypePlates+nbTypePieces){
                     int h = Integer.parseInt(tk.nextToken());
                     int w = Integer.parseInt(tk.nextToken());
                     int nbPieces = Integer.parseInt(tk.nextToken());

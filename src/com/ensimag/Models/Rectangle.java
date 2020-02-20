@@ -30,6 +30,6 @@ public class Rectangle implements Comparable<Rectangle> {
 
     @Override
     public int compareTo(Rectangle o) {
-        return this.h - o.getH();
+        return o.getH() - this.h;
     }
 }

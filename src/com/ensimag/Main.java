@@ -13,11 +13,15 @@ public class Main {
         myFileIn.loadEntries();
 
         //Map<Plate, Integer> plates = myFileIn.getPlates();
-        Plate myPlate = new Plate(40, 55);
+        Plate myPlate = new Plate(80, 80);
         Map<Rectangle, Integer> pieces = myFileIn.getPieces();
 
+        printStatus(myFileIn);
         myPlate.BL(pieces);
+        printStatus(myFileIn);
+    }
 
+    public static void printStatus(FileIn myFileIn) {
         System.out.println();
         for (Plate p : myFileIn.getPlates().keySet()) {
             System.out.println("Plaque H="+p.getH()+" / W="+p.getW()+" / Quantité="+myFileIn.getPlates().get(p));
@@ -25,5 +29,6 @@ public class Main {
         for (Rectangle p : myFileIn.getPieces().keySet()) {
             System.out.println("Pièce H="+p.getH()+" / W="+p.getW()+" / Quantité="+myFileIn.getPieces().get(p));
         }
+        System.out.println();
     }
 }
