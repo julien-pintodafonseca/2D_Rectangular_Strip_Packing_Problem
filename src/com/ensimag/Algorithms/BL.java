@@ -4,6 +4,7 @@ import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
+import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,8 @@ public class BL {
 
         results.add("Pièces restantes à couper :");
         String piecesRestantes = "";
-        for (Plate p : plates.keySet()) {
-            for (int i=0; i<plates.get(p); i++) {
+        for (Rectangle p : pieces.keySet()) {
+            for (int i=0; i<pieces.get(p); i++) {
                 piecesRestantes += p.getH()+" "+p.getW()+", ";
             }
         }
