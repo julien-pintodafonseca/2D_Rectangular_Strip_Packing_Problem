@@ -8,17 +8,17 @@ import java.util.List;
  */
 public class FileOut {
     private String fileName;
-    private List<String> endResults;
+    private List<String> results;
 
-    public FileOut(String _fileName, List<String> _endResults) {
+    public FileOut(String _fileName, List<String> _results) {
         this.fileName = _fileName;
-        this.endResults = _endResults;
+        this.results = _results;
     }
 
     public void writeFile() {
         try {
             FileWriter writer = new FileWriter(fileName);
-            for(String str: endResults) {
+            for(String str: results) {
                 writer.write(str + System.lineSeparator());
             }
             writer.close();

@@ -14,11 +14,11 @@ import java.util.Map;
  */
 public class BL {
     private FileIn fileIn;
-    private List<String> endResults;
+    private List<String> results;
 
     public BL(FileIn _fileIn) {
         this.fileIn = _fileIn;
-        this.endResults = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
 
     public void start() {
@@ -33,20 +33,20 @@ public class BL {
             for (int i=0; i<nbPlatesAtStart; i++) {
                 Plate plate = new Plate(pType.getH(), pType.getW());
 
-                endResults.add("Plaque "+plateNumber+" :");
+                results.add("Plaque "+plateNumber+" :");
                 resultBLForOnePlate = BLForOnePlate(plate, pieces);
                 if (resultBLForOnePlate != -1) {
                     plates.put(pType, plates.get(pType) - 1);
                     chutes += resultBLForOnePlate;
                 } else {
-                    endResults.add("Pas utilisée.");
+                    results.add("Pas utilisée.");
                 }
 
                 plateNumber++;
             }
         }
 
-        endResults.add("Pièces restantes à couper :");
+        results.add("Pièces restantes à couper :");
         String piecesRestantes = "";
         for (Plate p : plates.keySet()) {
             for (int i=0; i<plates.get(p); i++) {
@@ -54,20 +54,20 @@ public class BL {
             }
         }
         if (!piecesRestantes.equals("")) {
-            endResults.add(piecesRestantes);
+            results.add(piecesRestantes);
         } else {
-            endResults.add("Aucune.");
+            results.add("Aucune.");
         }
 
-        endResults.add("Chutes:");
+        results.add("Chutes:");
         if (chutes != 0) {
-            endResults.add(chutes.toString());
+            results.add(chutes.toString());
         } else {
-            endResults.add("Aucune.");
+            results.add("Aucune.");
         }
 
         System.out.println("BL Algorithm: entries.txt --> resultsBL.txt | State: Success!");
-        FileOut fileOut = new FileOut("resultsBL.txt", endResults);
+        FileOut fileOut = new FileOut("resultsBL.txt", results);
         fileOut.writeFile();
     }
 
@@ -99,7 +99,7 @@ public class BL {
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p)-1);
                         //System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
-                        endResults.add("LS="+lineH);
+                        results.add("LS="+lineH);
                     }
                     nbPieces = plate.getLineWRest(lineW) / p.getW();
                     if (nbPieces > 0) {
@@ -127,7 +127,7 @@ public class BL {
                 }
             }
             if (!piecesDecoupes.equals("")) {
-                endResults.add(piecesDecoupes);
+                results.add(piecesDecoupes);
             }
             piecesDecoupes = "";
             if (!end) {
