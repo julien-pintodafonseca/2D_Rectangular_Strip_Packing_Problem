@@ -1,7 +1,7 @@
 package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
-import com.ensimag.Algorithms.BLAdvanced;
+import com.ensimag.Algorithms.OptimizedSolver;
 import com.ensimag.Files.FileIn;
 import com.ensimag.Models.Decoupe;
 import com.ensimag.Models.Plate;
@@ -20,11 +20,8 @@ public class Main {
         myBL.start();
         printStatus(myFileIn);*/
 
-        BLAdvanced myBLA = new BLAdvanced(myFileIn);
-        printStatus(myFileIn);
+        OptimizedSolver myBLA = new OptimizedSolver(myFileIn);
         myBLA.start();
-        printStatus(myFileIn);
-
     }
 
     private static void printStatus(FileIn myFileIn) {
