@@ -66,6 +66,7 @@ public class BL {
             endResults.add("Aucune.");
         }
 
+        System.out.println("BL Algorithm: entries.txt --> resultsBL.txt | State: Success!");
         FileOut fileOut = new FileOut("resultsBL.txt", endResults);
         fileOut.writeFile();
     }
@@ -88,8 +89,8 @@ public class BL {
                     if (newLine) {
                         if (!plateIsUsed) {
                             plateIsUsed = true;
-                            System.out.println();
-                            System.out.println("+++ NOUVELLE PLAQUE ["+plate.getH()+"/"+plate.getW()+"]+++");
+                            //System.out.println();
+                            //System.out.println("+++ NOUVELLE PLAQUE ["+plate.getH()+"/"+plate.getW()+"]+++");
                         }
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
@@ -97,15 +98,15 @@ public class BL {
                         chutes -= getSize(p);
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p)-1);
-                        System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
+                        //System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
                         endResults.add("LS="+lineH);
                     }
                     nbPieces = plate.getLineWRest(lineW) / p.getW();
                     if (nbPieces > 0) {
                         if (pieces.get(p) - nbPieces > 0) {
                             // On place toutes les pièces que l'on peut placer (nbPieces)
-                            System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées " +
-                                    "(toutes les pièces pouvant etre placées sur la ligne).");
+                            //System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées " +
+                                    //"(toutes les pièces pouvant etre placées sur la ligne).");
                             for (int i=0; i<nbPieces; i++) {
                                 piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
                                 chutes -= getSize(p);
@@ -114,7 +115,7 @@ public class BL {
                             pieces.put(p, pieces.get(p) - nbPieces);
                         } else {
                             // On place toutes les pièces qu'il nous reste à placer (pieces.get(p))
-                            System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
+                            //System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
                             for (int i=0; i<pieces.get(p); i++) {
                                 piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
                                 chutes -= getSize(p);
