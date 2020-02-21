@@ -36,14 +36,6 @@ public class Decoupe {
         return info;
     }
 
-    /*public void setLost(int lost) {
-        this.lost = lost;
-    }*/
-
-    public void setInfo(List<PlateWithCoords> info) {
-        this.info = info;
-    }
-
     public void addInfo(PlateWithCoords newInfo) {
         this.info.add(newInfo);
     }
@@ -83,21 +75,5 @@ public class Decoupe {
     public void fusion(Decoupe toFusion){
         this.info.addAll(toFusion.getInfo());
         this.lost = this.lost + toFusion.getLost();
-    }
-
-    public void order() {
-        Collections.sort(this.info, new Comparator<PlateWithCoords>() {
-
-            public int compare(PlateWithCoords p1, PlateWithCoords p2) {
-                if(p1.getX()>p2.getX()) {
-                    return -1;
-                }
-                else if(p1.getX() == p2.getX() && p1.getY()>p2.getY()) {
-                        return -1;
-                }
-                else {
-                    return 1;
-                }
-            }});
     }
 }

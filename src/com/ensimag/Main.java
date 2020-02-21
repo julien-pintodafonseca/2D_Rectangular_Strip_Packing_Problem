@@ -12,10 +12,9 @@ public class Main {
         FileIn myFileIn = new FileIn("entries.txt");
         myFileIn.loadEntries();
         BL myBL = new BL(myFileIn);
+        OptimizedSolver myBLA = new OptimizedSolver(myFileIn);
 
         myBL.start();
-
-        OptimizedSolver myBLA = new OptimizedSolver(myFileIn);
         myBLA.start();
     }
 
