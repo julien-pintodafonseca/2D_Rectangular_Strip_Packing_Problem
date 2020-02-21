@@ -23,28 +23,12 @@ public class FileIn {
         this.pieces = new TreeMap<>();
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     public Map<Plate, Integer> getPlates() {
         return plates;
     }
 
-    public void setPlates(Map<Plate, Integer> plates) {
-        this.plates = plates;
-    }
-
     public Map<Rectangle, Integer> getPieces() {
         return pieces;
-    }
-
-    public void setPieces(Map<Rectangle, Integer> pieces) {
-        this.pieces = pieces;
     }
 
     public void loadEntries() {
