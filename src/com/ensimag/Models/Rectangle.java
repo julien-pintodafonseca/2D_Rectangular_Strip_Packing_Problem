@@ -16,20 +16,12 @@ public class Rectangle implements Comparable<Rectangle> {
         return h;
     }
 
-    public void setH(int h) {
-        this.h = h;
-    }
-
     public int getW() {
         return w;
     }
 
-    public void setW(int w) {
-        this.w = w;
-    }
-
     @Override
     public int compareTo(Rectangle o) {
-        return o.getH() - this.h;
+        return (o.getH()*o.getW()) - (this.h*this.w);
     }
 }
