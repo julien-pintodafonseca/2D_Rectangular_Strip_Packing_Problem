@@ -1,28 +1,29 @@
 package com.ensimag.Models;
 
-import java.io.CharArrayReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by solokwal on 2/20/20.
  */
-public class Decoupe {
+public class Cut {
     private int lost;
     private List<PlateWithCoords> info;
 
-    public Decoupe(int _lost, PlateWithCoords _info) {
+    public Cut(int _lost, PlateWithCoords _info) {
         this.lost = _lost;
         this.info = new ArrayList<>();
         if(_info != null) {
             this.info.add(_info);
         }
     }
-    public Decoupe() {
+    public Cut() {
         this.lost = 0;
         this.info = new ArrayList<>();
     }
 
-    public Decoupe(Decoupe clone) {
+    public Cut(Cut clone) {
         this.lost = clone.getLost();
         this.info = new ArrayList<>();
         this.info.addAll(clone.getInfo());
@@ -72,7 +73,7 @@ public class Decoupe {
         return endResult;
     }
 
-    public void fusion(Decoupe toFusion){
+    public void fusion(Cut toFusion){
         this.info.addAll(toFusion.getInfo());
         this.lost = this.lost + toFusion.getLost();
     }

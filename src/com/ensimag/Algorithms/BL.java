@@ -4,7 +4,6 @@ import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
