@@ -1,6 +1,7 @@
 package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
+import com.ensimag.Algorithms.BLAdvanced;
 import com.ensimag.Algorithms.OptimizedSolver;
 import com.ensimag.Files.FileIn;
 import com.ensimag.Models.Plate;
@@ -12,10 +13,12 @@ public class Main {
         FileIn myFileIn = new FileIn("entries.txt");
         myFileIn.loadEntries();
         BL myBL = new BL(myFileIn);
-        OptimizedSolver myBLA = new OptimizedSolver(myFileIn);
+        BLAdvanced myBLAdvanced = new BLAdvanced(myFileIn);
+        OptimizedSolver myOptimizedSolver = new OptimizedSolver(myFileIn);
 
         myBL.start();
-        myBLA.start();
+        myBLAdvanced.start();
+        myOptimizedSolver.start();
     }
 
     private static void printInventory(FileIn myFileIn) {

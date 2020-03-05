@@ -24,11 +24,11 @@ public class FileIn {
     }
 
     public Map<Plate, Integer> getPlates() {
-        return plates;
+        return new TreeMap<>(plates);
     }
 
     public Map<Rectangle, Integer> getPieces() {
-        return pieces;
+        return new TreeMap<>(pieces);
     }
 
     public void loadEntries() {
