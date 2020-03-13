@@ -2,30 +2,26 @@ package com.ensimag.Algorithms;
 
 import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
-import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by pintodaj on 3/5/20.
  */
 public class BLAdvanced {
     private FileIn fileIn;
-    private List<String> results;
 
     public BLAdvanced(FileIn _fileIn) {
         this.fileIn = _fileIn;
-        this.results = new ArrayList<>();
     }
 
     public void start() {
         Map<Plate, Integer> plates = fileIn.getPlates();
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
-        int resultBLForOnePlate;
-        Integer chutes = 0;
+        Cut resultBLForOnePlate;
+        int lost = 0;
+        List<String> results = new ArrayList<>();
 
         int plateNumber = 0;
         for (Plate pType : plates.keySet()) {
@@ -33,37 +29,16 @@ public class BLAdvanced {
             for (int i=0; i<nbPlatesAtStart; i++) {
                 Plate plate = new Plate(pType.getH(), pType.getW());
 
-                results.add("Plaque "+plateNumber+" :");
                 resultBLForOnePlate = BLForOnePlate(plate, pieces);
-                if (resultBLForOnePlate != -1) {
-                    plates.put(pType, plates.get(pType) - 1);
-                    chutes += resultBLForOnePlate;
+                resultBLForOnePlate.getInfo().sort(new SortByCoords());
+                if (i == nbPlatesAtStart - 1) {
+                    results.addAll(resultBLForOnePlate.toString(pieces, plateNumber, lost));
                 } else {
-                    results.add("Pas utilisée.");
+                    results.addAll(resultBLForOnePlate.toStringLimited(pieces, plateNumber));
+                    lost += resultBLForOnePlate.getLost();
                 }
-
                 plateNumber++;
             }
-        }
-
-        results.add("Pièces restantes à couper :");
-        String piecesRestantes = "";
-        for (Rectangle p : pieces.keySet()) {
-            for (int i=0; i<pieces.get(p); i++) {
-                piecesRestantes += p.getH()+" "+p.getW()+", ";
-            }
-        }
-        if (!piecesRestantes.equals("")) {
-            results.add(piecesRestantes);
-        } else {
-            results.add("Aucune.");
-        }
-
-        results.add("Chutes:");
-        if (chutes != 0) {
-            results.add(chutes.toString());
-        } else {
-            results.add("Aucune.");
         }
 
         System.out.println("BLAdvanced Algorithm: entries.txt --> resultsBLAdvanced.txt | State: Success!");
@@ -71,18 +46,20 @@ public class BLAdvanced {
         fileOut.writeFile();
     }
 
-    private int BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
+    private Cut BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces) {
         int lineH = 0;
         int lineW = 0;
         boolean plateIsUsed = false; // vrai si la plaque a été utilisé (même partiellement), faux sinon
         boolean newLine = true;
         boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placer toutes les pièces
-        String piecesDecoupes = "";
-        int chutes = getSize(plate);
+        Cut piecesDecoupes = new Cut();
 
         while (plate.getHRest() > 0 && !end) {
             end = true;
-            for (Rectangle p : pieces.keySet()) {
+            Iterator it = pieces.keySet().iterator();
+            Rectangle p;
+            while (it.hasNext()) {
+                p = (Rectangle) it.next();
                 if (p.getH() <= plate.getHRest() && p.getW() <= plate.getLineWRest(lineW) && pieces.get(p) > 0) {
                     end = false;
                     if (newLine) {
@@ -93,28 +70,22 @@ public class BLAdvanced {
                         }
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
-                        piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
-                        chutes -= getSize(p);
+                        piecesDecoupes.addInfo(new PlateWithCoords(p.getH(), p.getW(), lineW, lineH));
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p) - 1);
                         //System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
-                        results.add("LS=" + lineH);
                     }
-                    while (plate.getLineWRest(lineW) > p.getW() && pieces.get(p) > 0) {
+                    while (plate.getLineWRest(lineW) >= p.getW() && pieces.get(p) > 0) {
                         // On découpe des pièces
                         //System.out.println("La pièce ["+p.getH()+"/"+p.getW()+"] a été découpée " +
-                        piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
-                        chutes -= getSize(p);
-                        lineW += p.getW();
+                        piecesDecoupes.addInfo(new PlateWithCoords(p.getH(), p.getW(), lineW, lineH));
+                        piecesDecoupes.addLost(getSize(p));
                         pieces.put(p, pieces.get(p) - 1);
-                        //stacking();
+                        piecesDecoupes.fusion(stacking(new PlateWithCoords(lineH-p.getH(), p.getW(), lineW, lineH), pieces, p, it));
+                        lineW += p.getW();
                     }
                 }
             }
-            if (!piecesDecoupes.equals("")) {
-                results.add(piecesDecoupes);
-            }
-            piecesDecoupes = "";
             if (!end) {
                 newLine = true;
                 lineW = 0;
@@ -122,11 +93,25 @@ public class BLAdvanced {
             }
         }
 
-        return plateIsUsed ? chutes : -1;
+        return piecesDecoupes;
     }
 
-    private void stacking() {
-
+    private Cut stacking(PlateWithCoords subPlate, Map<Rectangle, Integer> pieces, Rectangle current, Iterator it) {
+        Cut piecesDecoupes = new Cut();
+        if (subPlate.getH() == 0) {
+            return piecesDecoupes;
+        } else if (subPlate.getH() >= current.getH() && subPlate.getW() >= current.getW() && pieces.get(current)>0) {
+            piecesDecoupes.addInfo(new PlateWithCoords(current.getH(), current.getW(), subPlate.getX(), subPlate.getY()));
+            pieces.put(current, pieces.get(current) - 1);
+            piecesDecoupes.fusion(stacking(new PlateWithCoords( subPlate.getH()-current.getH(),
+                    current.getW(), subPlate.getX(), subPlate.getY()+current.getH()),
+                    pieces, current, it));
+            return piecesDecoupes;
+        } else if (it.hasNext()) {
+            return stacking(subPlate, pieces, (Rectangle) it.next(), it);
+        } else {
+            return piecesDecoupes;
+        }
     }
 
     private int getSize(Rectangle o) {

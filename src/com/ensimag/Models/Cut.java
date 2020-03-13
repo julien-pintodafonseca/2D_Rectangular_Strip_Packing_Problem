@@ -1,6 +1,7 @@
 package com.ensimag.Models;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class Cut {
         return lost;
     }
 
+    public void addLost(int yes) { this.lost += yes; }
+
     public List<PlateWithCoords> getInfo() {
         return info;
     }
@@ -41,22 +44,11 @@ public class Cut {
         this.info.add(newInfo);
     }
 
-    public List<String> toString(Map<Rectangle, Integer> pieces){
+    public List<String> toString(Map<Rectangle, Integer> pieces, int plateNumber, int previousLost){
         List<String> endResult = new ArrayList<>();
-        String information = "Plaque 0 :";
-        int xCurrent=-1;
-        for(PlateWithCoords plate:this.info) {
-            if(plate.getX()>xCurrent) {
-                endResult.add(information);
-                endResult.add("LS=" + plate.getX());
-                xCurrent = plate.getX();
-                information = "";
-            }
-            information = information + plate.getY() + " " + plate.getH() + " " + plate.getW()+", ";
-        }
-        endResult.add(information);
+        endResult.addAll(toStringLimited(pieces, plateNumber));
         endResult.add("Pièces restantes à couper :");
-        information = "";
+        String information = "";
         for(Rectangle p : pieces.keySet()) {
             if (pieces.get(p) > 0) {
                 for (int i = 0; i < pieces.get(p); i++) {
@@ -69,7 +61,29 @@ public class Cut {
         }
         endResult.add(information);
         endResult.add("Chutes :");
-        endResult.add("" + this.getLost());
+        endResult.add("" + (this.getLost() + previousLost));
+        return endResult;
+    }
+
+    public List<String> toStringLimited(Map<Rectangle, Integer> pieces, int plateNumber){
+        List<String> endResult = new ArrayList<>();
+        if (this.getLost() == 0) {
+            endResult.add("Plaque " + plateNumber + " :");
+            endResult.add("Pas utilisée.");
+        } else {
+            String information = "Plaque " + plateNumber + " :";
+            int yCurrent = -1;
+            for (PlateWithCoords plate : this.info) {
+                if (plate.getY() > yCurrent) {
+                    endResult.add(information);
+                    endResult.add("LS=" + plate.getY());
+                    yCurrent = plate.getY();
+                    information = "";
+                }
+                information = information + plate.getX() + " " + plate.getH() + " " + plate.getW() + ", ";
+            }
+            endResult.add(information);
+        }
         return endResult;
     }
 

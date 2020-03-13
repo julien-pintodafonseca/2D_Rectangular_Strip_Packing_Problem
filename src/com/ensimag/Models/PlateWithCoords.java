@@ -7,7 +7,7 @@ public class PlateWithCoords extends Rectangle{
     private int x;
     private int y;
 
-    public PlateWithCoords(Plate _plate,int _x, int _y) {
+    public PlateWithCoords(Plate _plate, int _x, int _y) {
         super(_plate.getH(), _plate.getW());
         this.x = _x;
         this.y = _y;

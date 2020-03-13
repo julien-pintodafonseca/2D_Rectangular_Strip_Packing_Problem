@@ -26,8 +26,9 @@ public class OptimizedSolver {
         Cut result = this.cutCutCut(plate2);
 
         result.getInfo().sort(new SortByCoords());
-        List<String> endResults = result.toString(this.pieces);
+        List<String> endResults = result.toString(this.pieces, 0, 0);
 
+        System.out.println("OptimizedSolver Algorithm: entries.txt --> resultsOptimizedSolver.txt | State: Success!");
         FileOut fileOut = new FileOut("resultsOptimizedSolver.txt", endResults);
         fileOut.writeFile();
     }
