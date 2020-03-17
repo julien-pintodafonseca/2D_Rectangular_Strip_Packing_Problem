@@ -13,7 +13,7 @@ public class PlateWithCoords extends Rectangle {
         this.y = _y;
     }
 
-    public PlateWithCoords(int _h, int _w,int _x, int _y) {
+    public PlateWithCoords(int _h, int _w, int _x, int _y) {
         super(_h, _w);
         this.x = _x;
         this.y = _y;
