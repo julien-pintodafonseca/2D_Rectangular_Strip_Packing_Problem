@@ -57,7 +57,7 @@ public class FileIn {
                 line++;
             }
         } catch (Exception e) {
-            System.out.println("There is a problem with EntriesFile");
+            System.out.println("There is a problem when reading FileIn");
             e.printStackTrace();
         }
     }

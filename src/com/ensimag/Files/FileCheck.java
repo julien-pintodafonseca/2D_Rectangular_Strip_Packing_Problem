@@ -1,16 +1,13 @@
 package com.ensimag.Files;
 
 import com.ensimag.Models.CutPlate;
-import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
 import org.w3c.dom.css.Rect;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 public class FileCheck {
     private String fileName;
@@ -97,7 +94,7 @@ public class FileCheck {
                 //System.out.println(st);
             }
         } catch (Exception e) {
-            System.out.println("There is a problem with EntriesFile");
+            System.out.println("There is a problem when reading FileCheck");
             e.printStackTrace();
         }
     }
