@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class CutPlate {
     private int lost;
-    private Map<Integer, Map<Integer, Plate>> xPieces;
-    private Map<Integer, Map<Integer, Plate>> yPieces;
+    public Map<Integer, Map<Integer, Plate>> xPieces;
+    public Map<Integer, Map<Integer, Plate>> yPieces;
     private ArrayList<Integer> xList;
     private ArrayList<Integer> yList;
 
@@ -27,10 +27,10 @@ public class CutPlate {
         }
         Map<Integer, Plate> subXPieces = this.xPieces.get(piece.getX());
         subXPieces.put(piece.getY(), new Plate(piece.getH(), piece.getW()));
-        System.out.println(this.xPieces.get(piece.getX()));
+        //System.out.println(this.xPieces.get(piece.getX()));
         Map<Integer, Plate> subYPieces = this.xPieces.get(piece.getY());
         subXPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
-        System.out.println(this.xPieces.get(piece.getX()));
+        //System.out.println(this.xPieces.get(piece.getX()));
     }
 
     public PlateWithCoords nextX(int x, int y, Plate piece) {
