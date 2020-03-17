@@ -8,8 +8,8 @@ public class CutPlate {
     private int lost;
     private Map<Integer, Map<Integer, Plate>> xPieces;
     private Map<Integer, Map<Integer, Plate>> yPieces;
-    private ArrayList<int> xList;
-    private ArrayList<int> yList;
+    private ArrayList<Integer> xList;
+    private ArrayList<Integer> yList;
 
     public CutPlate() {
         this.xPieces = new HashMap<>();
