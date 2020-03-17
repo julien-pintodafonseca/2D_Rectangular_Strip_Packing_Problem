@@ -23,7 +23,7 @@ public class FileOut {
             }
             writer.close();
         } catch(Exception e) {
-            System.out.println("There is a problem in writing the files");
+            System.out.println("There is a problem when writing FileOut");
         }
     }
 
