@@ -52,9 +52,9 @@ public class OptimizedSolver {
             }
         }
 
-        if (!enoughPlace && !toward){
+        if (!enoughPlace && !toward) {
             return new Cut(plate.getH()*plate.getW(), null);
-        } else{
+        } else {
             Cut subPlateToward = new Cut();
             Cut subPlateEnough = new Cut();
             this.pieces.put(p, this.pieces.get(p) - 1);
@@ -67,23 +67,19 @@ public class OptimizedSolver {
             if (enoughPlace && toward) {
                 if (subPlateToward.getLost() > subPlateEnough.getLost()) {
                     return subPlateEnough;
-                }
-                else {
+                } else {
                     return subPlateToward;
                 }
-            }
-            else if (enoughPlace) {
+            } else if (enoughPlace) {
                 return subPlateEnough;
-            }
-            else {
+            } else {
                 return subPlateToward;
             }
-
         }
     }
 
     private Cut bestSoluce(PlateWithCoords plate, int pH, int pW) {
-        Cut subPlate1 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, pW, plate.getX(), plate.getY() + pH)));
+        Cut subPlate1 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, pW, plate.getX(),plate.getY() + pH)));
         Cut subPlate2 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY())));
         Cut subPlate3 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH)));
         Cut subPlate4 = new Cut(this.cutCutCut(new PlateWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY())));
@@ -91,8 +87,7 @@ public class OptimizedSolver {
             subPlate1.fusion(subPlate2);
             subPlate1.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
             return subPlate1;
-        }
-        else {
+        } else {
             subPlate3.fusion(subPlate4);
             subPlate3.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
             return subPlate3;

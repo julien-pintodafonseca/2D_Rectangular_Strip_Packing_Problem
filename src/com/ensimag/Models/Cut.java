@@ -31,13 +31,13 @@ public class Cut {
     }
 
     public int getLost() {
-        return lost;
+        return this.lost;
     }
 
     public void addLost(int yes) { this.lost += yes; }
 
     public List<PlateWithCoords> getInfo() {
-        return info;
+        return this.info;
     }
 
     public void addInfo(PlateWithCoords newInfo) {
@@ -45,18 +45,17 @@ public class Cut {
     }
 
     public List<String> toString(Map<Rectangle, Integer> pieces, int plateNumber, int previousLost){
-        List<String> endResult = new ArrayList<>();
-        endResult.addAll(toStringLimited(pieces, plateNumber));
+        List<String> endResult = new ArrayList<>(toStringLimited(pieces, plateNumber));
         endResult.add("Pièces restantes à couper :");
         String information = "";
-        for(Rectangle p : pieces.keySet()) {
+        for (Rectangle p : pieces.keySet()) {
             if (pieces.get(p) > 0) {
                 for (int i = 0; i < pieces.get(p); i++) {
                     information = information + p.getH() + " " + p.getW() + ", ";
                 }
             }
         }
-        if(information.equals("")) {
+        if (information.equals("")) {
             information = "Aucune.";
         }
         endResult.add(information);

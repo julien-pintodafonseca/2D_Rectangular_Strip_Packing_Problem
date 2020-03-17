@@ -13,11 +13,11 @@ public class Rectangle implements Comparable<Rectangle> {
     }
 
     public int getH() {
-        return h;
+        return this.h;
     }
 
     public int getW() {
-        return w;
+        return this.w;
     }
 
     @Override

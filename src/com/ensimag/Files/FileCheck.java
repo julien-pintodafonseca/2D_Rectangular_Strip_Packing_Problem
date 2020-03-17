@@ -66,7 +66,6 @@ public class FileCheck {
 
                                 // on enregistre la pièce de coordonnées "x", "y" et de dimension "h", "w"
                                 plate.addPiece(new PlateWithCoords(h, w, x, y));
-                                //System.out.println(y+" "+x+" "+h+" "+w); //TODO: a supprimer
                             }
                         }
 
@@ -78,18 +77,6 @@ public class FileCheck {
                     }
 
                     cuttedPlates.add(plate); // on enregistre la plaque contenant les pièces découpées
-
-                    //TODO: a supprimer
-                    System.out.println("----------");
-                    for (Integer x : plate.xPieces.keySet()) {
-                        Map<Integer, Plate> sub = plate.xPieces.get(x);
-                        for (Integer bigy : plate.yPieces.keySet()) {
-                            System.out.println("y:"+bigy);
-                            System.out.println("x:"+x);
-                            System.out.println(x + " " + bigy + " " + sub.get(bigy).getH() + " " + sub.get(bigy).getW());
-                        }
-                    }
-
                 } else if (st.contains("Pièces restantes à couper")) {
                     // on traite la ligne suivante:
                     st = br.readLine();

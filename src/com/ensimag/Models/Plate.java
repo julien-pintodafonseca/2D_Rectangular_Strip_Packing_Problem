@@ -12,7 +12,7 @@ public class Plate extends Rectangle {
     }
 
     public int getHRest() {
-        return hRest;
+        return this.hRest;
     }
 
     public void setHRest(int hRest) {
