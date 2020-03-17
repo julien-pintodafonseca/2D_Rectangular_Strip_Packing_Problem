@@ -19,17 +19,23 @@ public class CutPlate {
     }
 
     public void addPiece(PlateWithCoords piece) {
-        if(!this.xPieces.containsKey(piece.getX())) {
-            this.xPieces.put(piece.getX(), new HashMap<Integer, Plate>());
+        if (!this.xPieces.containsKey(piece.getX())) {
+            this.xPieces.put(piece.getX(), new HashMap<>());
         }
-        if(!this.yPieces.containsKey(piece.getY())) {
-            this.yPieces.put(piece.getY(), new HashMap<Integer, Plate>());
+        if (!this.yPieces.containsKey(piece.getY())) {
+            this.yPieces.put(piece.getY(), new HashMap<>());
         }
+
         Map<Integer, Plate> subXPieces = this.xPieces.get(piece.getX());
+        if (subXPieces.containsKey(piece.getY())) {
+            System.out.println("Erreur deux pièces à la même position - CutPlate.java");;
+        }
         subXPieces.put(piece.getY(), new Plate(piece.getH(), piece.getW()));
+        this.xPieces.put(piece.getX(), subXPieces);
         //System.out.println(this.xPieces.get(piece.getX()));
-        Map<Integer, Plate> subYPieces = this.xPieces.get(piece.getY());
-        subXPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
+
+        Map<Integer, Plate> subYPieces = this.yPieces.get(piece.getY());
+        subYPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
         //System.out.println(this.xPieces.get(piece.getX()));
     }
 
