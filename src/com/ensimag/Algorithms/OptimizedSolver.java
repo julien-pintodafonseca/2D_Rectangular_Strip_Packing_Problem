@@ -15,7 +15,7 @@ public class OptimizedSolver {
     private FileIn fileIn;
     private Map<Rectangle, Integer> pieces;
     
-    public  OptimizedSolver(FileIn _fileIn) {
+    public OptimizedSolver(FileIn _fileIn) {
         this.fileIn = _fileIn;
     }
 

@@ -3,9 +3,11 @@ package com.ensimag;
 import com.ensimag.Algorithms.BL;
 import com.ensimag.Algorithms.BLAdvanced;
 import com.ensimag.Algorithms.OptimizedSolver;
+import com.ensimag.Files.FileCheck;
 import com.ensimag.Files.FileIn;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
+import com.ensimag.Utils.Checker;
 
 public class Main {
 
@@ -19,6 +21,11 @@ public class Main {
         myBL.start();
         myBLAdvanced.start();
         myOptimizedSolver.start();
+
+        FileCheck myFileCheck = new FileCheck("resultsBL.txt");
+        myFileCheck.loadEntries();
+        Checker myChecker = new Checker(myFileCheck);
+        myChecker.start();
     }
 
     private static void printInventory(FileIn myFileIn) {

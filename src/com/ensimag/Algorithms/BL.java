@@ -25,7 +25,7 @@ public class BL {
         Map<Plate, Integer> plates = fileIn.getPlates();
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
         int resultBLForOnePlate;
-        Integer chutes = 0;
+        Integer lost = 0;
 
         int plateNumber = 0;
         for (Plate pType : plates.keySet()) {
@@ -37,7 +37,7 @@ public class BL {
                 resultBLForOnePlate = BLForOnePlate(plate, pieces);
                 if (resultBLForOnePlate != -1) {
                     plates.put(pType, plates.get(pType) - 1);
-                    chutes += resultBLForOnePlate;
+                    lost += resultBLForOnePlate;
                 } else {
                     results.add("Pas utilisée.");
                 }
@@ -60,8 +60,8 @@ public class BL {
         }
 
         results.add("Chutes:");
-        if (chutes != 0) {
-            results.add(chutes.toString());
+        if (lost != 0) {
+            results.add(lost.toString());
         } else {
             results.add("Aucune.");
         }
