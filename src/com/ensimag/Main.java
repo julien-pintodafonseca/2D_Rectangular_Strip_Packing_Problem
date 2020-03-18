@@ -25,7 +25,7 @@ public class Main {
         FileCheck myFileCheck = new FileCheck("resultsBL.txt");
         myFileCheck.loadEntries();
         Checker myChecker = new Checker(myFileCheck);
-        myChecker.start();
+        //myChecker.start();
     }
 
     private static void printInventory(FileIn myFileIn) {

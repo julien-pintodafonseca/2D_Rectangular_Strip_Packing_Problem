@@ -38,59 +38,59 @@ public class OptimizedSolver {
         Rectangle p = new Rectangle(0,0);
         boolean toward = false;
         boolean enoughPlace = false;
-
-        while (!enoughPlace && it.hasNext()) {
+        boolean stop = false;
+        if (plate.getH() == 0 || plate.getW() == 0) {
+            stop = true;
+        }
+        while (!enoughPlace && !toward && it.hasNext() && !stop) {
             p = it.next();
-            if (p.getH() <=plate.getH() && p.getW() <= plate.getW() && pieces.get(p) > 0) {
-                enoughPlace=true;
+            enoughPlace = false;
+            toward = false;
+            if (p.getH() <= plate.getH() && p.getW() <= plate.getW() && pieces.get(p) > 0) {
+                enoughPlace = true;
             }
-            if (p.getH() <= plate.getW() && p.getW() <= plate.getH() && pieces.get(p) > 0){
+            if (p.getH() <= plate.getW() && p.getW() <= plate.getH() && pieces.get(p) > 0 && p.getH() != p.getW()){
                 toward = true;
-            }
-            if (p.getH() == p.getW()) {
-                toward = false;
             }
         }
 
         if (!enoughPlace && !toward) {
             return new Cut(plate.getH()*plate.getW(), null);
         } else {
-            Cut subPlateToward = new Cut();
-            Cut subPlateEnough = new Cut();
             this.pieces.put(p, this.pieces.get(p) - 1);
-            if (toward) {
-                subPlateToward = new Cut(bestSoluce(plate, p.getW(), p.getH()));
-            }
-            if (enoughPlace) {
-                subPlateEnough = new Cut(bestSoluce(plate, p.getH(), p.getW()));
-            }
+            Cut subPlateEnough;
+            Cut subPlateToward;
             if (enoughPlace && toward) {
+                subPlateEnough = new Cut(bestSoluce(plate, p.getH(), p.getW()));
+                subPlateToward = new Cut(bestSoluce(plate, p.getW(), p.getH()));
                 if (subPlateToward.getLost() > subPlateEnough.getLost()) {
                     return subPlateEnough;
                 } else {
                     return subPlateToward;
                 }
             } else if (enoughPlace) {
+                subPlateEnough = new Cut(bestSoluce(plate, p.getH(), p.getW()));
                 return subPlateEnough;
             } else {
+                subPlateToward = new Cut(bestSoluce(plate, p.getW(), p.getH()));
                 return subPlateToward;
             }
         }
     }
 
     private Cut bestSoluce(PlateWithCoords plate, int pH, int pW) {
-        Cut subPlate1 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, pW, plate.getX(),plate.getY() + pH)));
-        Cut subPlate2 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY())));
-        Cut subPlate3 = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH)));
-        Cut subPlate4 = new Cut(this.cutCutCut(new PlateWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY())));
-        if (subPlate1.getLost()+subPlate2.getLost() < subPlate3.getLost()+subPlate4.getLost()) {
-            subPlate1.fusion(subPlate2);
-            subPlate1.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
-            return subPlate1;
+        Cut subPlate1a = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, pW, plate.getX(),plate.getY() + pH)));
+        Cut subPlate1b = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY())));
+        Cut subPlate2a = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH)));
+        Cut subPlate2b = new Cut(this.cutCutCut(new PlateWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY())));
+        if (subPlate1a.getLost()+subPlate1b.getLost() < subPlate2a.getLost()+subPlate2b.getLost()) {
+            subPlate1a.fusion(subPlate1b);
+            subPlate1a.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
+            return subPlate1a;
         } else {
-            subPlate3.fusion(subPlate4);
-            subPlate3.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
-            return subPlate3;
+            subPlate2a.fusion(subPlate2b);
+            subPlate2a.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
+            return subPlate2a;
         }
     }
 }
