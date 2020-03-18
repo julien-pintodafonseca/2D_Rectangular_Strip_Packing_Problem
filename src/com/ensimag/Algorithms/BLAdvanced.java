@@ -30,12 +30,15 @@ public class BLAdvanced {
                 Plate plate = new Plate(pType.getH(), pType.getW());
 
                 resultBLForOnePlate = BLForOnePlate(plate, pieces);
-                resultBLForOnePlate.getInfo().sort(new SortByCoords());
+                List<PlateWithCoords> info = resultBLForOnePlate.getInfo();
+                info.sort(new SortByCoords());
+                resultBLForOnePlate.setInfo(info);
+                lost += resultBLForOnePlate.getLost();
+
                 if (i == nbPlatesAtStart - 1) {
                     results.addAll(resultBLForOnePlate.toString(pieces, plateNumber, lost));
                 } else {
                     results.addAll(resultBLForOnePlate.toStringLimited(pieces, plateNumber));
-                    lost += resultBLForOnePlate.getLost();
                 }
                 plateNumber++;
             }
@@ -71,6 +74,7 @@ public class BLAdvanced {
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
                         piecesDecoupes.addInfo(new PlateWithCoords(p.getH(), p.getW(), lineW, lineH));
+                        piecesDecoupes.addLost(getSize(p));
                         lineW += p.getW();
                         pieces.put(p, pieces.get(p) - 1);
                         //System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
@@ -102,6 +106,7 @@ public class BLAdvanced {
             return piecesDecoupes;
         } else if (subPlate.getH() >= current.getH() && subPlate.getW() >= current.getW() && pieces.get(current)>0) {
             piecesDecoupes.addInfo(new PlateWithCoords(current.getH(), current.getW(), subPlate.getX(), subPlate.getY()));
+            piecesDecoupes.addLost(getSize(current));
             pieces.put(current, pieces.get(current) - 1);
             piecesDecoupes.fusion(stacking(new PlateWithCoords( subPlate.getH()-current.getH(),
                     current.getW(), subPlate.getX(), subPlate.getY()+current.getH()),
