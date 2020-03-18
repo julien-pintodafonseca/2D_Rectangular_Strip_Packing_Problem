@@ -7,10 +7,12 @@ import java.util.Comparator;
  */
 public class SortByCoords implements Comparator<PlateWithCoords> {
     public int compare(PlateWithCoords p1, PlateWithCoords p2) {
-        if (p1.getX() > p2.getX()) {
+        if (p1.getY() > p2.getY()) {
             return 1;
-        } else if (p1.getX() == p2.getX() && p1.getY() > p2.getY()) {
+        } else if (p1.getY() == p2.getY() && p1.getX() > p2.getX()) {
             return 1;
+        }  else if (p1.getY() == p2.getY() && p1.getX() == p2.getX()) {
+            return 0;
         } else {
             return -1;
         }

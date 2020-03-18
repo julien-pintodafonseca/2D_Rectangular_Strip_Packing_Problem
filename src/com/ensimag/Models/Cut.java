@@ -44,6 +44,8 @@ public class Cut {
         this.info.add(newInfo);
     }
 
+    public void setInfo(List<PlateWithCoords> info) { this.info = info; }
+
     public List<String> toString(Map<Rectangle, Integer> pieces, int plateNumber, int previousLost){
         List<String> endResult = new ArrayList<>(toStringLimited(pieces, plateNumber));
         endResult.add("Pièces restantes à couper :");
