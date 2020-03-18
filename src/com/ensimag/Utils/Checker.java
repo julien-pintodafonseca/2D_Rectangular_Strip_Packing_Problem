@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Checker {
     private FileCheck fileCheck;
-    CutPlate plate;
+    private CutPlate plate;
     private Map<Integer, Object> xPieces;
     private Map<Integer, Object> yPieces;
 
@@ -20,24 +20,22 @@ public class Checker {
         this.plate = new CutPlate();
     }
 
-    public void start(){
+    public void start() {
         boolean checked = true;
-        while(this.fileCheck.hasNextPlate() && checked) {
+        while (this.fileCheck.hasNextPlate() && checked) {
             this.plate = this.fileCheck.nextPlate();
             if (!this.checkX() || !this.checkY()) {
                 checked = false;
             }
         }
-        if(checked) {
+        if (checked) {
             System.out.println("All is ok !");
-        }
-        else {
+        } else {
             System.out.println("NOK !");
         }
     }
 
     public boolean checkX() {
-        
         return true;
     }
 

@@ -31,10 +31,10 @@ public class Main {
     private static void printInventory(FileIn myFileIn) {
         System.out.println();
         for (Plate p : myFileIn.getPlates().keySet()) {
-            System.out.println("Plaque H="+p.getH()+" / W="+p.getW()+" / Quantité="+myFileIn.getPlates().get(p));
+            System.out.println("Plaque H=" + p.getH() + " / W=" + p.getW() + " / Quantité=" + myFileIn.getPlates().get(p));
         }
         for (Rectangle p : myFileIn.getPieces().keySet()) {
-            System.out.println("Pièce H="+p.getH()+" / W="+p.getW()+" / Quantité="+myFileIn.getPieces().get(p));
+            System.out.println("Pièce H=" + p.getH() + " / W=" + p.getW() + " / Quantité=" + myFileIn.getPieces().get(p));
         }
         System.out.println();
     }

@@ -44,13 +44,12 @@ public class CutPlate {
         this.xList.indexOf(x);
         int indexNextX = this.xList.indexOf(x) + 1;
         int sizeXList = this.xList.size();
-        while(indexNextX <= sizeXList && !subYPiecesX.containsKey(this.xList.get(indexNextX))) {
+        while (indexNextX <= sizeXList && !subYPiecesX.containsKey(this.xList.get(indexNextX))) {
             indexNextX ++;
         }
-        if(indexNextX > sizeXList) {
+        if (indexNextX > sizeXList) {
             return null;
-        }
-        else {
+        } else {
             return new PlateWithCoords(subYPiecesX.get(x), indexNextX, y);
         }
     }
@@ -60,13 +59,12 @@ public class CutPlate {
         this.yList.indexOf(y);
         int indexNextY = this.yList.indexOf(y) + 1;
         int sizeYList = this.yList.size();
-        while(indexNextY <= sizeYList && !subXPiecesY.containsKey(this.yList.get(indexNextY))) {
+        while (indexNextY <= sizeYList && !subXPiecesY.containsKey(this.yList.get(indexNextY))) {
             indexNextY ++;
         }
-        if(indexNextY > sizeYList) {
+        if (indexNextY > sizeYList) {
             return null;
-        }
-        else {
+        } else {
             return new PlateWithCoords(subXPiecesY.get(y), x, indexNextY);
         }
     }

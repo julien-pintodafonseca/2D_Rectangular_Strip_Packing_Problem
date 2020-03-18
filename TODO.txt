@@ -1,0 +1,6 @@
+OptimizedSolver:
+- algo pas optimisé ?
+- le fichier de résultat n'affiche pas les pièces restantes à couper (pb de gestion des pièces à restantes à couper ?)
+
+BLAdvanced:
+- calcul des chutes inccorect ?
