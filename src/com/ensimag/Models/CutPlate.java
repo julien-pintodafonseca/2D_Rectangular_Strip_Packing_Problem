@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class CutPlate {
     private int lost;
-    public Map<Integer, Map<Integer, Plate>> xPieces;
-    public Map<Integer, Map<Integer, Plate>> yPieces;
+    private Map<Integer, Map<Integer, Plate>> xPieces;
+    private Map<Integer, Map<Integer, Plate>> yPieces;
     private ArrayList<Integer> xList;
     private ArrayList<Integer> yList;
 

@@ -3,7 +3,6 @@ package com.ensimag.Utils;
 import com.ensimag.Files.FileCheck;
 import com.ensimag.Models.CutPlate;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
