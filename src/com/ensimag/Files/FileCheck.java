@@ -1,7 +1,6 @@
 package com.ensimag.Files;
 
 import com.ensimag.Models.CutPlate;
-import com.ensimag.Models.Plate;
 import com.ensimag.Models.PlateWithCoords;
 import com.ensimag.Models.Rectangle;
 import org.w3c.dom.css.Rect;
@@ -9,7 +8,6 @@ import org.w3c.dom.css.Rect;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class FileCheck {
@@ -31,6 +29,14 @@ public class FileCheck {
 
     public CutPlate nextPlate() {
         return null;
+    }
+
+    public ArrayList<CutPlate> getCuttedPlates() {
+        return this.cuttedPlates;
+    }
+
+    public ArrayList<Rectangle> getLeftPieces() {
+        return this.leftPieces;
     }
 
     public int getLost() {
