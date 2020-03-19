@@ -3,7 +3,6 @@ package com.ensimag.Files;
 import com.ensimag.Models.CutPlate;
 import com.ensimag.Models.PlateWithCoords;
 import com.ensimag.Models.Rectangle;
-import org.w3c.dom.css.Rect;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
