@@ -23,7 +23,6 @@ public class BL2in1 {
         Map<Rectangle, Integer> pieces = fileIn.getPieces();
         Cut resultBLForOnePlate;
         int lost = 0;
-        List<String> results = new ArrayList<>();
         boolean end = false;
 
         int plateNumber = 0;
