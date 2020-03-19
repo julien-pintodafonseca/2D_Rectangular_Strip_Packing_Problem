@@ -96,14 +96,10 @@ public class Cut {
         return endResult;
     }
 
-    public void fusion(Cut toFusion){
+    public void fusion(Cut toFusion) {
         if (toFusion.getInfo().size() > 0) {
             this.info.addAll(toFusion.getInfo());
         }
         this.lost = this.lost + toFusion.getLost();
-    }
-
-    public Cut2 convertToCut2() {
-        return new Cut2(this.getLost(), this.getInfo(), null);
     }
 }
