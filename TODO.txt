@@ -1,3 +1,5 @@
-OptimizedSolver:
-- il manque une pièce découpée dans le résultat
-- le résultat n'affiche pas les pièces restantes à couper (pb de gestion des pièces à restantes à couper ?)
+-> Commenter algo 1, 2 et 3
+-> Mettre Ã  jour le diagramme de classe (sur Visual Paradigm)
+
+-> Dans les algos, effectuer un trie des piÃ¨ces et des plaques en fonction de leur surface
+-> Continuer le checker
