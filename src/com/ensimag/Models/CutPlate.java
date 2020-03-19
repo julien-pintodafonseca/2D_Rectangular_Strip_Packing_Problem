@@ -18,6 +18,14 @@ public class CutPlate {
         this.yList = new ArrayList<>();
     }
 
+    public Map<Integer, Map<Integer, Plate>> getxPieces() {
+        return this.xPieces;
+    }
+
+    public Map<Integer, Map<Integer, Plate>> getyPieces() {
+        return this.yPieces;
+    }
+
     public void addPiece(PlateWithCoords piece) {
         if (!this.xPieces.containsKey(piece.getX())) {
             this.xPieces.put(piece.getX(), new HashMap<>());

@@ -15,20 +15,27 @@ public class FileCheck {
     private ArrayList<CutPlate> cuttedPlates;
     private ArrayList<Rectangle> leftPieces;
     private int lost;
+    private int plateNumber;
 
     public FileCheck(String _fileName) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
         this.leftPieces = new ArrayList<>();
         this.lost = -1;
+        this.plateNumber = -1;
     }
 
     public boolean hasNextPlate() {
-        return true;
+        if (this.plateNumber + 1 < this.cuttedPlates.size()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public CutPlate nextPlate() {
-        return null;
+        this.plateNumber += 1;
+        return this.cuttedPlates.get(this.plateNumber);
     }
 
     public ArrayList<CutPlate> getCuttedPlates() {

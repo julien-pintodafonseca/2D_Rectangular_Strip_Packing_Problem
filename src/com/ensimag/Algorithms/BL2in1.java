@@ -133,12 +133,11 @@ public class BL2in1 {
                     pieces.put(p, pieces.get(p) - 1);
                     piecesDecoupes.addLost((subPlate.getW() - p.getW()) * p.getH());
                     subPlate.setH(subPlate.getH() - p.getH());
-                    subPlate.setW(p.getW());
                     subPlate.setY(subPlate.getY() + p.getH());
                 }
             }
+            piecesDecoupes.addLost(subPlate.getW()*subPlate.getH());
+            return piecesDecoupes;
         }
-        piecesDecoupes.addLost(subPlate.getW()*subPlate.getH());
-        return piecesDecoupes;
     }
 }
