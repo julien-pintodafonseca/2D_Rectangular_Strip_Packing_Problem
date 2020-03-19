@@ -41,7 +41,7 @@ public class BL2in1 {
                     resultBLForOnePlate = new Cut();
                 }
 
-                results.addAll(resultBLForOnePlate.toStringLimited(pieces, plateNumber));
+                results.addAll(resultBLForOnePlate.toString(plateNumber));
                 lost += resultBLForOnePlate.getLost();
                 plateNumber++;
             }
@@ -51,10 +51,10 @@ public class BL2in1 {
 
         FileOut fileOut;
         if (type) {
-            System.out.println("BL Algorithm: entries.txt --> resultsBL2in1v2.txt | State: Success!");
+            System.out.println("BL Algorithm (v1 BL2in1) : entries.txt --> resultsBL2in1v2.txt | State: Success!");
             fileOut = new FileOut("resultsBL2in1v2.txt", results);
         } else {
-            System.out.println("BL Algorithm: entries.txt --> resultsBL2in1v1.txt | State: Success!");
+            System.out.println("BL Algorithm Advanced (v2 BL2in1) : entries.txt --> resultsBL2in1v1.txt | State: Success!");
             fileOut = new FileOut("resultsBL2in1v1.txt", results);
         }
         fileOut.writeFile();
@@ -85,7 +85,7 @@ public class BL2in1 {
                             end = false;
                             //add piece
                             pieces.put(p, pieces.get(p) - 1);
-                            piecesDecoupes.addInfo(new PlateWithCoords(p, 0, LS));
+                            piecesDecoupes.addInfo(new PieceWithCoords(p, 0, LS));
                             plate.setHRest(plate.getHRest() - p.getH());
                             lineH = p.getH();
                             lineW = plate.getW() - p.getW();
@@ -95,9 +95,9 @@ public class BL2in1 {
                         while (p.getH() <= lineH && p.getW() <= lineW && pieces.get(p) > 0) {
                             //add piece
                             pieces.put(p, pieces.get(p) - 1);
-                            piecesDecoupes.addInfo(new PlateWithCoords(p, plate.getW() - lineW, LS));
+                            piecesDecoupes.addInfo(new PieceWithCoords(p, plate.getW() - lineW, LS));
                             if (type) {
-                                piecesDecoupes.fusion(stacking(new PlateWithCoords(lineH - p.getH(), p.getW(), plate.getW() - lineW, LS + p.getH()), pieces));//appel à la méthode stacking
+                                piecesDecoupes.fusion(stacking(new PieceWithCoords(lineH - p.getH(), p.getW(), plate.getW() - lineW, LS + p.getH()), pieces));//appel à la méthode stacking
                             } else {
                                 piecesDecoupes.addLost((lineH - p.getH()) * p.getW());
                             }
@@ -121,14 +121,14 @@ public class BL2in1 {
         return piecesDecoupes;
     }
 
-    private Cut stacking(PlateWithCoords subPlate, Map<Rectangle, Integer> pieces) {
+    private Cut stacking(PieceWithCoords subPlate, Map<Rectangle, Integer> pieces) {
         Cut piecesDecoupes = new Cut();
         if (subPlate.getH() == 0) {
             return piecesDecoupes;
         } else {
             for (Rectangle p : pieces.keySet()) {
                 while (subPlate.getH() >= p.getH() && subPlate.getW() >= p.getW() && pieces.get(p) > 0) {
-                    piecesDecoupes.addInfo(new PlateWithCoords(p.getH(), p.getW(), subPlate.getX(), subPlate.getY()));
+                    piecesDecoupes.addInfo(new PieceWithCoords(p.getH(), p.getW(), subPlate.getX(), subPlate.getY()));
                     pieces.put(p, pieces.get(p) - 1);
                     piecesDecoupes.addLost((subPlate.getW() - p.getW()) * p.getH());
                     subPlate.setH(subPlate.getH() - p.getH());

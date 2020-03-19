@@ -1,9 +1,8 @@
 package com.ensimag.Files;
 
 import com.ensimag.Models.CutPlate;
-import com.ensimag.Models.PlateWithCoords;
+import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Rectangle;
-import org.w3c.dom.css.Rect;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -79,7 +78,7 @@ public class FileCheck {
                                 int w = Integer.parseInt(tk.nextToken()); // on obtient "w"
 
                                 // on enregistre la pièce de coordonnées "x", "y" et de dimension "h", "w"
-                                plate.addPiece(new PlateWithCoords(h, w, x, y));
+                                plate.addPiece(new PieceWithCoords(h, w, x, y));
                             }
                         }
 

@@ -3,10 +3,8 @@ package com.ensimag.Utils;
 import com.ensimag.Files.FileCheck;
 import com.ensimag.Models.CutPlate;
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.PlateWithCoords;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Checker {

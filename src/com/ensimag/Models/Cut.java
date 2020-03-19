@@ -1,7 +1,6 @@
 package com.ensimag.Models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +9,9 @@ import java.util.Map;
  */
 public class Cut {
     private int lost;
-    private List<PlateWithCoords> info;
+    private List<PieceWithCoords> info;
 
-    public Cut(int _lost, PlateWithCoords _info) {
+    public Cut(int _lost, PieceWithCoords _info) {
         this.lost = _lost;
         this.info = new ArrayList<>();
         if(_info != null) {
@@ -36,35 +35,15 @@ public class Cut {
 
     public void addLost(int yes) { this.lost += yes; }
 
-    public List<PlateWithCoords> getInfo() {
+    public List<PieceWithCoords> getInfo() {
         return this.info;
     }
 
-    public void addInfo(PlateWithCoords newInfo) {
+    public void addInfo(PieceWithCoords newInfo) {
         this.info.add(newInfo);
     }
 
-    public void setInfo(List<PlateWithCoords> info) { this.info = info; }
-
-    public List<String> toString(Map<Rectangle, Integer> pieces, int plateNumber, int previousLost){
-        List<String> endResult = new ArrayList<>(toStringLimited(pieces, plateNumber));
-        endResult.add("Pièces restantes à couper :");
-        String information = "";
-        for (Rectangle p : pieces.keySet()) {
-            if (pieces.get(p) > 0) {
-                for (int i = 0; i < pieces.get(p); i++) {
-                    information = information + p.getH() + " " + p.getW() + ", ";
-                }
-            }
-        }
-        if (information.equals("")) {
-            information = "Aucune.";
-        }
-        endResult.add(information);
-        endResult.add("Chutes :");
-        endResult.add("" + (this.getLost() + previousLost));
-        return endResult;
-    }
+    public void setInfo(List<PieceWithCoords> info) { this.info = info; }
 
     public List<String> toStringEnd(Map<Rectangle, Integer> pieces, int totalLost){
         List<String> endResult = new ArrayList<>();
@@ -86,7 +65,7 @@ public class Cut {
         return endResult;
     }
 
-    public List<String> toStringLimited(Map<Rectangle, Integer> pieces, int plateNumber){
+    public List<String> toString(int plateNumber){
         List<String> endResult = new ArrayList<>();
         if (this.getInfo().size() == 0) {
             endResult.add("Plaque " + plateNumber + " :");
@@ -94,7 +73,7 @@ public class Cut {
         } else {
             String information = "Plaque " + plateNumber + " :";
             int yCurrent = -1;
-            for (PlateWithCoords plate : this.info) {
+            for (PieceWithCoords plate : this.info) {
                 if (plate.getY() > yCurrent) {
                     endResult.add(information);
                     endResult.add("LS=" + plate.getY());

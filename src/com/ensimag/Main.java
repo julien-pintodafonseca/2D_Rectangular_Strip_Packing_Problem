@@ -16,12 +16,11 @@ public class Main {
         BL2in1 myBL2in1v2 = new BL2in1(myFileIn);
         OptimizedSolver myOptimizedSolver = new OptimizedSolver(myFileIn);
 
-        myBL2in1v1.start(false);
-        myBL2in1v2.start(true);
+        myBL2in1v1.start(false); //BL tâche 1
+        myBL2in1v2.start(true); //BL tâche 2
+        myOptimizedSolver.start(); //Algorithme optimisé tâche 3
 
-        myOptimizedSolver.start();
-
-        //FileCheck myFileCheck = new FileCheck("resultsBL.txt");
+        //FileCheck myFileCheck = new FileCheck("resultsBL2in1v1.txt");
         //myFileCheck.loadEntries();
         //Checker myChecker = new Checker(myFileCheck);
         //myChecker.start();

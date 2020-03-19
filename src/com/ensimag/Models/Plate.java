@@ -18,8 +18,4 @@ public class Plate extends Rectangle {
     public void setHRest(int hRest) {
         this.hRest = hRest;
     }
-
-    public int getLineWRest(int lineW) {
-        return this.getW() - lineW;
-    }
 }

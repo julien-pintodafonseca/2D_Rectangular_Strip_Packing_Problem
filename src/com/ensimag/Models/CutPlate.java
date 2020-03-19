@@ -26,7 +26,7 @@ public class CutPlate {
         return this.yPieces;
     }
 
-    public void addPiece(PlateWithCoords piece) {
+    public void addPiece(PieceWithCoords piece) {
         if (!this.xPieces.containsKey(piece.getX())) {
             this.xPieces.put(piece.getX(), new HashMap<>());
         }
@@ -47,7 +47,7 @@ public class CutPlate {
         //System.out.println(this.xPieces.get(piece.getX()));
     }
 
-    public PlateWithCoords nextX(int x, int y, Plate piece) {
+    public PieceWithCoords nextX(int x, int y, Plate piece) {
         Map<Integer, Plate> subYPiecesX = this.yPieces.get(y);
         this.xList.indexOf(x);
         int indexNextX = this.xList.indexOf(x) + 1;
@@ -58,11 +58,11 @@ public class CutPlate {
         if (indexNextX > sizeXList) {
             return null;
         } else {
-            return new PlateWithCoords(subYPiecesX.get(x), indexNextX, y);
+            return new PieceWithCoords(subYPiecesX.get(x), indexNextX, y);
         }
     }
 
-    public PlateWithCoords nextY(int x, int y, Plate piece) {
+    public PieceWithCoords nextY(int x, int y, Plate piece) {
         Map<Integer, Plate> subXPiecesY = this.xPieces.get(x);
         this.yList.indexOf(y);
         int indexNextY = this.yList.indexOf(y) + 1;
@@ -73,7 +73,7 @@ public class CutPlate {
         if (indexNextY > sizeYList) {
             return null;
         } else {
-            return new PlateWithCoords(subXPiecesY.get(y), x, indexNextY);
+            return new PieceWithCoords(subXPiecesY.get(y), x, indexNextY);
         }
     }
 }

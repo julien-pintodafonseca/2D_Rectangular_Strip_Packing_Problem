@@ -4,7 +4,6 @@ import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
 import com.ensimag.Models.*;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,22 +21,23 @@ public class OptimizedSolver {
 
     public void start() {
         Plate plate = fileIn.getPlates().keySet().iterator().next();
-        PlateWithCoords plate2 = new PlateWithCoords(plate, 0, 0);
+        PieceWithCoords plate2 = new PieceWithCoords(plate, 0, 0);
         this.pieces = fileIn.getPieces();
 
         Cut result = this.cutCutCut(plate2);
-        List<PlateWithCoords> info = result.getInfo();
+        List<PieceWithCoords> info = result.getInfo();
         info.sort(new SortByCoords());
         result.setInfo(info);
 
-        List<String> endResults = result.toString(this.pieces, 0, 0);
+        List<String> endResults = result.toString(0);
+        endResults.addAll(result.toStringEnd(this.pieces, result.getLost()));
 
         System.out.println("OptimizedSolver Algorithm: entries.txt --> resultsOptimizedSolver.txt | State: Success!");
         FileOut fileOut = new FileOut("resultsOptimizedSolver.txt", endResults);
         fileOut.writeFile();
     }
 
-    private Cut cutCutCut(PlateWithCoords plate) {
+    private Cut cutCutCut(PieceWithCoords plate) {
         Iterator<Rectangle> it = this.pieces.keySet().iterator();
         Rectangle p = new Rectangle(0,0);
         boolean toward = false;
@@ -50,10 +50,10 @@ public class OptimizedSolver {
             p = it.next();
             enoughPlace = false;
             toward = false;
-            if (p.getH() <= plate.getH() && p.getW() <= plate.getW() && pieces.get(p) > 0) {
+            if (pieces.get(p) > 0 && p.getH() <= plate.getH() && p.getW() <= plate.getW()) {
                 enoughPlace = true;
             }
-            if (p.getH() <= plate.getW() && p.getW() <= plate.getH() && pieces.get(p) > 0 && p.getH() != p.getW()){
+            if (pieces.get(p) > 0 && p.getH() <= plate.getW() && p.getW() <= plate.getH() && p.getH() != p.getW()){
                 toward = true;
             }
         }
@@ -82,18 +82,18 @@ public class OptimizedSolver {
         }
     }
 
-    private Cut bestSoluce(PlateWithCoords plate, int pH, int pW) {
-        Cut subPlate1a = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, pW, plate.getX(),plate.getY() + pH)));
-        Cut subPlate1b = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY())));
-        Cut subPlate2a = new Cut(this.cutCutCut(new PlateWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH)));
-        Cut subPlate2b = new Cut(this.cutCutCut(new PlateWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY())));
+    private Cut bestSoluce(PieceWithCoords plate, int pH, int pW) {
+        Cut subPlate1a = new Cut(this.cutCutCut(new PieceWithCoords(plate.getH()-pH, pW, plate.getX(),plate.getY() + pH)));
+        Cut subPlate1b = new Cut(this.cutCutCut(new PieceWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY())));
+        Cut subPlate2a = new Cut(this.cutCutCut(new PieceWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH)));
+        Cut subPlate2b = new Cut(this.cutCutCut(new PieceWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY())));
         if (subPlate1a.getLost()+subPlate1b.getLost() < subPlate2a.getLost()+subPlate2b.getLost()) {
             subPlate1a.fusion(subPlate1b);
-            subPlate1a.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
+            subPlate1a.addInfo(new PieceWithCoords(pH, pW, plate.getX(), plate.getY()));
             return subPlate1a;
         } else {
             subPlate2a.fusion(subPlate2b);
-            subPlate2a.addInfo(new PlateWithCoords(pH, pW, plate.getX(), plate.getY()));
+            subPlate2a.addInfo(new PieceWithCoords(pH, pW, plate.getX(), plate.getY()));
             return subPlate2a;
         }
     }
