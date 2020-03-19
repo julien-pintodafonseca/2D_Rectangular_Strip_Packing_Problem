@@ -4,6 +4,7 @@ import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
 import com.ensimag.Models.*;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,12 @@ public class OptimizedSolver {
         Plate plate = fileIn.getPlates().keySet().iterator().next();
         PlateWithCoords plate2 = new PlateWithCoords(plate, 0, 0);
         this.pieces = fileIn.getPieces();
-        Cut result = this.cutCutCut(plate2);
 
-        result.getInfo().sort(new SortByCoords());
+        Cut result = this.cutCutCut(plate2);
+        List<PlateWithCoords> info = result.getInfo();
+        info.sort(new SortByCoords());
+        result.setInfo(info);
+
         List<String> endResults = result.toString(this.pieces, 0, 0);
 
         System.out.println("OptimizedSolver Algorithm: entries.txt --> resultsOptimizedSolver.txt | State: Success!");
