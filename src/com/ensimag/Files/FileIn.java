@@ -5,6 +5,7 @@ import com.ensimag.Models.Rectangle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
@@ -19,16 +20,16 @@ public class FileIn {
 
     public FileIn(String _fileName) {
         this.fileName = _fileName;
-        this.plates = new TreeMap<>();
-        this.pieces = new TreeMap<>();
+        this.plates = new HashMap<>();
+        this.pieces = new HashMap<>();
     }
 
     public Map<Plate, Integer> getPlates() {
-        return new TreeMap<>(plates);
+        return new HashMap<>(plates);
     }
 
     public Map<Rectangle, Integer> getPieces() {
-        return new TreeMap<>(pieces);
+        return new HashMap<>(pieces);
     }
 
     public void loadEntries() {
@@ -51,7 +52,7 @@ public class FileIn {
                     int h = Integer.parseInt(tk.nextToken());
                     int w = Integer.parseInt(tk.nextToken());
                     int nbPieces = Integer.parseInt(tk.nextToken());
-                    pieces.put(new Plate(h, w), nbPieces);
+                    pieces.put(new Rectangle(h, w), nbPieces);
                 }
                 //System.out.println(st);
                 line++;

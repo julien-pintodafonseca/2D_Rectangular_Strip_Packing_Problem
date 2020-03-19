@@ -18,6 +18,15 @@ public class Cut {
             this.info.add(_info);
         }
     }
+
+    public Cut(int _lost, List<PieceWithCoords> _info) {
+        this.lost = _lost;
+        this.info = new ArrayList<>();
+        if(_info != null) {
+            this.info.addAll(_info);
+        }
+    }
+
     public Cut() {
         this.lost = 0;
         this.info = new ArrayList<>();
@@ -88,7 +97,13 @@ public class Cut {
     }
 
     public void fusion(Cut toFusion){
-        this.info.addAll(toFusion.getInfo());
+        if (toFusion.getInfo().size() > 0) {
+            this.info.addAll(toFusion.getInfo());
+        }
         this.lost = this.lost + toFusion.getLost();
+    }
+
+    public Cut2 convertToCut2() {
+        return new Cut2(this.getLost(), this.getInfo(), null);
     }
 }
