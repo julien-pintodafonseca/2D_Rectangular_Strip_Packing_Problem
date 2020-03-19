@@ -13,6 +13,12 @@ public class PlateWithCoords extends Rectangle {
         this.y = _y;
     }
 
+    public PlateWithCoords(Rectangle _piece, int _x, int _y) {
+        super(_piece.getH(), _piece.getW());
+        this.x = _x;
+        this.y = _y;
+    }
+
     public PlateWithCoords(int _h, int _w, int _x, int _y) {
         super(_h, _w);
         this.x = _x;
@@ -25,5 +31,9 @@ public class PlateWithCoords extends Rectangle {
 
     public int getY() {
         return y;
+    }
+
+    public void setY(int _y) {
+        this.y = _y;
     }
 }

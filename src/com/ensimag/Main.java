@@ -1,6 +1,7 @@
 package com.ensimag;
 
 import com.ensimag.Algorithms.BL;
+import com.ensimag.Algorithms.BL2in1;
 import com.ensimag.Algorithms.BLAdvanced;
 import com.ensimag.Algorithms.OptimizedSolver;
 import com.ensimag.Files.FileCheck;
@@ -14,17 +15,22 @@ public class Main {
     public static void main(String[] args) {
         FileIn myFileIn = new FileIn("entries.txt");
         myFileIn.loadEntries();
-        BL myBL = new BL(myFileIn);
-        BLAdvanced myBLAdvanced = new BLAdvanced(myFileIn);
-        OptimizedSolver myOptimizedSolver = new OptimizedSolver(myFileIn);
+//        BL myBL = new BL(myFileIn);
+//        BLAdvanced myBLAdvanced = new BLAdvanced(myFileIn);
+//        OptimizedSolver myOptimizedSolver = new OptimizedSolver(myFileIn);
 
-        myBL.start();
-        myBLAdvanced.start();
-        myOptimizedSolver.start();
+        BL2in1 myBL2in1v1 = new BL2in1(myFileIn);
+        BL2in1 myBL2in1v2 = new BL2in1(myFileIn);
+//        myBL.start();
+//        myBLAdvanced.start();
+//        myOptimizedSolver.start();
+        myBL2in1v1.start(false);
 
-        FileCheck myFileCheck = new FileCheck("resultsBL.txt");
-        myFileCheck.loadEntries();
-        Checker myChecker = new Checker(myFileCheck);
+        myBL2in1v2.start(true);
+
+//        FileCheck myFileCheck = new FileCheck("resultsBL.txt");
+//        myFileCheck.loadEntries();
+//        Checker myChecker = new Checker(myFileCheck);
         //myChecker.start();
     }
 

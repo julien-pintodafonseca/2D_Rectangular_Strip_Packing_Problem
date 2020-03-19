@@ -64,9 +64,29 @@ public class Cut {
         return endResult;
     }
 
+    public List<String> toStringEnd(Map<Rectangle, Integer> pieces, int totalLost){
+        List<String> endResult = new ArrayList<>();
+        endResult.add("Pièces restantes à couper :");
+        String information = "";
+        for (Rectangle p : pieces.keySet()) {
+            if (pieces.get(p) > 0) {
+                for (int i = 0; i < pieces.get(p); i++) {
+                    information = information + p.getH() + " " + p.getW() + ", ";
+                }
+            }
+        }
+        if (information.equals("")) {
+            information = "Aucune.";
+        }
+        endResult.add(information);
+        endResult.add("Chutes :");
+        endResult.add(String.valueOf(totalLost));
+        return endResult;
+    }
+
     public List<String> toStringLimited(Map<Rectangle, Integer> pieces, int plateNumber){
         List<String> endResult = new ArrayList<>();
-        if (this.getLost() == 0) {
+        if (this.getInfo().size() == 0) {
             endResult.add("Plaque " + plateNumber + " :");
             endResult.add("Pas utilisée.");
         } else {

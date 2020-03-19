@@ -80,6 +80,7 @@ public class BL {
         int nbPieces; // nombre de pièces à découper dans la ligne actuelle
         String piecesDecoupes = "";
         int chutes = getSize(plate);
+        int LSH = 0;
 
         while (plate.getHRest() > 0 && !end) {
             end = true;
@@ -92,6 +93,7 @@ public class BL {
                             //System.out.println();
                             //System.out.println("+++ NOUVELLE PLAQUE ["+plate.getH()+"/"+plate.getW()+"]+++");
                         }
+                        LSH = p.getH();
                         newLine = false;
                         plate.setHRest(plate.getHRest() - p.getH());
                         piecesDecoupes += lineW+" "+p.getH()+" "+p.getW()+", ";
@@ -101,27 +103,29 @@ public class BL {
                         //System.out.println("Nouvelle ligne, une pièce a été placée ! ["+p.getH()+"/"+p.getW()+"]");
                         results.add("LS="+lineH);
                     }
-                    nbPieces = plate.getLineWRest(lineW) / p.getW();
-                    if (nbPieces > 0) {
-                        if (pieces.get(p) - nbPieces > 0) {
-                            // On place toutes les pièces que l'on peut placer (nbPieces)
-                            //System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées " +
-                                    //"(toutes les pièces pouvant etre placées sur la ligne).");
-                            for (int i=0; i<nbPieces; i++) {
-                                piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
-                                chutes -= getSize(p);
-                                lineW += p.getW();
+                    if (p.getH() <= LSH) {
+                        nbPieces = plate.getLineWRest(lineW) / p.getW();
+                        if (nbPieces > 0) {
+                            if (pieces.get(p) - nbPieces > 0) {
+                                // On place toutes les pièces que l'on peut placer (nbPieces)
+                                //System.out.println(nbPieces+" ["+p.getH()+"/"+p.getW()+"] ont été découpées " +
+                                //"(toutes les pièces pouvant etre placées sur la ligne).");
+                                for (int i = 0; i < nbPieces; i++) {
+                                    piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
+                                    chutes -= getSize(p);
+                                    lineW += p.getW();
+                                }
+                                pieces.put(p, pieces.get(p) - nbPieces);
+                            } else {
+                                // On place toutes les pièces qu'il nous reste à placer (pieces.get(p))
+                                //System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
+                                for (int i = 0; i < pieces.get(p); i++) {
+                                    piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
+                                    chutes -= getSize(p);
+                                    lineW += p.getW();
+                                }
+                                pieces.put(p, 0);
                             }
-                            pieces.put(p, pieces.get(p) - nbPieces);
-                        } else {
-                            // On place toutes les pièces qu'il nous reste à placer (pieces.get(p))
-                            //System.out.println(pieces.get(p)+" ["+p.getH()+"/"+p.getW()+"] ont été découpées (toutes les pièces restantes).");
-                            for (int i=0; i<pieces.get(p); i++) {
-                                piecesDecoupes += lineW + " " + p.getH() + " " + p.getW() + ", ";
-                                chutes -= getSize(p);
-                                lineW += p.getW();
-                            }
-                            pieces.put(p, 0);
                         }
                     }
                 }
