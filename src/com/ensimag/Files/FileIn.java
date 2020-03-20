@@ -28,6 +28,17 @@ public class FileIn {
     }
 
     public List<Plate> getPlatesList() {
+        List<Plate> platesList = new ArrayList<>();
+        for (Plate p : plates.keySet()) {
+            for (int i=0; i<plates.get(p); i++) {
+                platesList.add(p);
+            }
+        }
+        platesList.sort(new SortByArea());
+        return platesList;
+    }
+
+    public List<Plate> getPlateTypes() {
         List<Plate> platesList = new ArrayList<>(plates.keySet());
         platesList.sort(new SortByArea());
         return platesList;
@@ -37,7 +48,7 @@ public class FileIn {
         return new HashMap<>(pieces);
     }
 
-    public List<Rectangle> getPiecesList() {
+    public List<Rectangle> getPieceTypes() {
         List<Rectangle> piecesList = new ArrayList<>(pieces.keySet());
         piecesList.sort(new SortByArea());
         return piecesList;

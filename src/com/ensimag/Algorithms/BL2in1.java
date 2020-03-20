@@ -6,7 +6,6 @@ import com.ensimag.Models.Cut;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
-import com.ensimag.Sorts.SortByCoords;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,7 +29,7 @@ public class BL2in1 {
         boolean end = false;
 
         int plateNumber = 0;
-        for (Plate pType : fileIn.getPlatesList()) {
+        for (Plate pType : fileIn.getPlateTypes()) {
             int nbPlatesAtStart = plates.get(pType);
             for (int i=0; i<nbPlatesAtStart; i++) {
                 Plate plate = new Plate(pType.getH(), pType.getW());
@@ -74,7 +73,7 @@ public class BL2in1 {
 
         while (plate.getHRest() > 0 && !end) {
             end = true;
-            Iterator it = fileIn.getPiecesList().iterator();
+            Iterator it = fileIn.getPieceTypes().iterator();
             Rectangle p;
             while (it.hasNext()) {
                 p = (Rectangle) it.next();
@@ -131,7 +130,7 @@ public class BL2in1 {
         if (subPlate.getH() == 0) {
             return piecesDecoupes;
         } else {
-            for (Rectangle p : fileIn.getPiecesList()) {
+            for (Rectangle p : fileIn.getPieceTypes()) {
                 while (subPlate.getH() >= p.getH() && subPlate.getW() >= p.getW() && pieces.get(p) > 0) {
                     piecesDecoupes.addInfo(new PieceWithCoords(p.getH(), p.getW(), subPlate.getX(), subPlate.getY()));
                     pieces.put(p, pieces.get(p) - 1);

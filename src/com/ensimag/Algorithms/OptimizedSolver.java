@@ -20,7 +20,7 @@ public class OptimizedSolver {
     }
 
     public void start() {
-        Plate plate = fileIn.getPlatesList().iterator().next();
+        Plate plate = fileIn.getPlateTypes().get(0);
         PieceWithCoords plateWithCoords = new PieceWithCoords(plate, 0, 0);
         Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
 
@@ -34,7 +34,7 @@ public class OptimizedSolver {
     }
 
     private CutOptimized cutCutCut(PieceWithCoords plate, Map<Rectangle, Integer> pieces) {
-        Iterator<Rectangle> it = fileIn.getPiecesList().iterator();
+        Iterator<Rectangle> it = fileIn.getPieceTypes().iterator();
         Rectangle p = new Rectangle(0,0);
         boolean toward = false;
         boolean enoughPlace = false;

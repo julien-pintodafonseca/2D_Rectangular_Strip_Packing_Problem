@@ -13,17 +13,17 @@ public class FileCheck {
     private String fileName;
     private List<CutPlate> cuttedPlates;
     private List<Rectangle> leftPieces;
-    private List<Plate> pTypes;
     private int lost;
+    private List<Plate> platesList;
     private int plateNumber;
 
-    public FileCheck(String _fileName, List<Plate> _pTypes) {
+    public FileCheck(String _fileName, List<Plate> _platesList) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
         this.leftPieces = new ArrayList<>();
         this.lost = -1;
         this.plateNumber = -1;
-        this.pTypes = new ArrayList<>(_pTypes);
+        this.platesList = new ArrayList<>(_platesList);
         this.loadEntries();
     }
 
@@ -52,7 +52,7 @@ public class FileCheck {
             int current_plate = 0;
             while ((st = br.readLine()) != null) {
                 if (st.contains("Plaque")) {
-                    CutPlate plate = new CutPlate(this.pTypes.get(current_plate).getH(), this.pTypes.get(current_plate).getW());
+                    CutPlate plate = new CutPlate(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
                     plate.setLost(plate.getH()*plate.getW());
                     current_plate += 1;
                     int y = -1;
