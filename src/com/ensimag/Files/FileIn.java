@@ -1,13 +1,13 @@
 package com.ensimag.Files;
 
+import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
+import com.ensimag.Sorts.SortByArea;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Created by pintodaj on 2/19/20.
@@ -23,12 +23,24 @@ public class FileIn {
         this.pieces = new HashMap<>();
     }
 
-    public Map<Plate, Integer> getPlates() {
+    public Map<Plate, Integer> getPlatesMap() {
         return new HashMap<>(plates);
     }
 
-    public Map<Rectangle, Integer> getPieces() {
+    public List<Plate> getPlatesList() {
+        List<Plate> platesList = new ArrayList<>(plates.keySet());
+        platesList.sort(new SortByArea());
+        return platesList;
+    }
+
+    public Map<Rectangle, Integer> getPiecesMap() {
         return new HashMap<>(pieces);
+    }
+
+    public List<Rectangle> getPiecesList() {
+        List<Rectangle> piecesList = new ArrayList<>(pieces.keySet());
+        piecesList.sort(new SortByArea());
+        return piecesList;
     }
 
     public void loadEntries() {

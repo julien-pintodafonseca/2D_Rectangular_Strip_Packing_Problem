@@ -8,6 +8,7 @@ import com.ensimag.Models.Rectangle;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class FileCheck {
@@ -18,7 +19,7 @@ public class FileCheck {
     private int lost;
     private int plateNumber;
 
-    public FileCheck(String _fileName, ArrayList<Plate> _plates) {
+    public FileCheck(String _fileName, List<Plate> _plates) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
         this.leftPieces = new ArrayList<>();

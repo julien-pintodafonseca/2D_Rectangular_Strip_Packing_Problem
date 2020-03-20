@@ -1,13 +1,13 @@
 Plaque 0 :
 LS=0
-0 1 3, 
-LS=1
-0 1 3, 
-LS=2
-0 1 3, 
-LS=3
-0 1 3, 
+0 20 10, 10 20 10, 20 20 10, 30 10 10, 40 10 10, 
+LS=10
+30 10 10, 40 10 10, 
+LS=20
+0 5 18, 18 5 18, 
+Plaque 1 :
+Pas utilisée.
 Pièces restantes à couper :
-3 1, 3 1, 3 1, 3 1, 
+Aucune.
 Chutes :
-13
+1020

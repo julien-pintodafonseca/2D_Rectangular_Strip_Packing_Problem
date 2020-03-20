@@ -2,7 +2,11 @@ package com.ensimag.Algorithms;
 
 import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
-import com.ensimag.Models.*;
+import com.ensimag.Models.CutOptimized;
+import com.ensimag.Models.PieceWithCoords;
+import com.ensimag.Models.Plate;
+import com.ensimag.Models.Rectangle;
+import com.ensimag.Sorts.SortByCoords;
 
 import java.util.*;
 
@@ -17,9 +21,9 @@ public class OptimizedSolver {
     }
 
     public void start() {
-        Plate plate = fileIn.getPlates().keySet().iterator().next();
+        Plate plate = fileIn.getPlatesMap().keySet().iterator().next();
         PieceWithCoords plateWithCoords = new PieceWithCoords(plate, 0, 0);
-        Map<Rectangle, Integer> pieces = fileIn.getPieces();
+        Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
 
         CutOptimized result = this.cutCutCut(plateWithCoords, pieces);
         List<PieceWithCoords> info = result.getInfo();

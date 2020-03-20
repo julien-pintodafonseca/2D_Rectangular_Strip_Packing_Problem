@@ -2,7 +2,11 @@ package com.ensimag.Algorithms;
 
 import com.ensimag.Files.FileIn;
 import com.ensimag.Files.FileOut;
-import com.ensimag.Models.*;
+import com.ensimag.Models.Cut;
+import com.ensimag.Models.PieceWithCoords;
+import com.ensimag.Models.Plate;
+import com.ensimag.Models.Rectangle;
+import com.ensimag.Sorts.SortByCoords;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,14 +23,14 @@ public class BL2in1 {
     }
 
     public void start(boolean type) {
-        Map<Plate, Integer> plates = fileIn.getPlates();
-        Map<Rectangle, Integer> pieces = fileIn.getPieces();
+        Map<Plate, Integer> plates = fileIn.getPlatesMap();
+        Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
         Cut resultBLForOnePlate;
         int lost = 0;
         boolean end = false;
 
         int plateNumber = 0;
-        for (Plate pType : plates.keySet()) {
+        for (Plate pType : fileIn.getPlatesList()) {
             int nbPlatesAtStart = plates.get(pType);
             for (int i=0; i<nbPlatesAtStart; i++) {
                 Plate plate = new Plate(pType.getH(), pType.getW());
@@ -72,7 +76,7 @@ public class BL2in1 {
 
         while (plate.getHRest() > 0 && !end) {
             end = true;
-            Iterator it = pieces.keySet().iterator();
+            Iterator it = fileIn.getPiecesList().iterator();
             Rectangle p;
             while (it.hasNext()) {
                 p = (Rectangle) it.next();
@@ -126,7 +130,7 @@ public class BL2in1 {
         if (subPlate.getH() == 0) {
             return piecesDecoupes;
         } else {
-            for (Rectangle p : pieces.keySet()) {
+            for (Rectangle p : fileIn.getPiecesList()) {
                 while (subPlate.getH() >= p.getH() && subPlate.getW() >= p.getW() && pieces.get(p) > 0) {
                     piecesDecoupes.addInfo(new PieceWithCoords(p.getH(), p.getW(), subPlate.getX(), subPlate.getY()));
                     pieces.put(p, pieces.get(p) - 1);

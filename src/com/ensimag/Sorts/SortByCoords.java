@@ -1,4 +1,6 @@
-package com.ensimag.Models;
+package com.ensimag.Sorts;
+
+import com.ensimag.Models.PieceWithCoords;
 
 import java.util.Comparator;
 
