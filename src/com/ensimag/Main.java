@@ -22,7 +22,6 @@ public class Main {
         myOptimizedSolver.start(); //Algorithme optimisé tâche 3
 
         FileCheck myFileCheck = new FileCheck("resultsBL2in1v1.txt", myFileIn.getPlatesList());
-        myFileCheck.loadEntries();
         Checker myChecker = new Checker(myFileCheck);
         myChecker.start();
     }

@@ -11,27 +11,20 @@ import java.util.*;
 
 public class FileCheck {
     private String fileName;
-    private ArrayList<CutPlate> cuttedPlates;
-    private ArrayList<Rectangle> leftPieces;
-    private ArrayList<Plate> plates;
+    private List<CutPlate> cuttedPlates;
+    private List<Rectangle> leftPieces;
+    private List<Plate> pTypes;
     private int lost;
     private int plateNumber;
 
-    public FileCheck(String _fileName, List<Plate> _plates) {
+    public FileCheck(String _fileName, List<Plate> _pTypes) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
         this.leftPieces = new ArrayList<>();
         this.lost = -1;
         this.plateNumber = -1;
-        this.plates = new ArrayList<>(_plates);
-    }
-
-    public ArrayList<CutPlate> getCuttedPlates() {
-        return this.cuttedPlates;
-    }
-
-    public ArrayList<Rectangle> getLeftPieces() {
-        return this.leftPieces;
+        this.pTypes = new ArrayList<>(_pTypes);
+        this.loadEntries();
     }
 
     public int getLost() {
@@ -47,7 +40,7 @@ public class FileCheck {
         return this.cuttedPlates.get(this.plateNumber);
     }
 
-    public void loadEntries() {
+    private void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String st, st2;
@@ -55,7 +48,7 @@ public class FileCheck {
             int current_plate = 0;
             while ((st = br.readLine()) != null) {
                 if (st.contains("Plaque")) {
-                    CutPlate plate = new CutPlate(this.plates.get(current_plate).getH(), this.plates.get(current_plate).getW());
+                    CutPlate plate = new CutPlate(this.pTypes.get(current_plate).getH(), this.pTypes.get(current_plate).getW());
                     plate.setLost(plate.getH()*plate.getW());
                     current_plate += 1;
                     int y = -1;
