@@ -23,6 +23,10 @@
 .idea/
 *.iml
 
+# Visual Paradigm #
+/vp/*.back_*
+/vp/*.vpp.lck
+
 # Autres #
 out/
 .DS_Store

@@ -4,3 +4,8 @@
 
 -> Dans les algos, effectuer un tri des pièces et des plaques en fonction de leur surface (faire une ArrayList)
 -> Vérifier le bon fonctionnement du checker
+
+
+Julien
+-> code review des Models + FileCheck & Checker
+-> Refactoring Rectangle

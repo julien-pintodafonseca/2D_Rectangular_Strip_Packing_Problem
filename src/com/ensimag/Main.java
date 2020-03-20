@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
         FileIn myFileIn = new FileIn("entries.txt");
-        myFileIn.loadEntries();
 
         BL2in1 myBL2in1v1 = new BL2in1(myFileIn);
         BL2in1 myBL2in1v2 = new BL2in1(myFileIn);

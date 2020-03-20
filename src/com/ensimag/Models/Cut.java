@@ -1,5 +1,7 @@
 package com.ensimag.Models;
 
+import com.ensimag.Sorts.SortByCoords;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,18 +13,10 @@ public class Cut {
     private int lost;
     private List<PieceWithCoords> info;
 
-    public Cut(int _lost, PieceWithCoords _info) {
-        this.lost = _lost;
-        this.info = new ArrayList<>();
-        if(_info != null) {
-            this.info.add(_info);
-        }
-    }
-
     public Cut(int _lost, List<PieceWithCoords> _info) {
         this.lost = _lost;
         this.info = new ArrayList<>();
-        if(_info != null) {
+        if (_info != null) {
             this.info.addAll(_info);
         }
     }
@@ -52,8 +46,6 @@ public class Cut {
         this.info.add(newInfo);
     }
 
-    public void setInfo(List<PieceWithCoords> info) { this.info = info; }
-
     public List<String> toStringEnd(Map<Rectangle, Integer> pieces, int totalLost){
         List<String> endResult = new ArrayList<>();
         endResult.add("Pièces restantes à couper :");
@@ -82,6 +74,7 @@ public class Cut {
         } else {
             String information = "Plaque " + plateNumber + " :";
             int yCurrent = -1;
+            this.sortInfo();
             for (PieceWithCoords plate : this.info) {
                 if (plate.getY() > yCurrent) {
                     endResult.add(information);
@@ -101,5 +94,9 @@ public class Cut {
             this.info.addAll(toFusion.getInfo());
         }
         this.lost = this.lost + toFusion.getLost();
+    }
+
+    private void sortInfo() {
+        this.info.sort(new SortByCoords());
     }
 }

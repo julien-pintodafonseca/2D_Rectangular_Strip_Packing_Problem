@@ -26,8 +26,4 @@ public class FileOut {
             System.out.println("There is a problem when writing FileOut");
         }
     }
-
-
 }
-
-

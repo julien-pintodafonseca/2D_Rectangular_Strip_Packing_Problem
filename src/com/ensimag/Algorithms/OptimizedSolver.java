@@ -6,7 +6,6 @@ import com.ensimag.Models.CutOptimized;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
-import com.ensimag.Sorts.SortByCoords;
 
 import java.util.*;
 
@@ -21,15 +20,11 @@ public class OptimizedSolver {
     }
 
     public void start() {
-        Plate plate = fileIn.getPlatesMap().keySet().iterator().next();
+        Plate plate = fileIn.getPlatesList().iterator().next();
         PieceWithCoords plateWithCoords = new PieceWithCoords(plate, 0, 0);
         Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
 
         CutOptimized result = this.cutCutCut(plateWithCoords, pieces);
-        List<PieceWithCoords> info = result.getInfo();
-        info.sort(new SortByCoords());
-        result.setInfo(info);
-
         List<String> endResults = result.toString(0);
         endResults.addAll(result.toStringEnd(result.getPieces(), result.getLost()));
 
@@ -39,7 +34,7 @@ public class OptimizedSolver {
     }
 
     private CutOptimized cutCutCut(PieceWithCoords plate, Map<Rectangle, Integer> pieces) {
-        Iterator<Rectangle> it = pieces.keySet().iterator();
+        Iterator<Rectangle> it = fileIn.getPiecesList().iterator();
         Rectangle p = new Rectangle(0,0);
         boolean toward = false;
         boolean enoughPlace = false;
@@ -113,7 +108,6 @@ public class OptimizedSolver {
             subPlate2a = new CutOptimized(this.cutCutCut(new PieceWithCoords(pH, plate.getW()-pW, plate.getX() + pW, plate.getY()), piecesCopy));
             subPlate2b = new CutOptimized(this.cutCutCut(new PieceWithCoords(plate.getH()-pH, plate.getW(), plate.getX(), plate.getY() + pH), subPlate2a.getPieces()));
         }
-
 
         if (subPlate1a.getLost()+subPlate1b.getLost() <= subPlate2a.getLost()+subPlate2b.getLost()) {
             subPlate1b.fusion(subPlate1a.convertToCut());

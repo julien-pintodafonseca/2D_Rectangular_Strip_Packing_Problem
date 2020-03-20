@@ -1,6 +1,5 @@
 package com.ensimag.Files;
 
-import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
 import com.ensimag.Sorts.SortByArea;
@@ -21,6 +20,7 @@ public class FileIn {
         this.fileName = _fileName;
         this.plates = new HashMap<>();
         this.pieces = new HashMap<>();
+        this.loadEntries();
     }
 
     public Map<Plate, Integer> getPlatesMap() {
@@ -43,7 +43,7 @@ public class FileIn {
         return piecesList;
     }
 
-    public void loadEntries() {
+    private void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             int line = 0;

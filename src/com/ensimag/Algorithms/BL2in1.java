@@ -40,7 +40,6 @@ public class BL2in1 {
                     if (resultBLForOnePlate.getInfo().size() == 0) {
                         end = true;
                     }
-                    resultBLForOnePlate.getInfo().sort(new SortByCoords());
                 } else {
                     resultBLForOnePlate = new Cut();
                 }
@@ -62,7 +61,6 @@ public class BL2in1 {
             fileOut = new FileOut("resultsBL2in1v1.txt", results);
         }
         fileOut.writeFile();
-
     }
 
     private Cut BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces, boolean type) {
@@ -101,7 +99,10 @@ public class BL2in1 {
                             pieces.put(p, pieces.get(p) - 1);
                             piecesDecoupes.addInfo(new PieceWithCoords(p, plate.getW() - lineW, LS));
                             if (type) {
-                                piecesDecoupes.fusion(stacking(new PieceWithCoords(lineH - p.getH(), p.getW(), plate.getW() - lineW, LS + p.getH()), pieces));//appel à la méthode stacking
+                                piecesDecoupes.fusion(
+                                        stacking(new PieceWithCoords(lineH - p.getH(), p.getW(),
+                                                plate.getW() - lineW, LS + p.getH()), pieces)
+                                );//appel à la méthode stacking
                             } else {
                                 piecesDecoupes.addLost((lineH - p.getH()) * p.getW());
                             }

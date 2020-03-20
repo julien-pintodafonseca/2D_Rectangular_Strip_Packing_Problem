@@ -2,14 +2,15 @@ package com.ensimag.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CutPlate extends Rectangle {
     private int lost;
     private Map<Integer, Map<Integer, Plate>> xPieces;
     private Map<Integer, Map<Integer, Plate>> yPieces;
-    private ArrayList<Integer> xList;
-    private ArrayList<Integer> yList;
+    private List<Integer> xList;
+    private List<Integer> yList;
 
     public CutPlate(int _h, int _w) {
         super(_h, _w);
