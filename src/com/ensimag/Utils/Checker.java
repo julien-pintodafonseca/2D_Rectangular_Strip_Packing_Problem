@@ -4,7 +4,6 @@ import com.ensimag.Files.FileCheck;
 import com.ensimag.Models.CutPlate;
 import com.ensimag.Models.Plate;
 
-import java.util.Iterator;
 import java.util.Map;
 
 public class Checker {
@@ -28,84 +27,74 @@ public class Checker {
         }
         if (checked) { //si les pièces sont bien positionnées
             if (total_lost == this.fileCheck.getLost()) { //on vérifie les pertes
-                System.out.println("All is ok !");
+                System.out.println("All is ok!");
             } else {
-                System.out.println("Erreur : les chutes sont incorrectes !");
+                System.out.println("Erreur: les chutes sont incorrectes!");
             }
         } else {
-            System.out.println("Erreur : des pièces se superposent !");
+            System.out.println("Erreur: des pièces se superposent!");
         }
     }
 
-    public boolean checkX() {
-        Map.Entry<Integer, Plate> subList;
-        Map.Entry<Integer, Plate> subList_next;
+    private boolean checkX() {;
         int y;
-        int y_next;
+        int y_index;
         Plate p;
-        Plate p_next;
-        for (int x : this.plate.getxPieces().keySet()) {
-            Iterator<Map.Entry<Integer, Plate>> it = this.plate.getxPieces().get(x).entrySet().iterator();
-            if (it.hasNext()) {
-                subList = it.next();
+        int y_next;
+
+        for (int x : this.plate.getyPieces().keySet()) {
+            for (Map.Entry<Integer, Plate> subList : this.plate.getxPieces().get(x).entrySet()) {
                 y = subList.getKey();
                 p = subList.getValue();
-                while (it.hasNext()) {
-                    subList_next = it.next();
-                    y_next = subList_next.getKey();
-                    p_next = subList_next.getValue();
+                y_index = this.plate.getyList().indexOf(y);
 
-                    if (y + p.getH() > y_next) {
+                if (y_index < this.plate.getyList().size() - 1) {
+                    y_next = this.plate.nextY(x, y);
+                    if (y_next < 0) {
+                        if (y + p.getH() > this.plate.getH()) {
+                            return false;
+                        }
+                    } else if (y + p.getH() > y_next) {
                         return false;
                     }
-
-                    if (this.plate.nextX(x, y, p)) {
+                    if (!this.plate.suivX(x, y, p)) {
                         return false;
                     }
-
-                    y = y_next;
-                    p = p_next;
+                } else {
+                    if (y + p.getH() > this.plate.getH()) {
+                        return false;
+                    }
                 }
-
-                if (y + p.getH() > this.plate.getH()) {
-                    return false;
-                }
-
             }
         }
         return true;
     }
 
-    public boolean checkY() {
-        Map.Entry<Integer, Plate> subList;
-        Map.Entry<Integer, Plate> subList_next;
+    private boolean checkY() {
         int x;
-        int x_next;
+        int x_index;
         Plate p;
-        Plate p_next;
+        int x_next;
         for (int y : this.plate.getyPieces().keySet()) {
-            Iterator<Map.Entry<Integer, Plate>> it = this.plate.getyPieces().get(y).entrySet().iterator();
-            if (it.hasNext()) {
-                subList = it.next();
+            for (Map.Entry<Integer, Plate> subList : this.plate.getyPieces().get(y).entrySet()) {
                 x = subList.getKey();
                 p = subList.getValue();
-                while (it.hasNext()) {
-                    subList_next = it.next();
-                    x_next = subList_next.getKey();
-                    p_next = subList_next.getValue();
+                x_index = this.plate.getxList().indexOf(x);
 
-                    if (x + p.getW() > x_next) {
+                if (x_index < this.plate.getxList().size() - 1) {
+                    x_next = this.plate.nextX(x, y);
+                    if (x_next < 0) {
+                        if (x + p.getW() > this.plate.getW()) {
+                            return false;
+                        }
+                    } else if (x + p.getW() > x_next) {
                         return false;
                     }
-
-                    x = x_next;
-                    p = p_next;
+                } else {
+                    if (x + p.getW() > this.plate.getW()) {
+                        return false;
+                    }
                 }
-
-                if (x + p.getW() > this.plate.getH()) {
-                    return false;
-                }
-
             }
         }
         return true;

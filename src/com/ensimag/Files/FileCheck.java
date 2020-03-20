@@ -7,9 +7,7 @@ import com.ensimag.Models.Rectangle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class FileCheck {
     private String fileName;
@@ -92,7 +90,7 @@ public class FileCheck {
                             st = st2; // on ne traite que les lignes correspondantes à la plaque actuelle
                         }
                     }
-
+                    plate.sort();
                     cuttedPlates.add(plate); // on enregistre la plaque contenant les pièces découpées
                 } else if (st.contains("Pièces restantes à couper")) {
                     // on traite la ligne suivante:

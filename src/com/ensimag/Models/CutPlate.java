@@ -1,9 +1,6 @@
 package com.ensimag.Models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CutPlate extends Rectangle {
     private int lost;
@@ -27,6 +24,14 @@ public class CutPlate extends Rectangle {
 
     public Map<Integer, Map<Integer, Plate>> getyPieces() {
         return this.yPieces;
+    }
+
+    public List<Integer> getxList() {
+        return this.xList;
+    }
+
+    public List<Integer> getyList() {
+        return this.yList;
     }
 
     public int getLost() {
@@ -60,26 +65,64 @@ public class CutPlate extends Rectangle {
         subYPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
         //System.out.println(this.xPieces.get(piece.getX()));
 
-        //compléter arrayList
+        if (!this.xList.contains(piece.getX())) {
+            this.xList.add(piece.getX());
+        }
+        if (!this.yList.contains(piece.getY())) {
+            this.yList.add(piece.getY());
+        }
     }
 
-    public boolean nextX(int x, int y, Plate piece) {
+    public boolean suivX(int x, int y, Plate piece) {
         int x_index = this.xList.indexOf(x);
         if (x_index == this.xList.size() - 1) {
             return true;
         } else {
-            Map<Integer, Plate> subXPiecesY = this.xPieces.get(x_index + 1);
-            int y_index = this.yList.indexOf(y);
+            Map<Integer, Plate> subXPiecesY = this.xPieces.get(this.xList.get(x_index + 1));
+            int y_index = this.yList.indexOf(y) + 1;
             int y_index_max = this.yList.indexOf(y + piece.getH());
-            Plate p_prec;
             while (y_index < y_index_max) {
-                p_prec = subXPiecesY.get(y_index);
-                if (p_prec != null) {
+                if (subXPiecesY.get(y_index) != null) {
                         return false;
                 }
                 y_index += 1;
             }
             return true;
         }
+    }
+
+    public int nextX(int x, int y) {
+        Map<Integer, Plate> subYPiecesX = this.yPieces.get(y);
+        this.xList.indexOf(x);
+        int indexNextX = this.xList.indexOf(x) + 1;
+        int sizeXList = this.xList.size();
+        while (indexNextX < sizeXList && !subYPiecesX.containsKey(this.xList.get(indexNextX))) {
+            indexNextX ++;
+        }
+        if (indexNextX >= sizeXList) {
+            return -1;
+        } else {
+            return this.xList.get(indexNextX);
+        }
+    }
+
+    public int nextY(int x, int y) {
+        Map<Integer, Plate> subXPiecesY = this.xPieces.get(x);
+        this.yList.indexOf(y);
+        int indexNextY = this.yList.indexOf(y) + 1;
+        int sizeYList = this.yList.size();
+        while (indexNextY < sizeYList && !subXPiecesY.containsKey(this.yList.get(indexNextY))) {
+            indexNextY ++;
+        }
+        if (indexNextY >= sizeYList) {
+            return -1;
+        } else {
+            return this.yList.get(indexNextY);
+        }
+    }
+
+    public void sort() {
+        Collections.sort(this.xList);
+        Collections.sort(this.yList);
     }
 }
