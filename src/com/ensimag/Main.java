@@ -12,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileIn myFileIn = new FileIn("entries.txt");
+        printInventory(myFileIn);
 
         BL2in1 myBL = new BL2in1(myFileIn);
         BL2in1 myBLAdvanced = new BL2in1(myFileIn);
@@ -33,12 +34,13 @@ public class Main {
     }
 
     private static void printInventory(FileIn myFileIn) {
-        System.out.println();
+        System.out.println("Inventory:");
+        System.out.println("---------");
         for (Plate p : myFileIn.getPlatesMap().keySet()) {
-            System.out.println("Plaque H=" + p.getH() + " / W=" + p.getW() + " / Quantité=" + myFileIn.getPlatesMap().get(p));
+            System.out.println("PlaqueType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPlatesMap().get(p));
         }
         for (Rectangle p : myFileIn.getPiecesMap().keySet()) {
-            System.out.println("Pièce H=" + p.getH() + " / W=" + p.getW() + " / Quantité=" + myFileIn.getPiecesMap().get(p));
+            System.out.println("PièceType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPiecesMap().get(p));
         }
         System.out.println();
     }

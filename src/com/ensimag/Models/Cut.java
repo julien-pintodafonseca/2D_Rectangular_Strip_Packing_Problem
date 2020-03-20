@@ -13,14 +13,6 @@ public class Cut {
     private int lost;
     private List<PieceWithCoords> info;
 
-    public Cut(int _lost, List<PieceWithCoords> _info) {
-        this.lost = _lost;
-        this.info = new ArrayList<>();
-        if (_info != null) {
-            this.info.addAll(_info);
-        }
-    }
-
     public Cut() {
         this.lost = 0;
         this.info = new ArrayList<>();
@@ -30,6 +22,14 @@ public class Cut {
         this.lost = clone.getLost();
         this.info = new ArrayList<>();
         this.info.addAll(clone.getInfo());
+    }
+
+    public Cut(int _lost, List<PieceWithCoords> _info) {
+        this.lost = _lost;
+        this.info = new ArrayList<>();
+        if (_info != null) {
+            this.info.addAll(_info);
+        }
     }
 
     public int getLost() {

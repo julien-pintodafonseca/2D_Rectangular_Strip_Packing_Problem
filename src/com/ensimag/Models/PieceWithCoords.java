@@ -7,14 +7,14 @@ public class PieceWithCoords extends Rectangle {
     private int x;
     private int y;
 
-    public PieceWithCoords(Plate _plate, int _x, int _y) {
-        super(_plate.getH(), _plate.getW());
+    public PieceWithCoords(Rectangle _piece, int _x, int _y) {
+        super(_piece.getH(), _piece.getW());
         this.x = _x;
         this.y = _y;
     }
 
-    public PieceWithCoords(Rectangle _piece, int _x, int _y) {
-        super(_piece.getH(), _piece.getW());
+    public PieceWithCoords(Plate _plate, int _x, int _y) {
+        super(_plate.getH(), _plate.getW());
         this.x = _x;
         this.y = _y;
     }

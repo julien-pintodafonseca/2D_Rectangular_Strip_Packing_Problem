@@ -37,12 +37,13 @@ public class CutPlate extends Rectangle {
     public int getLost() {
         return this.lost;
     }
+
     public void setLost(int _lost) {
         this.lost = _lost;
     }
 
-    public void addLost(int _lost) {
-        this.lost += _lost;
+    public void addLost(int yes) {
+        this.lost += yes;
     }
 
     public void addPiece(PieceWithCoords piece) {

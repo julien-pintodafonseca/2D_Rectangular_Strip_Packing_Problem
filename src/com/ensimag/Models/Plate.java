@@ -15,7 +15,7 @@ public class Plate extends Rectangle {
         return this.hRest;
     }
 
-    public void setHRest(int hRest) {
-        this.hRest = hRest;
+    public void setHRest(int _hRest) {
+        this.hRest = _hRest;
     }
 }
