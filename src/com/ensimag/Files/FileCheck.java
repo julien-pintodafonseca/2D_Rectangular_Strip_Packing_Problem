@@ -2,6 +2,7 @@ package com.ensimag.Files;
 
 import com.ensimag.Models.CutPlate;
 import com.ensimag.Models.PieceWithCoords;
+import com.ensimag.Models.Plate;
 import com.ensimag.Models.Rectangle;
 
 import java.io.BufferedReader;
@@ -13,28 +14,17 @@ public class FileCheck {
     private String fileName;
     private ArrayList<CutPlate> cuttedPlates;
     private ArrayList<Rectangle> leftPieces;
+    private ArrayList<Plate> plates;
     private int lost;
     private int plateNumber;
 
-    public FileCheck(String _fileName) {
+    public FileCheck(String _fileName, ArrayList<Plate> _plates) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
         this.leftPieces = new ArrayList<>();
         this.lost = -1;
         this.plateNumber = -1;
-    }
-
-    public boolean hasNextPlate() {
-        if (this.plateNumber + 1 < this.cuttedPlates.size()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public CutPlate nextPlate() {
-        this.plateNumber += 1;
-        return this.cuttedPlates.get(this.plateNumber);
+        this.plates = new ArrayList<>(_plates);
     }
 
     public ArrayList<CutPlate> getCuttedPlates() {
@@ -49,14 +39,26 @@ public class FileCheck {
         return this.lost;
     }
 
+    public boolean hasNextPlate() {
+        return (this.plateNumber + 1 < this.cuttedPlates.size());
+    }
+
+    public CutPlate nextPlate() {
+        this.plateNumber += 1;
+        return this.cuttedPlates.get(this.plateNumber);
+    }
+
     public void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String st, st2;
             StringTokenizer tk;
+            int current_plate = 0;
             while ((st = br.readLine()) != null) {
                 if (st.contains("Plaque")) {
-                    CutPlate plate = new CutPlate();
+                    CutPlate plate = new CutPlate(this.plates.get(current_plate).getH(), this.plates.get(current_plate).getW());
+                    plate.setLost(plate.getH()*plate.getW());
+                    current_plate += 1;
                     int y = -1;
 
                     // on traite la ligne suivante:
@@ -79,6 +81,7 @@ public class FileCheck {
 
                                 // on enregistre la pièce de coordonnées "x", "y" et de dimension "h", "w"
                                 plate.addPiece(new PieceWithCoords(h, w, x, y));
+                                plate.addLost(-h*w);
                             }
                         }
 

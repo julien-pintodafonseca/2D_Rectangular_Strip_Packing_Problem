@@ -63,7 +63,7 @@ public class BL2in1 {
 
     private Cut BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces, boolean type) {
         boolean newLine = true;
-        boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placer toutes les pièces
+        boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placé toutes les pièces
         Cut piecesDecoupes = new Cut();
 
         int lineH = 0; // hauteur de la ligne courante
