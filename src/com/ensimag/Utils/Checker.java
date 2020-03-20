@@ -27,12 +27,12 @@ public class Checker {
         }
         if (checked) { //si les pièces sont bien positionnées
             if (total_lost == this.fileCheck.getLost()) { //on vérifie les pertes
-                System.out.println("All is ok!");
+                System.out.println("Checker --> "+fileCheck.getFileName()+" | All is ok!");
             } else {
-                System.out.println("Erreur: les chutes sont incorrectes!");
+                System.out.println("Checker --> "+fileCheck.getFileName()+" | Erreur: les chutes sont incorrectes!");
             }
         } else {
-            System.out.println("Erreur: des pièces se superposent!");
+            System.out.println("Checker --> "+fileCheck.getFileName()+" | Erreur: des pièces se superposent!");
         }
     }
 
@@ -42,7 +42,7 @@ public class Checker {
         Plate p;
         int y_next;
 
-        for (int x : this.plate.getyPieces().keySet()) {
+        for (int x : this.plate.getxPieces().keySet()) {
             for (Map.Entry<Integer, Plate> subList : this.plate.getxPieces().get(x).entrySet()) {
                 y = subList.getKey();
                 p = subList.getValue();

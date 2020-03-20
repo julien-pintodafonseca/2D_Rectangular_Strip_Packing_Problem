@@ -13,17 +13,23 @@ public class Main {
     public static void main(String[] args) {
         FileIn myFileIn = new FileIn("entries.txt");
 
-        BL2in1 myBL2in1v1 = new BL2in1(myFileIn);
-        BL2in1 myBL2in1v2 = new BL2in1(myFileIn);
+        BL2in1 myBL = new BL2in1(myFileIn);
+        BL2in1 myBLAdvanced = new BL2in1(myFileIn);
         OptimizedSolver myOptimizedSolver = new OptimizedSolver(myFileIn);
 
-        myBL2in1v1.start(false); //BL tâche 1
-        myBL2in1v2.start(true); //BL tâche 2
+        myBL.start(false); //Algorithme BL tâche 1
+        myBLAdvanced.start(true); //Algorithme BL avancé tâche 2
         myOptimizedSolver.start(); //Algorithme optimisé tâche 3
 
-        FileCheck myFileCheck = new FileCheck("resultsBL2in1v1.txt", myFileIn.getPlatesList());
-        Checker myChecker = new Checker(myFileCheck);
-        myChecker.start();
+        FileCheck myFileCheck1 = new FileCheck("resultsBL.txt", myFileIn.getPlatesList());
+        FileCheck myFileCheck2 = new FileCheck("resultsBLAdvanced.txt", myFileIn.getPlatesList());
+        FileCheck myFileCheck3 = new FileCheck("resultsOptimizedSolver.txt", myFileIn.getPlatesList());
+        Checker myChecker1 = new Checker(myFileCheck1);
+        Checker myChecker2 = new Checker(myFileCheck2);
+        Checker myChecker3 = new Checker(myFileCheck3);
+        myChecker1.start();
+        myChecker2.start();
+        myChecker3.start();
     }
 
     private static void printInventory(FileIn myFileIn) {

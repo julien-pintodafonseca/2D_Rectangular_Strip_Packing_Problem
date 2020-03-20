@@ -54,11 +54,11 @@ public class BL2in1 {
 
         FileOut fileOut;
         if (type) {
-            System.out.println("BL Algorithm (v1 BL2in1) : entries.txt --> resultsBL2in1v2.txt | State: Success!");
-            fileOut = new FileOut("resultsBL2in1v2.txt", results);
+            System.out.println("BLAdvanced Algorithm : entries.txt --> resultsBLAdvanced.txt | State: Success!");
+            fileOut = new FileOut("resultsBLAdvanced.txt", results);
         } else {
-            System.out.println("BL Algorithm Advanced (v2 BL2in1) : entries.txt --> resultsBL2in1v1.txt | State: Success!");
-            fileOut = new FileOut("resultsBL2in1v1.txt", results);
+            System.out.println("BL Algorithm : entries.txt --> resultsBL.txt | State: Success!");
+            fileOut = new FileOut("resultsBL.txt", results);
         }
         fileOut.writeFile();
     }

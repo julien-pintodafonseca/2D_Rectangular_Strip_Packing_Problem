@@ -31,6 +31,10 @@ public class FileCheck {
         return this.lost;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
     public boolean hasNextPlate() {
         return (this.plateNumber + 1 < this.cuttedPlates.size());
     }

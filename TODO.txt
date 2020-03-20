@@ -1,10 +1,6 @@
--> Commenter algo 1, 2 et 3
+﻿-> Commenter algo 1, 2 et 3
 -> Mettre à jour le diagramme de classe (sur Visual Paradigm)
 -> Récupérer l'article de l'algo 3
-
--> Dans les algos, effectuer un tri des pièces et des plaques en fonction de leur surface (faire une ArrayList)
--> Vérifier le bon fonctionnement du checker
-
 
 Julien
 -> code review des Models + FileCheck & Checker
