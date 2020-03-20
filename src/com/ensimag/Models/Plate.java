@@ -3,7 +3,7 @@ package com.ensimag.Models;
 /**
  * Created by houdee on 2/17/20.
  */
-public class Plate extends Rectangle {
+public class Plate extends Piece {
     private int hRest;
 
     public Plate(int _h, int _w) {

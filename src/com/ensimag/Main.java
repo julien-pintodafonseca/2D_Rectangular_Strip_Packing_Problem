@@ -5,7 +5,7 @@ import com.ensimag.Algorithms.OptimizedSolver;
 import com.ensimag.Files.FileCheck;
 import com.ensimag.Files.FileIn;
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 import com.ensimag.Utils.Checker;
 
 public class Main {
@@ -39,7 +39,7 @@ public class Main {
         for (Plate p : myFileIn.getPlatesMap().keySet()) {
             System.out.println("PlaqueType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPlatesMap().get(p));
         }
-        for (Rectangle p : myFileIn.getPiecesMap().keySet()) {
+        for (Piece p : myFileIn.getPiecesMap().keySet()) {
             System.out.println("PièceType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPiecesMap().get(p));
         }
         System.out.println();

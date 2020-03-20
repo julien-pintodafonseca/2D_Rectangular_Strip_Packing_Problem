@@ -3,7 +3,7 @@ package com.ensimag.Files;
 import com.ensimag.Models.CutPlate;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ import java.util.*;
 public class FileCheck {
     private String fileName;
     private List<CutPlate> cuttedPlates;
-    private List<Rectangle> leftPieces;
+    private List<Piece> leftPieces;
     private int lost;
     private List<Plate> platesList;
     private int plateNumber;
@@ -100,7 +100,7 @@ public class FileCheck {
                             tk = new StringTokenizer(s);
                             int h = Integer.parseInt(tk.nextToken()); // on obtient "h"
                             int w = Integer.parseInt(tk.nextToken()); // on obtient "w"
-                            leftPieces.add(new Rectangle(h, w)); // on enregistre la pièce de dimension "h", "w"
+                            leftPieces.add(new Piece(h, w)); // on enregistre la pièce de dimension "h", "w"
                         }
                     }
                 } else if (st.contains("Chutes")) {

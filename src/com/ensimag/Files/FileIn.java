@@ -1,7 +1,7 @@
 package com.ensimag.Files;
 
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 import com.ensimag.Sorts.SortByArea;
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ import java.util.*;
 public class FileIn {
     private String fileName;
     private Map<Plate, Integer> plates;
-    private Map<Rectangle, Integer> pieces;
+    private Map<Piece, Integer> pieces;
 
     public FileIn(String _fileName) {
         this.fileName = _fileName;
@@ -44,12 +44,12 @@ public class FileIn {
         return platesList;
     }
 
-    public Map<Rectangle, Integer> getPiecesMap() {
+    public Map<Piece, Integer> getPiecesMap() {
         return new HashMap<>(pieces);
     }
 
-    public List<Rectangle> getPieceTypes() {
-        List<Rectangle> piecesList = new ArrayList<>(pieces.keySet());
+    public List<Piece> getPieceTypes() {
+        List<Piece> piecesList = new ArrayList<>(pieces.keySet());
         piecesList.sort(new SortByArea());
         return piecesList;
     }
@@ -74,7 +74,7 @@ public class FileIn {
                     int h = Integer.parseInt(tk.nextToken());
                     int w = Integer.parseInt(tk.nextToken());
                     int nbPieces = Integer.parseInt(tk.nextToken());
-                    pieces.put(new Rectangle(h, w), nbPieces);
+                    pieces.put(new Piece(h, w), nbPieces);
                 }
                 //System.out.println(st);
                 line++;

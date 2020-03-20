@@ -2,6 +2,3 @@
 -> Mettre à jour le diagramme de classe (sur Visual Paradigm)
 -> Récupérer l'article de l'algo 3
 
-Julien
--> code review des Models + FileCheck & Checker
--> Refactoring Rectangle

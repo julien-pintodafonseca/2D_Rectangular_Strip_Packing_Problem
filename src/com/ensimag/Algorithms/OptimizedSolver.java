@@ -5,7 +5,7 @@ import com.ensimag.Files.FileOut;
 import com.ensimag.Models.CutOptimized;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class OptimizedSolver {
     public void start() {
         Plate plate = fileIn.getPlateTypes().get(0);
         PieceWithCoords plateWithCoords = new PieceWithCoords(plate, 0, 0);
-        Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
+        Map<Piece, Integer> pieces = fileIn.getPiecesMap();
 
         CutOptimized result = this.cutCutCut(plateWithCoords, pieces);
         List<String> endResults = result.toString(0);
@@ -33,9 +33,9 @@ public class OptimizedSolver {
         fileOut.writeFile();
     }
 
-    private CutOptimized cutCutCut(PieceWithCoords plate, Map<Rectangle, Integer> pieces) {
-        Iterator<Rectangle> it = fileIn.getPieceTypes().iterator();
-        Rectangle p = new Rectangle(0,0);
+    private CutOptimized cutCutCut(PieceWithCoords plate, Map<Piece, Integer> pieces) {
+        Iterator<Piece> it = fileIn.getPieceTypes().iterator();
+        Piece p = new Piece(0,0);
         boolean toward = false;
         boolean enoughPlace = false;
         boolean stop = false;
@@ -78,8 +78,8 @@ public class OptimizedSolver {
         }
     }
 
-    private CutOptimized bestSoluce(PieceWithCoords plate, int pH, int pW, Map<Rectangle, Integer> pieces) {
-        Map<Rectangle, Integer> piecesCopy = new HashMap<>(pieces);
+    private CutOptimized bestSoluce(PieceWithCoords plate, int pH, int pW, Map<Piece, Integer> pieces) {
+        Map<Piece, Integer> piecesCopy = new HashMap<>(pieces);
         if (plate.getH()-pH == 0) {
             CutOptimized subPlate1b = new CutOptimized(this.cutCutCut(new PieceWithCoords(plate.getH(), plate.getW()-pW, plate.getX() + pW, plate.getY()), pieces));
             subPlate1b.addInfo(new PieceWithCoords(pH, pW, plate.getX(), plate.getY()));

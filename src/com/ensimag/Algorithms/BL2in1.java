@@ -5,7 +5,7 @@ import com.ensimag.Files.FileOut;
 import com.ensimag.Models.Cut;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,7 +23,7 @@ public class BL2in1 {
 
     public void start(boolean type) {
         Map<Plate, Integer> plates = fileIn.getPlatesMap();
-        Map<Rectangle, Integer> pieces = fileIn.getPiecesMap();
+        Map<Piece, Integer> pieces = fileIn.getPiecesMap();
         Cut resultBLForOnePlate;
         int lost = 0;
         boolean end = false;
@@ -62,7 +62,7 @@ public class BL2in1 {
         fileOut.writeFile();
     }
 
-    private Cut BLForOnePlate(Plate plate, Map<Rectangle, Integer> pieces, boolean type) {
+    private Cut BLForOnePlate(Plate plate, Map<Piece, Integer> pieces, boolean type) {
         boolean newLine = true;
         boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placé toutes les pièces
         Cut piecesDecoupes = new Cut();
@@ -74,9 +74,9 @@ public class BL2in1 {
         while (plate.getHRest() > 0 && !end) {
             end = true;
             Iterator it = fileIn.getPieceTypes().iterator();
-            Rectangle p;
+            Piece p;
             while (it.hasNext()) {
-                p = (Rectangle) it.next();
+                p = (Piece) it.next();
                 if (pieces.get(p) == 0) {
                     it.remove();
                 } else {
@@ -125,12 +125,12 @@ public class BL2in1 {
         return piecesDecoupes;
     }
 
-    private Cut stacking(PieceWithCoords subPlate, Map<Rectangle, Integer> pieces) {
+    private Cut stacking(PieceWithCoords subPlate, Map<Piece, Integer> pieces) {
         Cut piecesDecoupes = new Cut();
         if (subPlate.getH() == 0) {
             return piecesDecoupes;
         } else {
-            for (Rectangle p : fileIn.getPieceTypes()) {
+            for (Piece p : fileIn.getPieceTypes()) {
                 while (subPlate.getH() >= p.getH() && subPlate.getW() >= p.getW() && pieces.get(p) > 0) {
                     piecesDecoupes.addInfo(new PieceWithCoords(p.getH(), p.getW(), subPlate.getX(), subPlate.getY()));
                     pieces.put(p, pieces.get(p) - 1);

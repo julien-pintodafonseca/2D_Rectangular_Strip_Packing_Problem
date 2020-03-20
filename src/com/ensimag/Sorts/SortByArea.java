@@ -1,18 +1,18 @@
 package com.ensimag.Sorts;
 
-import com.ensimag.Models.Rectangle;
+import com.ensimag.Models.Piece;
 
 import java.util.Comparator;
 
-public class SortByArea implements Comparator<Rectangle> {
-    public int compare(Rectangle r1, Rectangle r2) {
+public class SortByArea implements Comparator<Piece> {
+    public int compare(Piece r1, Piece r2) {
         if (getArea(r1) != getArea(r2)) {
             return getArea(r2) - getArea(r1);
         } else
             return 0;
     }
 
-    private int getArea(Rectangle r) {
+    private int getArea(Piece r) {
         return r.getH()*r.getW();
     }
 }

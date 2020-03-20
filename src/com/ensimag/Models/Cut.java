@@ -46,11 +46,11 @@ public class Cut {
         this.info.add(newInfo);
     }
 
-    public List<String> toStringEnd(Map<Rectangle, Integer> pieces, int totalLost){
+    public List<String> toStringEnd(Map<Piece, Integer> pieces, int totalLost){
         List<String> endResult = new ArrayList<>();
         endResult.add("Pièces restantes à couper :");
         String information = "";
-        for (Rectangle p : pieces.keySet()) {
+        for (Piece p : pieces.keySet()) {
             if (pieces.get(p) > 0) {
                 for (int i = 0; i < pieces.get(p); i++) {
                     information = information + p.getH() + " " + p.getW() + ", ";

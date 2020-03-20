@@ -2,7 +2,7 @@ package com.ensimag.Models;
 
 import java.util.*;
 
-public class CutPlate extends Rectangle {
+public class CutPlate extends Piece {
     private int lost;
     private Map<Integer, Map<Integer, Plate>> xPieces;
     private Map<Integer, Map<Integer, Plate>> yPieces;
