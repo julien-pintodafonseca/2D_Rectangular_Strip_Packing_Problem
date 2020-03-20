@@ -24,8 +24,8 @@
 *.iml
 
 # Visual Paradigm #
-/vp/*.back_*
 /vp/*.vpp.lck
+/vp/*.bak_*
 
 # Autres #
 out/
