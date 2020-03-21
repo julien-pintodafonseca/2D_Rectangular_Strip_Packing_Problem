@@ -1,6 +1,6 @@
 package com.ensimag.Files;
 
-import com.ensimag.Models.CutPlate;
+import com.ensimag.Models.CutChecker;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Piece;
@@ -11,7 +11,7 @@ import java.util.*;
 
 public class FileCheck {
     private String fileName;
-    private List<CutPlate> cuttedPlates;
+    private List<CutChecker> cuttedPlates;
     private List<Piece> leftPieces;
     private int lost;
     private List<Plate> platesList;
@@ -39,7 +39,7 @@ public class FileCheck {
         return (this.plateNumber + 1 < this.cuttedPlates.size());
     }
 
-    public CutPlate nextPlate() {
+    public CutChecker nextPlate() {
         this.plateNumber += 1;
         return this.cuttedPlates.get(this.plateNumber);
     }
@@ -47,30 +47,32 @@ public class FileCheck {
     private void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String st, st2;
+            BufferedReader br2 = new BufferedReader(new FileReader(fileName));
+            String st;
             StringTokenizer tk;
             int current_plate = 0;
             while ((st = br.readLine()) != null) {
+                if (!st.contains("Plaque") || st.contains("Plaque 0")) {
+                    br2.readLine();
+                }
                 if (st.contains("Plaque")) {
-                    CutPlate plate = new CutPlate(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
+                    CutChecker plate = new CutChecker(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
                     current_plate += 1;
                     int y = -1;
 
                     // on traite la ligne suivante:
-                    st = br.readLine();
-                    st2 = st;
-                    if (!st2.contains("Pas utilisée")) {
+                    st = br2.readLine();
+                    br.readLine();
+                    if (!st.contains("Pas utilisée")) {
                         plate.setLost(plate.getH()*plate.getW());
                     }
-
                     // on parcourt les lignes supports (LS) et les pièces découpées dans la plaque
-                    while (st2.contains("LS") || st2.contains(",") || st2.contains("Pas utilisée")) {
-
-                        if (st2.contains("LS")) {
-                            y = Integer.parseInt(st2.split("=")[1]);
-                        } else if (st2.contains(",")) {
+                    while (st.contains("LS") || st.contains(",") || st.contains("Pas utilisée")) {
+                        if (st.contains("LS")) {
+                            y = Integer.parseInt(st.split("=")[1]);
+                        } else if (st.contains(",")) {
                             // on enregistre chaque pièce découpée dans la plaque
-                            String[] spt = st2.split(", ");
+                            String[] spt = st.split(", ");
                             for (String s : spt) {
                                 tk = new StringTokenizer(s);
                                 int x = Integer.parseInt(tk.nextToken()); // on obtient "x"
@@ -84,9 +86,9 @@ public class FileCheck {
                         }
 
                         // on passe à la ligne suivante:
-                        st2 = br.readLine();
-                        if (st2.contains("LS") || st2.contains(",") || st2.contains("Pas utilisée")) {
-                            st = st2; // on ne traite que les lignes correspondantes à la plaque actuelle
+                        st = br2.readLine();
+                        if (st.contains("LS") || st.contains(",") || st.contains("Pas utilisée")) {
+                            br.readLine(); // on ne traite que les lignes correspondantes à la plaque actuelle
                         }
                     }
                     plate.sort();
@@ -94,6 +96,7 @@ public class FileCheck {
                 } else if (st.contains("Pièces restantes à couper")) {
                     // on traite la ligne suivante:
                     st = br.readLine();
+                    br2.readLine();
 
                     if (!st.contains("Aucune")) {
                         // on enregistre chaque pièce restante à couper
@@ -108,6 +111,7 @@ public class FileCheck {
                 } else if (st.contains("Chutes")) {
                     // on traite la ligne suivante:
                     st = br.readLine();
+                    br2.readLine();
 
                     tk = new StringTokenizer(st);
                     this.lost = Integer.parseInt(tk.nextToken()); // on enregistre "lost"

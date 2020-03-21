@@ -1,18 +1,18 @@
 package com.ensimag.Utils;
 
 import com.ensimag.Files.FileCheck;
-import com.ensimag.Models.CutPlate;
+import com.ensimag.Models.CutChecker;
 import com.ensimag.Models.Plate;
 
 import java.util.Map;
 
 public class Checker {
     private FileCheck fileCheck;
-    private CutPlate plate;
+    private CutChecker plate;
 
     public Checker(FileCheck _fileCheck) {
         this.fileCheck = _fileCheck;
-        this.plate = new CutPlate(0, 0);
+        this.plate = new CutChecker(0, 0);
     }
 
     public void start() {
