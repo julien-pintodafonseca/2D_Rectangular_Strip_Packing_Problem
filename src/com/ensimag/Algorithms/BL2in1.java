@@ -22,8 +22,12 @@ public class BL2in1 {
         this.results = new ArrayList<>();
     }
 
-    //Méthode permettant l'éxecution de l'algorithme
-    // type : booléen permettant de savoir si on éxécute l'algo de la tache 1(type=false) ou la tache 2(type=true)
+    
+
+    /**
+     * Méthode permettant l'éxecution de l'algorithme
+     * @param type : booléen permettant de savoir si on éxécute l'algo de la tache 1(type=false) ou la tache 2(type=true)
+     */
     public void start(boolean type) {
         Map<Plate, Integer> plates = fileIn.getPlatesMap(); //Map des différentes plaques et leur quantité
         Map<Piece, Integer> pieces = fileIn.getPiecesMap(); //Map des différentes pièces et leur quantité
@@ -47,13 +51,13 @@ public class BL2in1 {
                     resultBLForOnePlate = new Cut();
                 }
 
-                results.addAll(resultBLForOnePlate.toString(plateNumber)); //écrit la découpe de la plaque
-                lost += resultBLForOnePlate.getLost(); //incrémente les pertes
+                results.addAll(resultBLForOnePlate.toString(plateNumber)); // écrit la découpe de la plaque
+                lost += resultBLForOnePlate.getLost(); // incrémente les pertes
                 plateNumber++; //passe à plaque suivante
             }
             end = false;
         }
-        results.addAll((new Cut()).toStringEnd(pieces, lost)); //écrit les pièces qui n'ont pas été utilisé et les pertes
+        results.addAll((new Cut()).toStringEnd(pieces, lost)); // écrit les pièces qui n'ont pas été utilisées et les pertes
 
         //écriture dans le fichier de sortie et affichage de l'état de l'algorithme sur la console
         FileOut fileOut;

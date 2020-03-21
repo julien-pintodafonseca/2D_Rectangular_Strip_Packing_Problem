@@ -4,9 +4,23 @@ import java.util.*;
 
 public class CutChecker extends Piece {
     private int lost;
+    /**
+     * La Map a un Integer qui est la coordonnée X. A chaque X est associé une Map contenant la liste des pièces et
+     * leur position Y qui sont à cette position X.
+     */
     private Map<Integer, Map<Integer, Plate>> xPieces;
+    /**
+     * La Map a un Integer qui est la coordonnée Y. A chaque Y est associé une Map contenant la liste des pièces et
+     * leur position X qui sont à cette position Y.
+     */
     private Map<Integer, Map<Integer, Plate>> yPieces;
+    /**
+     * La liste de tous les X sur lesquels il y a une ou plusieurs pièce(s).
+     */
     private List<Integer> xList;
+    /**
+     * La liste de tous les Y sur lesquels il y a une ou plusieurs pièce(s).
+     */
     private List<Integer> yList;
 
     public CutChecker(int _h, int _w) {
@@ -46,7 +60,12 @@ public class CutChecker extends Piece {
         this.lost += yes;
     }
 
+    /**
+     * Méthode qui permet d'ajouter une pièce découpée dans la plaque
+     * @param piece : la pièce à ajouter
+     */
     public void addPiece(PieceWithCoords piece) {
+        // initialisation des sous map si nécessaire
         if (!this.xPieces.containsKey(piece.getX())) {
             this.xPieces.put(piece.getX(), new HashMap<>());
         }
@@ -54,26 +73,40 @@ public class CutChecker extends Piece {
             this.yPieces.put(piece.getY(), new HashMap<>());
         }
 
+        // On rajoute la pièce sur la map des X
         Map<Integer, Plate> subXPieces = this.xPieces.get(piece.getX());
         if (subXPieces.containsKey(piece.getY())) {
             System.out.println("Erreur deux pièces à la même position - CutChecker.java");
         }
         subXPieces.put(piece.getY(), new Plate(piece.getH(), piece.getW()));
         this.xPieces.put(piece.getX(), subXPieces);
-        //System.out.println(this.xPieces.get(piece.getX()));
 
+        // On rajoute la pièce sur la map des Y
         Map<Integer, Plate> subYPieces = this.yPieces.get(piece.getY());
+        if (subYPieces.containsKey(piece.getX())) {
+            System.out.println("Erreur deux pièces à la même position - CutChecker.java");
+        }
         subYPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
-        //System.out.println(this.xPieces.get(piece.getX()));
+        this.yPieces.put(piece.getY(), subYPieces);
 
+        // Ajouter le X de la pièce à la liste des X possibles
         if (!this.xList.contains(piece.getX())) {
             this.xList.add(piece.getX());
         }
+
+        // Ajouter le Y de la pièce à la liste des Y possibles
         if (!this.yList.contains(piece.getY())) {
             this.yList.add(piece.getY());
         }
     }
 
+    /**
+     * Fonction
+     * @param x
+     * @param y
+     * @param piece
+     * @return
+     */
     public boolean suivX(int x, int y, Plate piece) {
         int x_index = this.xList.indexOf(x);
         if (x_index == this.xList.size() - 1) {
