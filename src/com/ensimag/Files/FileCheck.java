@@ -1,6 +1,6 @@
 package com.ensimag.Files;
 
-import com.ensimag.Models.CutPlate;
+import com.ensimag.Models.CutChecker;
 import com.ensimag.Models.PieceWithCoords;
 import com.ensimag.Models.Plate;
 import com.ensimag.Models.Piece;
@@ -11,7 +11,7 @@ import java.util.*;
 
 public class FileCheck {
     private String fileName;
-    private List<CutPlate> cuttedPlates;
+    private List<CutChecker> cuttedPlates;
     private List<Piece> leftPieces;
     private int lost;
     private List<Plate> platesList;
@@ -39,7 +39,7 @@ public class FileCheck {
         return (this.plateNumber + 1 < this.cuttedPlates.size());
     }
 
-    public CutPlate nextPlate() {
+    public CutChecker nextPlate() {
         this.plateNumber += 1;
         return this.cuttedPlates.get(this.plateNumber);
     }
@@ -56,7 +56,7 @@ public class FileCheck {
                     br2.readLine();
                 }
                 if (st.contains("Plaque")) {
-                    CutPlate plate = new CutPlate(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
+                    CutChecker plate = new CutChecker(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
                     current_plate += 1;
                     int y = -1;
 

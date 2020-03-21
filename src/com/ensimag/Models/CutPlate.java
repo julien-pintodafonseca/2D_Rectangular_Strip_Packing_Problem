@@ -2,14 +2,14 @@ package com.ensimag.Models;
 
 import java.util.*;
 
-public class CutPlate extends Piece {
+public class CutChecker extends Piece {
     private int lost;
     private Map<Integer, Map<Integer, Plate>> xPieces;
     private Map<Integer, Map<Integer, Plate>> yPieces;
     private List<Integer> xList;
     private List<Integer> yList;
 
-    public CutPlate(int _h, int _w) {
+    public CutChecker(int _h, int _w) {
         super(_h, _w);
         this.xPieces = new HashMap<>();
         this.yPieces = new HashMap<>();
