@@ -79,14 +79,21 @@ public class CutPlate extends Piece {
         if (x_index == this.xList.size() - 1) {
             return true;
         } else {
-            Map<Integer, Plate> subXPiecesY = this.xPieces.get(this.xList.get(x_index + 1));
+            x_index += 1;
+            int x_index_max = this.xList.indexOf(x + piece.getW());
             int y_index = this.yList.indexOf(y) + 1;
             int y_index_max = this.yList.indexOf(y + piece.getH());
-            while (y_index < y_index_max) {
-                if (subXPiecesY.get(y_index) != null) {
+            Map<Integer, Plate> subXPiecesY;
+            while (x_index < x_index_max) {
+                subXPiecesY = this.xPieces.get(this.xList.get(x_index));
+                while (y_index < y_index_max) {
+                    if (subXPiecesY.get(y_index) != null) {
                         return false;
+                    }
+                    y_index += 1;
                 }
-                y_index += 1;
+                x_index += 1;
+                y_index = this.yList.indexOf(y) + 1;
             }
             return true;
         }
