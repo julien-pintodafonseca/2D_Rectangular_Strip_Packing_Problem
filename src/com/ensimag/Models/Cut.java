@@ -46,6 +46,12 @@ public class Cut {
         this.info.add(newInfo);
     }
 
+    /**
+     * Fonction qui écrit les pièces qui n'ont pas été utilisées et les pertes
+     * @param pieces les pièces non utilisées
+     * @param totalLost les pertes de toutes les plaques
+     * @return une liste de string énoncant les pièces non utilisées et les pertes totales ( seconde partie du fichier de résultat )
+     */
     public List<String> toStringEnd(Map<Piece, Integer> pieces, int totalLost){
         List<String> endResult = new ArrayList<>();
         endResult.add("Pièces restantes à couper :");
@@ -66,6 +72,11 @@ public class Cut {
         return endResult;
     }
 
+    /**
+     * Fonction qui écrit la découpe de la plaque
+     * @param plateNumber : le numéro de la plaque
+     * @return une liste de string énoncant le positionnement de toutes les pièces découpées dans la plaque
+     */
     public List<String> toString(int plateNumber){
         List<String> endResult = new ArrayList<>();
         if (this.getInfo().size() == 0) {

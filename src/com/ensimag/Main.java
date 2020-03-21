@@ -37,10 +37,10 @@ public class Main {
         System.out.println("Inventory:");
         System.out.println("---------");
         for (Plate p : myFileIn.getPlatesMap().keySet()) {
-            System.out.println("PlaqueType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPlatesMap().get(p));
+            System.out.println("PlaqueType: " + p.getH() + "x" + p.getW() + " | Quantité: " + myFileIn.getPlatesMap().get(p));
         }
         for (Piece p : myFileIn.getPiecesMap().keySet()) {
-            System.out.println("PièceType: " + p.getH() + "," + p.getW() + " | Quantité: " + myFileIn.getPiecesMap().get(p));
+            System.out.println("PièceType: " + p.getH() + "x" + p.getW() + " | Quantité: " + myFileIn.getPiecesMap().get(p));
         }
         System.out.println();
     }
