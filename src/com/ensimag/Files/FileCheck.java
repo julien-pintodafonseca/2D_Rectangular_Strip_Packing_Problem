@@ -53,13 +53,15 @@ public class FileCheck {
             while ((st = br.readLine()) != null) {
                 if (st.contains("Plaque")) {
                     CutPlate plate = new CutPlate(this.platesList.get(current_plate).getH(), this.platesList.get(current_plate).getW());
-                    plate.setLost(plate.getH()*plate.getW());
                     current_plate += 1;
                     int y = -1;
 
                     // on traite la ligne suivante:
                     st = br.readLine();
                     st2 = st;
+                    if (!st2.contains("Pas utilisée")) {
+                        plate.setLost(plate.getH()*plate.getW());
+                    }
 
                     // on parcourt les lignes supports (LS) et les pièces découpées dans la plaque
                     while (st2.contains("LS") || st2.contains(",") || st2.contains("Pas utilisée")) {
