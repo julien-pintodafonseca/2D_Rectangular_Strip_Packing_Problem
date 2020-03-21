@@ -16,7 +16,11 @@ public class BL2in1 {
     private FileIn fileIn; //fichier d'entrée=entries.txt
     private List<String> results; //ce qui doit être écrit dans le fichier de sortie
 
-    //Constructeur
+
+    /**
+     * Constructeur
+     * @param _fileIn : fichier à lire
+     */
     public BL2in1(FileIn _fileIn) {
         this.fileIn = _fileIn;
         this.results = new ArrayList<>();
@@ -71,11 +75,14 @@ public class BL2in1 {
         fileOut.writeFile();
     }
 
-    //Algorithme BL pour une seule plaque
-    //plate : la plaque à découper
-    //pieces : map des pièces restantes à découper
-    //type : booléen permettant de savoir si on éxécute l'algo de la tache 1(type=false) ou la tache 2(type=true)
-    //Retourne : la plaque découpée
+
+    /**
+     * Fonction qui effectue l'algorithme BL pour une seule plaque
+     * @param plate : la plaque à découper
+     * @param pieces : map des pièces restants à découper
+     * @param type : booléen permettant de savoir si on éxécute l'algorithme de la tâche 1(type=false) ou la tâche 2(type=true)
+     * @return : la plaque découpée
+     */
     private Cut BLForOnePlate(Plate plate, Map<Piece, Integer> pieces, boolean type) {
         boolean newLine = true; // permet de savoir si on doit commencer une nouvelle ligne
         boolean end = false; // vrai si l'on ne peut plus placer de pièces ou que l'on a placé toutes les pièces
@@ -145,10 +152,13 @@ public class BL2in1 {
         return piecesDecoupes;
     }
 
-    // Fonction pour positionner des pièces au dessus d'une pièce
-    // subPlate : la sous plaque contennat l'aire disponible au dessus de la pièce sur laquelle on apelle la méthode stacking
-    // pieces :  map des pièces restantes à découper
-    // Retourne : la sous plaque découpée
+
+    /**
+     * Fonction pour positionner des pièces au dessus d'une pièce
+     * @param subPlate : la sous plaque contennat l'aire disponible au dessus de la pièce sur laquelle on apelle la méthode stacking
+     * @param pieces :  map des pièces restantes à découper
+     * @return  : la sous plaque découpée
+     */
     private Cut stacking(PieceWithCoords subPlate, Map<Piece, Integer> pieces) {
         Cut piecesDecoupes = new Cut();
         //Si on a pas d'aire disponible

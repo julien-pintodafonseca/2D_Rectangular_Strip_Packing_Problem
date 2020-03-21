@@ -23,6 +23,11 @@ public class CutChecker extends Piece {
      */
     private List<Integer> yList;
 
+    /**
+     * Constructeur
+     * @param _h
+     * @param _w
+     */
     public CutChecker(int _h, int _w) {
         super(_h, _w);
         this.xPieces = new HashMap<>();
@@ -101,19 +106,26 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Fonction
-     * @param x
-     * @param y
-     * @param piece
-     * @return
+     * Fonction qui regarde si la pièce a une pièce voisine à droite qui se superpose sur elle
+     *          ___________
+     *         | Voisine |
+     *     ___|____     |
+     *   |   |    |    |
+     *  |   |____|____|
+     * |________|
+     * @param x : la position X de la pièce
+     * @param y : la position Y de la pièce
+     * @param piece : la pièce à vérifier
+     * @return true si la pièce voisine à une pièce à droite qui se superpose false sinon
      */
     public boolean suivX(int x, int y, Plate piece) {
         int x_index = this.xList.indexOf(x);
-        if (x_index == this.xList.size() - 1) {
+        if (x_index == this.xList.size() - 1) { //Si c'est la dernière pièce du X Alors pas de pièce voisine à droite
             return true;
         } else {
             x_index += 1;
             int x_index_max;
+            // x_index_max : le premier X qui existe dans xList tel que ce X soit supérieur ou égal à la coordonnée X de notre pièce + sa largeur
             if (this.xList.contains(x + piece.getW())) {
                 x_index_max = this.xList.indexOf(x + piece.getW());
             } else {
@@ -127,6 +139,7 @@ public class CutChecker extends Piece {
             }
             int y_index = this.yList.indexOf(y) + 1;
             int y_index_max;
+            // y_index_max : le premier X qui existe dans xList tel que ce X soit supérieur ou égal à la coordonnée Y de notre pièce + sa hauteur
             if (this.yList.contains(y + piece.getH())) {
                 y_index_max = this.yList.indexOf(y + piece.getH());
             } else {
@@ -139,6 +152,8 @@ public class CutChecker extends Piece {
                 }
             }
             Map<Integer, Plate> subXPiecesY;
+            // on fait varier x_index et y_index de manière à vérifier qu'il n'existe pas de pièce de coordonnées (xList.get(x_index), yList.get(y_index))
+            // dans la surface de notre pièce
             while (x_index < x_index_max) {
                 subXPiecesY = this.xPieces.get(this.xList.get(x_index));
                 while (y_index < y_index_max) {
@@ -154,6 +169,12 @@ public class CutChecker extends Piece {
         }
     }
 
+    /**
+     * Fonction qui permet d'avoir sur une ligne de coordonnée y la pièce suivant notre pièce située en x
+     * @param x : coordonnée x de la pièce
+     * @param y : coordonnée y de la pièce
+     * @return la coordonnée X de la pièce suivant notre pièce de coordonnées (x,y) si elle existe sinon -1
+     */
     public int nextX(int x, int y) {
         Map<Integer, Plate> subYPiecesX = this.yPieces.get(y);
         this.xList.indexOf(x);
@@ -169,6 +190,12 @@ public class CutChecker extends Piece {
         }
     }
 
+    /**
+     * Fonction qui permet d'avoir sur une ligne de coordonnée x la pièce suivant notre pièce située en y
+     * @param x : coordonnée x de la pièce
+     * @param y : coordonnée y de la pièce
+     * @return la coordonnée Y de la pièce suivant notre pièce de coordonnées (x,y) si elle existe sinon -1
+     */
     public int nextY(int x, int y) {
         Map<Integer, Plate> subXPiecesY = this.xPieces.get(x);
         this.yList.indexOf(y);
@@ -184,6 +211,9 @@ public class CutChecker extends Piece {
         }
     }
 
+    /**
+     * Méthode qui trie xList et yList dans l'ordre croissant
+     */
     public void sort() {
         Collections.sort(this.xList);
         Collections.sort(this.yList);

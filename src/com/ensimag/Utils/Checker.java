@@ -10,13 +10,19 @@ public class Checker {
     private FileCheck fileCheck; // le fichier à vérifier
     private CutChecker plate; // la plaque que l'on vérifie
 
-    // Constructeur
+    /**
+     * Constructeur
+     * @param _fileCheck : fichier à checker
+     */
     public Checker(FileCheck _fileCheck) {
         this.fileCheck = _fileCheck;
         this.plate = new CutChecker(0, 0);
     }
 
-    // Méthode permettant l'éxecution de l'algorithme
+
+    /**
+     * Méthode permettant l'éxécution de l'algorithme
+     */
     public void start() {
         boolean checked = true;
         int total_lost = 0;

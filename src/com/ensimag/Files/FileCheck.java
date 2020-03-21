@@ -17,6 +17,11 @@ public class FileCheck {
     private List<Plate> platesList;
     private int plateNumber;
 
+    /**
+     * Constructeur
+     * @param _fileName : nom du fichier à checker
+     * @param _platesList
+     */
     public FileCheck(String _fileName, List<Plate> _platesList) {
         this.fileName = _fileName;
         this.cuttedPlates = new ArrayList<>();
@@ -44,6 +49,9 @@ public class FileCheck {
         return this.cuttedPlates.get(this.plateNumber);
     }
 
+    /**
+     * Méthode qui charge les données du fichier dans les attributs correspondants de notre objet ( plaques, pièces et positions, chutes )
+     */
     private void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -63,6 +71,8 @@ public class FileCheck {
                     // on traite la ligne suivante:
                     st = br2.readLine();
                     br.readLine();
+                    // Si le pièce est utilisée
+                    // On ajoute son aire dans les chutes pour soustraire ensuite l'aire de chacune des pièces positionnées (ligne 94)
                     if (!st.contains("Pas utilisée")) {
                         plate.setLost(plate.getH()*plate.getW());
                     }
