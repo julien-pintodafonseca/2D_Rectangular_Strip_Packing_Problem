@@ -60,7 +60,6 @@ public class OptimizedSolver {
         Piece p = new Piece(0,0);
 
         boolean enoughPlace = false; // indique que la pièce loge dans la plaque
-        boolean toward = false; // indique que la pièce tournée loge dans la plaque
         boolean stop = false; // indique l'arrêt de l'algorithme
 
         //Fin de l'algorithme si la plaque à sa hauteur ou largueur égale à 0
@@ -69,46 +68,22 @@ public class OptimizedSolver {
         }
 
         //Boucle pour trouver une pièce qui rentre dans la plaque
-        while (!enoughPlace && !toward && it.hasNext() && !stop) {
+        while (!enoughPlace && it.hasNext() && !stop) {
             p = it.next();
             enoughPlace = false;
-            toward = false;
             //on regarde si la pièce rentre
             if (pieces.get(p) > 0 && p.getH() <= plate.getH() && p.getW() <= plate.getW()) {
                 enoughPlace = true;
             }
-            //on regarde si la pièce rentre quand on la tourne ( hauteur et largueur inversée)
-            if (pieces.get(p) > 0 && p.getH() <= plate.getW() && p.getW() <= plate.getH() && p.getH() != p.getW()){
-                toward = true;
-            }
         }
 
-        //Si il n'y a aucune pièce qui rentre de quelque manière que ce soit, c'est la fin de l'algorithme
-        if (!enoughPlace && !toward) {
+        //S'il n'y a aucune pièce qui loge, c'est la fin de l'algorithme
+        if (!enoughPlace) {
             return new CutOptimized(plate.getH()*plate.getW(), new ArrayList<>(), pieces);
         } else {
             pieces.put(p, pieces.get(p) - 1); // on supprime de la map pieces la pièce que l'on place
-            //création de deux CutOptimized
-            CutOptimized subPlateEnough; // pour quand on laisse pièce dans le bon sens
-            CutOptimized subPlateToward; // pour quand on tourne la pièce
-
-            //Si la pièce loge dans les deux sens, on cherche la meilleure solution dans les deux cas
-            // et on retourne celle avec le moins de perte
-            if (enoughPlace && toward) {
-                subPlateEnough = new CutOptimized(bestSoluce(plate, p.getH(), p.getW(), pieces));
-                subPlateToward = new CutOptimized(bestSoluce(plate, p.getW(), p.getH(), pieces));
-                if (subPlateToward.getLost() > subPlateEnough.getLost()) {
-                    return subPlateEnough;
-                } else {
-                    return subPlateToward;
-                }
-            } else if (enoughPlace) { // cherche la meilleure solution que dans le cas où la pièce garde sons sens
-                subPlateEnough = new CutOptimized(bestSoluce(plate, p.getH(), p.getW(), pieces));
-                return subPlateEnough;
-            } else { //cherche la meilleure solution que dans le cas où la pièce est tournée
-                subPlateToward = new CutOptimized(bestSoluce(plate, p.getW(), p.getH(), pieces));
-                return subPlateToward;
-            }
+            // on cherche et retourne la meilleure solution sous la forme d'un plan de coupe CutOptimized
+            return new CutOptimized(bestSoluce(plate, p.getH(), p.getW(), pieces));
         }
     }
 
