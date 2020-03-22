@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.util.*;
 
 /**
- * Class FileCheck
+ * Class FileCheck (fichier de sortie / de résultats à vérifier)
  * @author Groupe6
  */
 public class FileCheck {

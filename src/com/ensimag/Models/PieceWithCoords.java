@@ -1,7 +1,7 @@
 package com.ensimag.Models;
 
 /**
- * Class PieceWithCoords
+ * Class PieceWithCoords (Pièce possédant des coordonnées x et y)
  * @author Groupe6
  */
 public class PieceWithCoords extends Piece {

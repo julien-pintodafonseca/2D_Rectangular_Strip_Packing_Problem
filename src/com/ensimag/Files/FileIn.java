@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.util.*;
 
 /**
- * Class FileIn
+ * Class FileIn (fichier d'entrée)
  * @author Groupe6
  */
 public class FileIn {

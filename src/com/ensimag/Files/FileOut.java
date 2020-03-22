@@ -4,10 +4,13 @@ import java.io.FileWriter;
 import java.util.List;
 
 /**
- * Class FileOut
+ * Class FileOut (fichier de sortie / de résultats)
  * @author Groupe6
  */
 public class FileOut {
+    /**
+     * Nom du fichier de sortie
+     */
     private String fileName;
     private List<String> results;
 
