@@ -1,4 +1,0 @@
-﻿-> Commenter algo 1, 2 et 3
--> Mettre à jour le diagramme de classe (sur Visual Paradigm)
--> Récupérer l'article de l'algo 3
-
