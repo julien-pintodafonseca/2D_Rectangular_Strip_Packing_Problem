@@ -12,10 +12,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class BL2in1
+ * @author Groupe6
+ */
 public class BL2in1 {
     private FileIn fileIn; //fichier d'entrée=entries.txt
     private List<String> results; //ce qui doit être écrit dans le fichier de sortie
-
 
     /**
      * Constructeur
@@ -25,8 +28,6 @@ public class BL2in1 {
         this.fileIn = _fileIn;
         this.results = new ArrayList<>();
     }
-
-    
 
     /**
      * Méthode permettant l'éxecution de l'algorithme

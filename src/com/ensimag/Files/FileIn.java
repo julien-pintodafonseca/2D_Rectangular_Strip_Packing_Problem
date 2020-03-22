@@ -9,7 +9,8 @@ import java.io.FileReader;
 import java.util.*;
 
 /**
- * Created by pintodaj on 2/19/20.
+ * Class FileIn
+ * @author Groupe6
  */
 public class FileIn {
     private String fileName;

@@ -4,7 +4,8 @@ import java.io.FileWriter;
 import java.util.List;
 
 /**
- * Created by pintodaj on 2/19/20.
+ * Class FileOut
+ * @author Groupe6
  */
 public class FileOut {
     private String fileName;

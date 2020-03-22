@@ -10,7 +10,8 @@ import com.ensimag.Models.Piece;
 import java.util.*;
 
 /**
- * Created by solokwal on 2/20/20.
+ * Class OptimizedSolver
+ * @author Groupe6
  */
 public class OptimizedSolver {
     private FileIn fileIn;

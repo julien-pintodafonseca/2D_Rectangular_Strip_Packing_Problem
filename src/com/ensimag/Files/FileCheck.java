@@ -9,6 +9,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
+/**
+ * Class FileCheck
+ * @author Groupe6
+ */
 public class FileCheck {
     private String fileName;
     private List<CutChecker> cuttedPlates;
