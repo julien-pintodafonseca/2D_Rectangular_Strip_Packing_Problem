@@ -13,13 +13,22 @@ import java.util.*;
  * @author Groupe6
  */
 public class FileIn {
+    /**
+     * Nom du fichier d'entrée à lire
+     */
     private String fileName;
+    /**
+     * Map contenant les différents types de plaques ainsi que leur quantité
+     */
     private Map<Plate, Integer> plates;
+    /**
+     * Map contenant les différents types de pièces ainsi que leur quantité
+     */
     private Map<Piece, Integer> pieces;
 
     /**
-     * Constructeur
-     * @param _fileName : le nom du fichier à lire
+     * Constructeur de FileIn
+     * @param _fileName : nom du fichier d'entrée à lire
      */
     public FileIn(String _fileName) {
         this.fileName = _fileName;
@@ -29,7 +38,7 @@ public class FileIn {
     }
 
     /**
-     * Getter de l'attribut plates sous forme de HashMap
+     * Getter de la map contenant les différents types de plaques ainsi que leur quantité
      * @return l'attribut places sous forme de HashMap
      */
     public Map<Plate, Integer> getPlatesMap() {
@@ -37,8 +46,8 @@ public class FileIn {
     }
 
     /**
-     * Getter d'une liste triée de plaque
-     * @return une list de plaque
+     * Permet d'obtenir une liste contenant toutes les plaques, triée en fonction de leur aire
+     * @return une liste contenant toutes les plaques, triée en fonction de leur aire
      */
     public List<Plate> getPlatesList() {
         List<Plate> platesList = new ArrayList<>();
@@ -52,8 +61,8 @@ public class FileIn {
     }
 
     /**
-     * Getter de la liste triée des types de plaques
-     * @return liste de plaque
+     * Permet d'obtenir une liste contenant tous les types de plaques, triée en fonction de leur aire
+     * @return liste contenant tous les types de plaques, triée en fonction de leur aire
      */
     public List<Plate> getPlateTypes() {
         List<Plate> platesList = new ArrayList<>(plates.keySet());
@@ -62,7 +71,7 @@ public class FileIn {
     }
 
     /**
-     * Getter
+     * Getter de la map contenant les différents types de pièces ainsi que leur quantité
      * @return l'attribut pieces
      */
     public Map<Piece, Integer> getPiecesMap() {
@@ -70,8 +79,8 @@ public class FileIn {
     }
 
     /**
-     * Getter d'une liste de pièce triées par type
-     * @return liste de pièce
+     * Permet d'obtenir une liste contenant tous les types de pièces, triée en fonction de leur aire
+     * @return liste contenant tous les types de pièces, triée en fonction de leur aire
      */
     public List<Piece> getPieceTypes() {
         List<Piece> piecesList = new ArrayList<>(pieces.keySet());
@@ -80,7 +89,7 @@ public class FileIn {
     }
 
     /**
-     *  Méthode qui charge les données du fichier dans les attributs correspondants de notre objet (plaques et pièces)
+     *  Permet de lire et de charger les données du fichier (plaques et pièces) dans les attributs correspondants
      */
     private void loadEntries() {
         try {

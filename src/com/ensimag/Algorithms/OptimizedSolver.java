@@ -17,15 +17,15 @@ public class OptimizedSolver {
     private FileIn fileIn;
 
     /**
-     * Constructeur
-     * @param _fileIn : fichier à lire
+     * Constructeur de OptimizedSolver
+     * @param _fileIn : fichier d'entrée
      */
     public OptimizedSolver(FileIn _fileIn) {
         this.fileIn = _fileIn;
     }
 
     /**
-     * Méthode permettant l'éxecution de l'algorithme
+     * Permet l'éxecution de l'algorithme
      */
     public void start() {
         // récupère la plaque à découper
@@ -49,10 +49,10 @@ public class OptimizedSolver {
 
 
     /**
-     * Fonction qui effectue l'algorithme de découpe de la plaque
-     * @param plate : la plaque à découper avec ses coordonnées ( peut être une sous plaque de la grande plaque à découper)
+     * Permet d'effectuer l'algorithme de découpe de la plaque
+     * @param plate : plaque à découper avec ses coordonnées (peut être une sous-plaque de la grande plaque à découper)
      * @param pieces : liste des pièces qu'il reste à découper
-     * @return la meilleure découpe de la plaque + la liste des pièces à découper (Objet CutOptimized)
+     * @return la meilleure découpe de la plaque + la liste des pièces à découper (plan de découpe de type CutOptimized)
      */
     private CutOptimized cutCutCut(PieceWithCoords plate, Map<Piece, Integer> pieces) {
         //itérateur pour parcourir toutes les pièces disponibles
@@ -90,12 +90,12 @@ public class OptimizedSolver {
 
 
     /**
-     * Fonction qui effectue l'algorithme qui détermine la meileure découpe
-     * @param plate : la plaque que l'on veut découper
-     * @param pH : la hauteur de a pièce que on découpe
-     * @param pW : la largeur de la pièce que on découpe
-     * @param pieces : la map contenant les pièces qu'il reste à placer
-     * @return la meilleure découpe + les pièces restantes à découper
+     * Permet d'effectuer l'algorithme qui détermine la meileure découpe
+     * @param plate : plaque que l'on veut découper
+     * @param pH : hauteur de la pièce que l'on découpe
+     * @param pW : largeur de la pièce que l'on découpe
+     * @param pieces : map contenant les pièces qu'il reste à placer
+     * @return la meilleure découpe + la liste des pièces restantes à découper (plan de découpe de type CutOptimized)
      */
     private CutOptimized bestSoluce(PieceWithCoords plate, int pH, int pW, Map<Piece, Integer> pieces) {
         Map<Piece, Integer> piecesCopy = new HashMap<>(pieces);

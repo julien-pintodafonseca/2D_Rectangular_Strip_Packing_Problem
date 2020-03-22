@@ -14,17 +14,35 @@ import java.util.*;
  * @author Groupe6
  */
 public class FileCheck {
+    /**
+     * Nom du fichier de sortie / de résultats à vérifier
+     */
     private String fileName;
+    /**
+     * Liste de plan de découpes comprenant les pièces découpées pour chaque plaque
+     */
     private List<CutChecker> cuttedPlates;
+    /**
+     * Liste des pièces restantes (pièces non découpées)
+     */
     private List<Piece> leftPieces;
+    /**
+     * Valeur des pertes
+     */
     private int lost;
+    /**
+     * Liste des différentes plaques utilisées
+     */
     private List<Plate> platesList;
+    /**
+     * Numéro de plaque
+     */
     private int plateNumber;
 
     /**
-     * Constructeur
-     * @param _fileName : nom du fichier à checker
-     * @param _platesList
+     * Constructeur de FileCheck
+     * @param _fileName : nom du fichier à vérifier
+     * @param _platesList : liste des différentes plaques utilisées (à importer depuis un fichier d'entrée)
      */
     public FileCheck(String _fileName, List<Plate> _platesList) {
         this.fileName = _fileName;
@@ -37,7 +55,7 @@ public class FileCheck {
     }
 
     /**
-     * Getter de l'attribut lost
+     * Getter de la valeur des pertes
      * @return l'attribut lost
      */
     public int getLost() {
@@ -45,7 +63,7 @@ public class FileCheck {
     }
 
     /**
-     * Getter de fileName
+     * Getter du nom du fichier à vérifier
      * @return l'attribut fileName
      */
     public String getFileName() {
@@ -53,15 +71,15 @@ public class FileCheck {
     }
 
     /**
-     * Fonction permette de savoir s'il y a une plaque suivante
-     * @return true si une autre plaque false sinon
+     * Permet de savoir s'il y a une plaque suivante
+     * @return true s'il existe une plaque suivante, false sinon
      */
     public boolean hasNextPlate() {
         return (this.plateNumber + 1 < this.cuttedPlates.size());
     }
 
     /**
-     * Fonction qui permet de récupérer la plaque suivante
+     * Permet de récupérer la plaque suivante
      * @return la plaque suivante
      */
     public CutChecker nextPlate() {
@@ -70,7 +88,7 @@ public class FileCheck {
     }
 
     /**
-     * Méthode qui charge les données du fichier dans les attributs correspondants de notre objet ( plaques, pièces et positions, chutes )
+     * Permet de lire et de charger les données du fichier (plaques, pièces et positions, chutes) dans les attributs correspondants
      */
     private void loadEntries() {
         try {

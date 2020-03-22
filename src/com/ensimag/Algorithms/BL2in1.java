@@ -21,8 +21,8 @@ public class BL2in1 {
     private List<String> results; //ce qui doit être écrit dans le fichier de sortie
 
     /**
-     * Constructeur
-     * @param _fileIn : fichier à lire
+     * Constructeur de BL2in1
+     * @param _fileIn : fichier d'entrée
      */
     public BL2in1(FileIn _fileIn) {
         this.fileIn = _fileIn;
@@ -30,8 +30,8 @@ public class BL2in1 {
     }
 
     /**
-     * Méthode permettant l'éxecution de l'algorithme
-     * @param type : booléen permettant de savoir si on éxécute l'algo de la tache 1(type=false) ou la tache 2(type=true)
+     * Permet l'éxecution de l'algorithme
+     * @param type : booléen permettant de savoir si on exécute le BL (type=false) ou le BL avancé (type=true)
      */
     public void start(boolean type) {
         Map<Plate, Integer> plates = fileIn.getPlatesMap(); //Map des différentes plaques et leur quantité
@@ -78,10 +78,10 @@ public class BL2in1 {
 
 
     /**
-     * Fonction qui effectue l'algorithme BL pour une seule plaque
-     * @param plate : la plaque à découper
-     * @param pieces : map des pièces restants à découper
-     * @param type : booléen permettant de savoir si on éxécute l'algorithme de la tâche 1(type=false) ou la tâche 2(type=true)
+     * Permet d'effectuer l'algorithme BL pour une seule plaque
+     * @param plate : plaque à découper
+     * @param pieces : map contenant les pièces restantes à découper
+     * @param type : booléen permettant de savoir si on exécute le BL (type=false) ou le BL avancé (type=true)
      * @return : la plaque découpée
      */
     private Cut BLForOnePlate(Plate plate, Map<Piece, Integer> pieces, boolean type) {
@@ -155,10 +155,10 @@ public class BL2in1 {
 
 
     /**
-     * Fonction pour positionner des pièces au dessus d'une pièce
-     * @param subPlate : la sous plaque contennat l'aire disponible au dessus de la pièce sur laquelle on apelle la méthode stacking
-     * @param pieces :  map des pièces restantes à découper
-     * @return  : la sous plaque découpée
+     * Permet de découper des pièces au dessus d'une pièce déjà découpée dans notre plan de découpe (propre au BL avancé)
+     * @param subPlate : sous-plaque comprenant l'espace disponible au dessus de la pièce sur laquelle on appelle la méthode stacking
+     * @param pieces : map contenant les pièces restantes à découper
+     * @return : la sous plaque découpée
      */
     private Cut stacking(PieceWithCoords subPlate, Map<Piece, Integer> pieces) {
         Cut piecesDecoupes = new Cut();

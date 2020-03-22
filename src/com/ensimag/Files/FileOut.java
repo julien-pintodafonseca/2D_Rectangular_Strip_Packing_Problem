@@ -9,15 +9,18 @@ import java.util.List;
  */
 public class FileOut {
     /**
-     * Nom du fichier de sortie
+     * Nom du fichier de sortie dans lequel on doit écrire
      */
     private String fileName;
+    /**
+     * Contenu à écrire dans notre fichier de sortie, sous forme d'une liste de String
+     */
     private List<String> results;
 
     /**
-     * Constructeur
-     * @param _fileName : nom de fichier dans lequel on doit écrire
-     * @param _results : résultats à écrire dans le fichier
+     * Constructeur de FileOut
+     * @param _fileName : nom du fichier de sortie dans lequel on doit écrire
+     * @param _results : contenu à écrire dans notre fichier de sortie
      */
     public FileOut(String _fileName, List<String> _results) {
         this.fileName = _fileName;
@@ -25,7 +28,7 @@ public class FileOut {
     }
 
     /**
-     * Méthode qui permet d'écrire dans le fichier les données de l'attribut results
+     * Permet d'écrire les résultats dans le fichier de sortie
      */
     public void writeFile() {
         try {
