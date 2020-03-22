@@ -13,17 +13,29 @@ public class Cut {
     private int lost;
     private List<PieceWithCoords> info;
 
+    /**
+     * Constructeur
+     */
     public Cut() {
         this.lost = 0;
         this.info = new ArrayList<>();
     }
 
+    /**
+     * Constructeur
+     * @param clone : objet Cut à cloner
+     */
     public Cut(Cut clone) {
         this.lost = clone.getLost();
         this.info = new ArrayList<>();
         this.info.addAll(clone.getInfo());
     }
 
+    /**
+     * Constructeur
+     * @param _lost :  les pertes
+     * @param _info : la liste des pièces positionnées avec leurs coordonnées
+     */
     public Cut(int _lost, List<PieceWithCoords> _info) {
         this.lost = _lost;
         this.info = new ArrayList<>();
@@ -32,16 +44,32 @@ public class Cut {
         }
     }
 
+    /**
+     * Getter
+     * @return l'attribut lost
+     */
     public int getLost() {
         return this.lost;
     }
 
-    public void addLost(int yes) { this.lost += yes; }
-
+    /**
+     * Getter
+     * @return l'attribut info
+     */
     public List<PieceWithCoords> getInfo() {
         return this.info;
     }
 
+    /**
+     *  Méthode qui permet d'aditionner les pertes existantes avec la veleur yes
+     * @param yes : int à ajouter aux pertes
+     */
+    public void addLost(int yes) { this.lost += yes; }
+
+    /**
+     * Méthode qui permet d'ajouter une nouvele PlateWithCoord à la liste info
+     * @param newInfo : nouvelle PlateWithCoord à ajouter
+     */
     public void addInfo(PieceWithCoords newInfo) {
         this.info.add(newInfo);
     }
@@ -100,6 +128,10 @@ public class Cut {
         return endResult;
     }
 
+    /**
+     * Méthode qui fusionne deux objet Cut
+     * @param toFusion : l'objet Cut à fusionner
+     */
     public void fusion(Cut toFusion) {
         if (toFusion.getInfo().size() > 0) {
             this.info.addAll(toFusion.getInfo());
@@ -107,6 +139,9 @@ public class Cut {
         this.lost = this.lost + toFusion.getLost();
     }
 
+    /**
+     * Méthode qui permet de trier les objets de liste info
+     */
     private void sortInfo() {
         this.info.sort(new SortByCoords());
     }

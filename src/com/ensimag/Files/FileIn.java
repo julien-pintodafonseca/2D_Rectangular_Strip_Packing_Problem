@@ -16,6 +16,10 @@ public class FileIn {
     private Map<Plate, Integer> plates;
     private Map<Piece, Integer> pieces;
 
+    /**
+     * Constructeur
+     * @param _fileName : le nom du fichier à lire
+     */
     public FileIn(String _fileName) {
         this.fileName = _fileName;
         this.plates = new HashMap<>();
@@ -23,10 +27,18 @@ public class FileIn {
         this.loadEntries();
     }
 
+    /**
+     * Getter de l'attribut plates sous forme de HashMap
+     * @return l'attribut places sous forme de HashMap
+     */
     public Map<Plate, Integer> getPlatesMap() {
         return new HashMap<>(plates);
     }
 
+    /**
+     * Getter d'une liste triée de plaque
+     * @return une list de plaque
+     */
     public List<Plate> getPlatesList() {
         List<Plate> platesList = new ArrayList<>();
         for (Plate p : plates.keySet()) {
@@ -38,22 +50,37 @@ public class FileIn {
         return platesList;
     }
 
+    /**
+     * Getter de la liste triée des types de plaques
+     * @return liste de plaque
+     */
     public List<Plate> getPlateTypes() {
         List<Plate> platesList = new ArrayList<>(plates.keySet());
         platesList.sort(new SortByArea());
         return platesList;
     }
 
+    /**
+     * Getter
+     * @return l'attribut pieces
+     */
     public Map<Piece, Integer> getPiecesMap() {
         return new HashMap<>(pieces);
     }
 
+    /**
+     * Getter d'une liste de pièce triées par type
+     * @return liste de pièce
+     */
     public List<Piece> getPieceTypes() {
         List<Piece> piecesList = new ArrayList<>(pieces.keySet());
         piecesList.sort(new SortByArea());
         return piecesList;
     }
 
+    /**
+     *  Méthode qui charge les données du fichier dans les attributs correspondants de notre objet (plaques et pièces)
+     */
     private void loadEntries() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));

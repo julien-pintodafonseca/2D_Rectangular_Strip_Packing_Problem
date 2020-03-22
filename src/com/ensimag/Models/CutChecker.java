@@ -25,8 +25,8 @@ public class CutChecker extends Piece {
 
     /**
      * Constructeur
-     * @param _h
-     * @param _w
+     * @param _h : la hauteur
+     * @param _w : la largeur
      */
     public CutChecker(int _h, int _w) {
         super(_h, _w);
@@ -37,30 +37,58 @@ public class CutChecker extends Piece {
         this.lost = 0;
     }
 
+    /**
+     * Getter
+     * @return l'attribut xPieces
+     */
     public Map<Integer, Map<Integer, Plate>> getxPieces() {
         return this.xPieces;
     }
 
+    /**
+     * Getter
+     * @return l'attribut yPieces
+     */
     public Map<Integer, Map<Integer, Plate>> getyPieces() {
         return this.yPieces;
     }
 
+    /**
+     * Getter
+     * @return l'attribut xList
+     */
     public List<Integer> getxList() {
         return this.xList;
     }
 
+    /**
+     * Getter
+     * @return  l'attribut yList
+     */
     public List<Integer> getyList() {
         return this.yList;
     }
 
+    /**
+     * Getter
+     * @return  l'attribut lost
+     */
     public int getLost() {
         return this.lost;
     }
 
+    /**
+     * Setter
+     * @param _lost : nouvelle valeur de l'attribut de  l'attribut lost
+     */
     public void setLost(int _lost) {
         this.lost = _lost;
     }
 
+    /**
+     * Méthode qui permet d'aditionner les pertes existantes avec la veleur yes
+     * @param yes : int à ajouter aux pertes
+     */
     public void addLost(int yes) {
         this.lost += yes;
     }

@@ -32,18 +32,34 @@ public class FileCheck {
         this.loadEntries();
     }
 
+    /**
+     * Getter de l'attribut lost
+     * @return l'attribut lost
+     */
     public int getLost() {
         return this.lost;
     }
 
+    /**
+     * Getter de fileName
+     * @return l'attribut fileName
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * Fonction permette de savoir s'il y a une plaque suivante
+     * @return true si une autre plaque false sinon
+     */
     public boolean hasNextPlate() {
         return (this.plateNumber + 1 < this.cuttedPlates.size());
     }
 
+    /**
+     * Fonction qui permet de récupérer la plaque suivante
+     * @return la plaque suivante
+     */
     public CutChecker nextPlate() {
         this.plateNumber += 1;
         return this.cuttedPlates.get(this.plateNumber);

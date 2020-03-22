@@ -10,11 +10,19 @@ public class FileOut {
     private String fileName;
     private List<String> results;
 
+    /**
+     * Constructeur
+     * @param _fileName : nom de fichier dans lequel on doit écrire
+     * @param _results : résultats à écrire dans le fichier
+     */
     public FileOut(String _fileName, List<String> _results) {
         this.fileName = _fileName;
         this.results = _results;
     }
 
+    /**
+     * Méthode qui permet d'écrire dans le fichier les données de l'attribut results
+     */
     public void writeFile() {
         try {
             FileWriter writer = new FileWriter(fileName);
