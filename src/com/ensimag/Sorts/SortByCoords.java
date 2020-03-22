@@ -14,8 +14,8 @@ public class SortByCoords implements Comparator<PieceWithCoords> {
      * elle permet le trie par ordre croissant des pièces en fonction de leur Y puis de leur X
      * @param p1 : première pièce, à comparer avec p2
      * @param p2 : deuxième pièce, à comparer avec p1
-     * @return : 1 si Y de p1 > y de p2
-     *           1 si p1 et p2 ont le même Y mais que X de p1 > X de p2
+     * @return : 1 si Y de p1 supérieur à y de p2
+     *           1 si p1 et p2 ont le même Y mais que X de p1 supérieur à X de p2
      *           0 si elles ont les mêmes coordonées
      *           -1 si aucun des cas précédents
      */

@@ -206,7 +206,7 @@ public class CutChecker extends Piece {
 
     /**
      * Permet d'obtenir, pour une pièce située en (x,y), la pièce voisine adjacente de coordonnées (x2,y),
-     * tel que x < x2 si cette pièce existe
+     * tel que x inférieur à x2 si cette pièce existe
      * @param x : coordonnée x de la pièce
      * @param y : coordonnée y de la pièce
      * @return la coordonnée x2 si la pièce existe, -1 sinon
@@ -228,7 +228,7 @@ public class CutChecker extends Piece {
 
     /**
      * Permet d'obtenir, pour une pièce située en (x,y), la pièce voisine adjacente de coordonnées (x,y2),
-     * tel que y < y2 si cette pièce existe
+     * tel que y inférieur à y2 si cette pièce existe
      * @param x : coordonnée x de la pièce
      * @param y : coordonnée y de la pièce
      * @return la coordonnée y2 si la pièce existe, -1 sinon

@@ -8,6 +8,10 @@ import com.ensimag.Models.Plate;
 import com.ensimag.Models.Piece;
 import com.ensimag.Utils.Checker;
 
+/**
+ * Main
+ * @author Groupe6
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -33,6 +37,10 @@ public class Main {
         myChecker3.start();
     }
 
+    /**
+     * Permet d'écrire l'inventaire dans la console (la liste des plaques et pièces, leur dimension et leur quantité)
+     * @param myFileIn : fichier d'entrée
+     */
     private static void printInventory(FileIn myFileIn) {
         System.out.println("Inventory:");
         System.out.println("---------");
