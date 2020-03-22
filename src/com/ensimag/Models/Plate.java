@@ -1,15 +1,18 @@
 package com.ensimag.Models;
 
 /**
- * Created by houdee on 2/17/20.
- * Objet plaque qui hérite de la classe pièce
+ * Class Plate
+ * @author Groupe6
  */
 public class Plate extends Piece {
+    /**
+     * Hauteur restante de la plaque
+     */
     private int hRest;
 
     /**
-     * Constructeur
-     * @param _h : hateur de la plaque
+     * Constructeur de Plate
+     * @param _h : hauteur de la plaque
      * @param _w : largeur de la plaque
      */
     public Plate(int _h, int _w) {
@@ -18,8 +21,8 @@ public class Plate extends Piece {
     }
 
     /**
-     * Getter de la hauteur restante
-     * @return un int qui est l'attribut hRest
+     * Getter de la hauteur restante de la plaque
+     * @return l'attribut hRest
      */
     public int getHRest() {
         return this.hRest;

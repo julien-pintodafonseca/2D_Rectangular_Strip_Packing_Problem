@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by solokwal on 2/20/20.
+ * Class Cut (plan de découpe pour l'algorithme BL2in1 : BL & BLAdvanced)
+ * @author Groupe6
  */
 public class Cut {
     private int lost;
     private List<PieceWithCoords> info;
 
     /**
-     * Constructeur
+     * Constructeur de Cut
      */
     public Cut() {
         this.lost = 0;
@@ -22,7 +23,7 @@ public class Cut {
     }
 
     /**
-     * Constructeur
+     * Constructeur de Cut
      * @param clone : objet Cut à cloner
      */
     public Cut(Cut clone) {
@@ -32,9 +33,9 @@ public class Cut {
     }
 
     /**
-     * Constructeur
-     * @param _lost :  les pertes
-     * @param _info : la liste des pièces positionnées avec leurs coordonnées
+     * Constructeur de Cut
+     * @param _lost : valeur des pertes
+     * @param _info : liste de PieceWithCoords (pièces découpées avec leurs coordonnées sur la plaque)
      */
     public Cut(int _lost, List<PieceWithCoords> _info) {
         this.lost = _lost;
@@ -45,7 +46,7 @@ public class Cut {
     }
 
     /**
-     * Getter
+     * Getter de la valeur des pertes
      * @return l'attribut lost
      */
     public int getLost() {
@@ -53,7 +54,7 @@ public class Cut {
     }
 
     /**
-     * Getter
+     * Getter de la liste de PieceWithCoords (pièces découpées avec leurs coordonnées sur la plaque)
      * @return l'attribut info
      */
     public List<PieceWithCoords> getInfo() {
@@ -61,13 +62,13 @@ public class Cut {
     }
 
     /**
-     *  Méthode qui permet d'aditionner les pertes existantes avec la veleur yes
-     * @param yes : int à ajouter aux pertes
+     *  Permet d'ajouter des pertes à la valeur des pertes actuelles
+     * @param yes : valeur à ajouter aux pertes actuelles
      */
     public void addLost(int yes) { this.lost += yes; }
 
     /**
-     * Méthode qui permet d'ajouter une nouvele PlateWithCoord à la liste info
+     * Permet d'ajouter une nouvelle PlateWithCoord à la liste de PieceWithCoords (pièces découpées avec leurs coordonnées sur la plaque)
      * @param newInfo : nouvelle PlateWithCoord à ajouter
      */
     public void addInfo(PieceWithCoords newInfo) {
@@ -75,10 +76,10 @@ public class Cut {
     }
 
     /**
-     * Fonction qui écrit les pièces qui n'ont pas été utilisées et les pertes
-     * @param pieces les pièces non utilisées
-     * @param totalLost les pertes de toutes les plaques
-     * @return une liste de string énoncant les pièces non utilisées et les pertes totales ( seconde partie du fichier de résultat )
+     * Permet d'écrire, sous forme d'une liste de String, les pièces qui n'ont pas été utilisées ainsi que les pertes
+     * @param pieces : pièces non utilisées
+     * @param totalLost : valeur des pertes de toutes les plaques
+     * @return une liste de string énoncant les pièces non utilisées ainsi que la valeur des pertes totales (seconde partie du fichier de résultat)
      */
     public List<String> toStringEnd(Map<Piece, Integer> pieces, int totalLost){
         List<String> endResult = new ArrayList<>();
@@ -101,7 +102,7 @@ public class Cut {
     }
 
     /**
-     * Fonction qui écrit la découpe de la plaque
+     * Permet d'écrire, sous forme d'une liste de String, les découpes effectuées sur la plaque
      * @param plateNumber : le numéro de la plaque
      * @return une liste de string énoncant le positionnement de toutes les pièces découpées dans la plaque
      */
@@ -129,8 +130,8 @@ public class Cut {
     }
 
     /**
-     * Méthode qui fusionne deux objet Cut
-     * @param toFusion : l'objet Cut à fusionner
+     * Permet de fusionner deux objet Cut
+     * @param toFusion : objet Cut à fusionner
      */
     public void fusion(Cut toFusion) {
         if (toFusion.getInfo().size() > 0) {
@@ -140,7 +141,8 @@ public class Cut {
     }
 
     /**
-     * Méthode qui permet de trier les objets de liste info
+     * Permet de trier la liste de PieceWithCoords (pièces découpées avec leurs coordonnées sur la plaque),
+     * en fonction des connées Y puis X, par ordre croissant
      */
     private void sortInfo() {
         this.info.sort(new SortByCoords());

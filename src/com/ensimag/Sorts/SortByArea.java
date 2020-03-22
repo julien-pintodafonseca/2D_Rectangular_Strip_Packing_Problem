@@ -4,12 +4,17 @@ import com.ensimag.Models.Piece;
 
 import java.util.Comparator;
 
+/**
+ * Class SortByArea
+ * @author Groupe6
+ */
 public class SortByArea implements Comparator<Piece> {
     /**
-     * Méthode qui permet de comparer deux pièces en fonction de leur aire
-     * @param r1 : première pièce à comparer
-     * @param r2 : deuxième pièce à comparer
-     * @return 0 si elles ont la même  aire si non la différence entre des deux aires
+     * Méthode qui permet de comparer deux pièces en fonction de leur aire,
+     * elle permet le trie par ordre croissant de l'aire des pièces comparées
+     * @param r1 : première pièce, à comparer avec r1
+     * @param r2 : deuxième pièce, à comparer avec r2
+     * @return 0 si elles ont la même aire, la différence entre l'aide de r2 et r1 sinon
      */
     public int compare(Piece r1, Piece r2) {
         if (getArea(r1) != getArea(r2)) {

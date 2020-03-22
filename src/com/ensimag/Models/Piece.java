@@ -1,14 +1,14 @@
 package com.ensimag.Models;
 
 /**
- * Created by houdee on 2/17/20.
+ * Class Piece
  */
 public class Piece {
     private int h; // height
     private int w; // width
 
     /**
-     * Constructeur
+     * Constructeur de Piece
      * @param _h :  hauteur de la pièce
      * @param _w : largeur de la pièce
      */
@@ -18,24 +18,24 @@ public class Piece {
     }
 
     /**
-     * Getter de l'attribut hauteur
-     * @return un int qui est la hauteur d'une pièce
+     * Getter de la hauteur de la pièce
+     * @return l'attribut h
      */
     public int getH() {
         return this.h;
     }
 
     /**
-     * Getter de l'attribut largeur
-     * @return un int qui est la largeur d'une pièce
+     * Getter de la largeur de la pièce
+     * @return l'attribut w
      */
     public int getW() {
         return this.w;
     }
 
     /**
-     * Setter de l'attribut hateur
-     * @param _h : la nouvelle valeur de la hauteur de la pièce
+     * Setter de la hauteur de la pièce
+     * @param _h : nouvelle valeur l'attribut h
      */
     public void setH(int _h) {
         this.h = _h;

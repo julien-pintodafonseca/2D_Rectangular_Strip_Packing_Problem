@@ -1,19 +1,24 @@
 package com.ensimag.Models;
 
 /**
- * Created by solokwal on 2/20/20.
- * Objet qui hérite de la classe Piece.
- * Une pièce avec des coordonnées
+ * Class PieceWithCoords
+ * @author Groupe6
  */
 public class PieceWithCoords extends Piece {
+    /**
+     * Coordonnée x
+     */
     private int x;
+    /**
+     * Coordonnée y
+     */
     private int y;
 
     /**
-     * Contructeur
-     * @param _piece : l'objet pièce
-     * @param _x : coordonnée x de l'objet
-     * @param _y : coordonnée y de l'objet
+     * Contructeur de PieceWithCoords
+     * @param _piece : objet pièce
+     * @param _x : coordonnée x de la pièce
+     * @param _y : coordonnée y de la pièce
      */
     public PieceWithCoords(Piece _piece, int _x, int _y) {
         super(_piece.getH(), _piece.getW());
@@ -22,8 +27,8 @@ public class PieceWithCoords extends Piece {
     }
 
     /**
-     * Construtueur
-     * @param _plate : l'objet plaque
+     * Construtueur de PieceWithCoords
+     * @param _plate : objet plaque
      * @param _x : coordonnée x de la plaque
      * @param _y : coordonnée y de la plaque
      */
@@ -34,7 +39,7 @@ public class PieceWithCoords extends Piece {
     }
 
     /**
-     * Constructeur
+     * Constructeur de PieceWithCoords
      * @param _h : hauteur e la pièce
      * @param _w : largeur de la pièce
      * @param _x : coordonnée x de la pièce
@@ -48,7 +53,7 @@ public class PieceWithCoords extends Piece {
 
     /**
      * Getter de la coordonnée x
-     * @return int la coordonnée x de l'objet
+     * @return l'attribut x
      */
     public int getX() {
         return x;
@@ -56,7 +61,7 @@ public class PieceWithCoords extends Piece {
 
     /**
      * Getter de la coordonnée y
-     * @return int la coordonnée y de l'objet
+     * @return l'attribut y
      */
     public int getY() {
         return y;
@@ -64,7 +69,7 @@ public class PieceWithCoords extends Piece {
 
     /**
      * Setter de la coordonnée y
-     * @param _y : la nouvelle valeur de la coordonnée y
+     * @param _y : nouvelle valeur de l'attribut y
      */
     public void setY(int _y) {
         this.y = _y;

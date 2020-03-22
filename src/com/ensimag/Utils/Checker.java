@@ -2,26 +2,35 @@ package com.ensimag.Utils;
 
 import com.ensimag.Files.FileCheck;
 import com.ensimag.Models.CutChecker;
-import com.ensimag.Models.Plate;
+import com.ensimag.Models.Piece;
 
 import java.util.Map;
-// Algorithme de la tâche 4
+
+/**
+ * Class Checker (Algorithme tâche 4)
+ * @author Groupe6
+ */
 public class Checker {
-    private FileCheck fileCheck; // le fichier à vérifier
-    private CutChecker plate; // la plaque que l'on vérifie
+    /**
+     * Le fichier de résultats à vérifier
+     */
+    private FileCheck fileCheck;
+    /**
+     * La plaque en cours de vérification
+     */
+    private CutChecker plate;
 
     /**
-     * Constructeur
-     * @param _fileCheck : fichier à checker
+     * Constructeur de Checker
+     * @param _fileCheck : fichier de résultats à vérifier
      */
     public Checker(FileCheck _fileCheck) {
         this.fileCheck = _fileCheck;
         this.plate = new CutChecker(0, 0);
     }
 
-
     /**
-     * Méthode permettant l'éxécution de l'algorithme
+     * Permet l'éxécution de l'algorithme
      */
     public void start() {
         boolean checked = true;
@@ -46,19 +55,18 @@ public class Checker {
     }
 
     /**
-     * Fonction qui vérifie que au niveau des Y les pièces ne dépassent pas les unes sur les autres
+     * Permet de vérifier que, au niveau des Y, les pièces ne dépassent pas les unes sur les autres
      * et que leur voisin de droite ne commence pas sur leur surface
-     *
-     * @return true si les pièces ne se superposent pas false sinon
+     * @return true si les pièces ne se superposent pas, false sinon
      */
     private boolean checkX() {;
         int y;
         int y_index;
-        Plate p;
+        Piece p;
         int y_next;
 
         for (int x : this.plate.getxPieces().keySet()) { // Pour chaque X
-            for (Map.Entry<Integer, Plate> subList : this.plate.getxPieces().get(x).entrySet()) { // On parcourt l'ensemble des pièces ayant ce même X
+            for (Map.Entry<Integer, Piece> subList : this.plate.getxPieces().get(x).entrySet()) { // On parcourt l'ensemble des pièces ayant ce même X
                 y = subList.getKey();
                 p = subList.getValue();
                 y_index = this.plate.getyList().indexOf(y);
@@ -94,17 +102,16 @@ public class Checker {
     }
 
     /**
-     * Fonction qui vérifie que au niveau des X les pièces ne dépassent pas les unes sur les autres
-     *
-     * @return un booléen true si les pièces ne se superposent pas false sinon
+     * Permet de vérifier que, au niveau des X, les pièces ne dépassent pas les unes sur les autres
+     * @return true si les pièces ne se superposent pas, false sinon
      */
     private boolean checkY() {
         int x;
         int x_index;
-        Plate p;
+        Piece p;
         int x_next;
         for (int y : this.plate.getyPieces().keySet()) { // Pour chaque Y
-            for (Map.Entry<Integer, Plate> subList : this.plate.getyPieces().get(y).entrySet()) { // On parcourt l'ensemble des pièces ayant ce même Y
+            for (Map.Entry<Integer, Piece> subList : this.plate.getyPieces().get(y).entrySet()) { // On parcourt l'ensemble des pièces ayant ce même Y
                 x = subList.getKey();
                 p = subList.getValue();
                 x_index = this.plate.getxList().indexOf(x);

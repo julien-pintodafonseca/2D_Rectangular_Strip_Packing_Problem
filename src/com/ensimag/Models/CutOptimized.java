@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class CutOptimized (plan de découpe pour l'algorithme OptimizedSolver)
+ * @author Groupe6
+ */
 public class CutOptimized extends Cut {
     private Map<Piece, Integer> pieces;
 
     /**
-     * Constructeur
+     * Constructeur de CutOptimized
      * @param clone : objet CutOptimized à cloner
      */
     public CutOptimized(CutOptimized clone) {
@@ -17,10 +21,10 @@ public class CutOptimized extends Cut {
     }
 
     /**
-     * Constructeur
-     * @param _lost : les pertes
-     * @param _info : liste de pièces placées avec leurs coordonnée sur la plaque
-     * @param _pieces : map de pièces restantes
+     * Constructeur de CutOptimized
+     * @param _lost : valeur des pertes
+     * @param _info : liste de PieceWithCoords (pièces découpées avec leurs coordonnées sur la plaque)
+     * @param _pieces : map contenant les pièces restantes (=les pièces non découpées)
      */
     public CutOptimized(int _lost, List<PieceWithCoords> _info, Map<Piece, Integer> _pieces) {
         super(_lost, _info);
@@ -28,16 +32,16 @@ public class CutOptimized extends Cut {
     }
 
     /**
-     * Getter
-     * @return l'attribut pieces
+     * Getter de la map contenant les pièces restantes (=les pièces non découpées)
+     * @return la map contenant les pièces restantes (=les pièces non découpées)
      */
     public Map<Piece, Integer> getPieces() {
         return this.pieces;
     }
 
     /**
-     * Convertie l'objet CutOptimized en objet Cut
-     * @return l'objet convertie en Cut
+     * Permet de convertir l'objet CutOptimized en objet Cut
+     * @return l'objet converti, de type Cut
      */
     public Cut convertToCut() {
         return new Cut(this.getLost(), this.getInfo());

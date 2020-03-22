@@ -5,16 +5,17 @@ import com.ensimag.Models.PieceWithCoords;
 import java.util.Comparator;
 
 /**
- * Created by solokwal on 2/21/20.
+ * Class SortByCoords
+ * @author Groupe6
  */
-
 public class SortByCoords implements Comparator<PieceWithCoords> {
     /**
-     * Méthode permettant de comparer deux pièces par rapport à leurs coordonnées
-     * @param p1 : première pièce à comparer
-     * @param p2 : deuxième pièce à comparer
-     * @return : 1 si Y de p1> y de p2
-     *           1 si p1 et p2 ont le même Y mais que Xde p1 > X de p2
+     * Méthode permettant de comparer deux pièces par rapport à leurs coordonnées,
+     * elle permet le trie par ordre croissant des pièces en fonction de leur Y puis de leur X
+     * @param p1 : première pièce, à comparer avec p2
+     * @param p2 : deuxième pièce, à comparer avec p1
+     * @return : 1 si Y de p1 > y de p2
+     *           1 si p1 et p2 ont le même Y mais que X de p1 > X de p2
      *           0 si elles ont les mêmes coordonées
      *           -1 si aucun des cas précédents
      */

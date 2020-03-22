@@ -2,31 +2,38 @@ package com.ensimag.Models;
 
 import java.util.*;
 
+/**
+ * Class CutChecker (plan de découpe pour l'algorithme Checker)
+ * @author Groupe6
+ */
 public class CutChecker extends Piece {
+    /**
+     * Valeur des pertes
+     */
     private int lost;
     /**
-     * La Map a un Integer qui est la coordonnée X. A chaque X est associé une Map contenant la liste des pièces et
-     * leur position Y qui sont à cette position X.
+     * Map d'un objet Integer correspondant à la coordonnée X.
+     * A chaque X est associé une Map contenant la liste des pièces qui sont à cette position X, et leur position Y.
      */
-    private Map<Integer, Map<Integer, Plate>> xPieces;
+    private Map<Integer, Map<Integer, Piece>> xPieces;
     /**
-     * La Map a un Integer qui est la coordonnée Y. A chaque Y est associé une Map contenant la liste des pièces et
-     * leur position X qui sont à cette position Y.
+     * Map d'un objet Integer correspondant à la coordonnée Y.
+     * A chaque Y est associé une Map contenant la liste des pièces qui sont à cette position Y, et leur position X.
      */
-    private Map<Integer, Map<Integer, Plate>> yPieces;
+    private Map<Integer, Map<Integer, Piece>> yPieces;
     /**
-     * La liste de tous les X sur lesquels il y a une ou plusieurs pièce(s).
+     * La liste de toutes les coordonnées X sur lesquelles il y a une ou plusieurs pièce(s).
      */
     private List<Integer> xList;
     /**
-     * La liste de tous les Y sur lesquels il y a une ou plusieurs pièce(s).
+     * La liste de toutes les coordonnées Y sur lesquelles il y a une ou plusieurs pièce(s).
      */
     private List<Integer> yList;
 
     /**
-     * Constructeur
-     * @param _h : la hauteur
-     * @param _w : la largeur
+     * Constructeur de CutChecker
+     * @param _h : la hauteur du plan de découpe
+     * @param _w : la largeur du plan de découpe
      */
     public CutChecker(int _h, int _w) {
         super(_h, _w);
@@ -38,23 +45,23 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Getter
+     * Getter de la map xPieces
      * @return l'attribut xPieces
      */
-    public Map<Integer, Map<Integer, Plate>> getxPieces() {
+    public Map<Integer, Map<Integer, Piece>> getxPieces() {
         return this.xPieces;
     }
 
     /**
-     * Getter
+     * Getter de la map yPieces
      * @return l'attribut yPieces
      */
-    public Map<Integer, Map<Integer, Plate>> getyPieces() {
+    public Map<Integer, Map<Integer, Piece>> getyPieces() {
         return this.yPieces;
     }
 
     /**
-     * Getter
+     * Getter de la liste de toutes les coordonnées X sur lesquelles il y a une ou plusieurs pièce(s)
      * @return l'attribut xList
      */
     public List<Integer> getxList() {
@@ -62,40 +69,40 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Getter
-     * @return  l'attribut yList
+     * Getter de la liste de toutes les coordonnées Y sur lesquelles il y a une ou plusieurs pièce(s)
+     * @return l'attribut yList
      */
     public List<Integer> getyList() {
         return this.yList;
     }
 
     /**
-     * Getter
-     * @return  l'attribut lost
+     * Getter de la valeur des pertes
+     * @return l'attribut lost
      */
     public int getLost() {
         return this.lost;
     }
 
     /**
-     * Setter
-     * @param _lost : nouvelle valeur de l'attribut de  l'attribut lost
+     * Setter de la valeur des pertes
+     * @param _lost : nouvelle valeur de l'attribut lost
      */
     public void setLost(int _lost) {
         this.lost = _lost;
     }
 
     /**
-     * Méthode qui permet d'aditionner les pertes existantes avec la veleur yes
-     * @param yes : int à ajouter aux pertes
+     * Permet d'ajouter des pertes à la valeur des pertes actuelles
+     * @param yes : valeur à ajouter aux pertes actuelles
      */
     public void addLost(int yes) {
         this.lost += yes;
     }
 
     /**
-     * Méthode qui permet d'ajouter une pièce découpée dans la plaque
-     * @param piece : la pièce à ajouter
+     * Permet d'ajouter une pièce découpée dans le plan de découpe
+     * @param piece : la pièce découpée à ajouter
      */
     public void addPiece(PieceWithCoords piece) {
         // initialisation des sous map si nécessaire
@@ -107,19 +114,19 @@ public class CutChecker extends Piece {
         }
 
         // On rajoute la pièce sur la map des X
-        Map<Integer, Plate> subXPieces = this.xPieces.get(piece.getX());
+        Map<Integer, Piece> subXPieces = this.xPieces.get(piece.getX());
         if (subXPieces.containsKey(piece.getY())) {
             System.out.println("Erreur deux pièces à la même position - CutChecker.java");
         }
-        subXPieces.put(piece.getY(), new Plate(piece.getH(), piece.getW()));
+        subXPieces.put(piece.getY(), new Piece(piece.getH(), piece.getW()));
         this.xPieces.put(piece.getX(), subXPieces);
 
         // On rajoute la pièce sur la map des Y
-        Map<Integer, Plate> subYPieces = this.yPieces.get(piece.getY());
+        Map<Integer, Piece> subYPieces = this.yPieces.get(piece.getY());
         if (subYPieces.containsKey(piece.getX())) {
             System.out.println("Erreur deux pièces à la même position - CutChecker.java");
         }
-        subYPieces.put(piece.getX(), new Plate(piece.getH(), piece.getW()));
+        subYPieces.put(piece.getX(), new Piece(piece.getH(), piece.getW()));
         this.yPieces.put(piece.getY(), subYPieces);
 
         // Ajouter le X de la pièce à la liste des X possibles
@@ -134,7 +141,7 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Fonction qui regarde si la pièce a une pièce voisine à droite qui se superpose sur elle
+     * Permet de vérifier si une pièce a une pièce voisine à droite qui se superpose sur elle
      *          ___________
      *         | Voisine |
      *     ___|____     |
@@ -144,9 +151,9 @@ public class CutChecker extends Piece {
      * @param x : la position X de la pièce
      * @param y : la position Y de la pièce
      * @param piece : la pièce à vérifier
-     * @return true si la pièce voisine à une pièce à droite qui se superpose false sinon
+     * @return true si la pièce voisine à une pièce à droite qui se superpose, false sinon
      */
-    public boolean suivX(int x, int y, Plate piece) {
+    public boolean suivX(int x, int y, Piece piece) {
         int x_index = this.xList.indexOf(x);
         if (x_index == this.xList.size() - 1) { //Si c'est la dernière pièce du X Alors pas de pièce voisine à droite
             return true;
@@ -179,7 +186,7 @@ public class CutChecker extends Piece {
                     y_index_max += 1;
                 }
             }
-            Map<Integer, Plate> subXPiecesY;
+            Map<Integer, Piece> subXPiecesY;
             // on fait varier x_index et y_index de manière à vérifier qu'il n'existe pas de pièce de coordonnées (xList.get(x_index), yList.get(y_index))
             // dans la surface de notre pièce
             while (x_index < x_index_max) {
@@ -198,13 +205,14 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Fonction qui permet d'avoir sur une ligne de coordonnée y la pièce suivant notre pièce située en x
+     * Permet d'obtenir, pour une pièce située en (x,y), la pièce voisine adjacente de coordonnées (x2,y),
+     * tel que x < x2 si cette pièce existe
      * @param x : coordonnée x de la pièce
      * @param y : coordonnée y de la pièce
-     * @return la coordonnée X de la pièce suivant notre pièce de coordonnées (x,y) si elle existe sinon -1
+     * @return la coordonnée x2 si la pièce existe, -1 sinon
      */
     public int nextX(int x, int y) {
-        Map<Integer, Plate> subYPiecesX = this.yPieces.get(y);
+        Map<Integer, Piece> subYPiecesX = this.yPieces.get(y);
         this.xList.indexOf(x);
         int indexNextX = this.xList.indexOf(x) + 1;
         int sizeXList = this.xList.size();
@@ -219,13 +227,14 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Fonction qui permet d'avoir sur une ligne de coordonnée x la pièce suivant notre pièce située en y
+     * Permet d'obtenir, pour une pièce située en (x,y), la pièce voisine adjacente de coordonnées (x,y2),
+     * tel que y < y2 si cette pièce existe
      * @param x : coordonnée x de la pièce
      * @param y : coordonnée y de la pièce
-     * @return la coordonnée Y de la pièce suivant notre pièce de coordonnées (x,y) si elle existe sinon -1
+     * @return la coordonnée y2 si la pièce existe, -1 sinon
      */
     public int nextY(int x, int y) {
-        Map<Integer, Plate> subXPiecesY = this.xPieces.get(x);
+        Map<Integer, Piece> subXPiecesY = this.xPieces.get(x);
         this.yList.indexOf(y);
         int indexNextY = this.yList.indexOf(y) + 1;
         int sizeYList = this.yList.size();
@@ -240,7 +249,7 @@ public class CutChecker extends Piece {
     }
 
     /**
-     * Méthode qui trie xList et yList dans l'ordre croissant
+     * Permet de trier xList et yList dans l'ordre croissant
      */
     public void sort() {
         Collections.sort(this.xList);
