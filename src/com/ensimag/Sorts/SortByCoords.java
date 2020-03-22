@@ -5,7 +5,7 @@ import com.ensimag.Models.PieceWithCoords;
 import java.util.Comparator;
 
 /**
- * Class SortByCoords
+ * Trie deux pièces de coordonnées (x,y) en fonction de y puis de x, par ordre croissant
  * @author Groupe6
  */
 public class SortByCoords implements Comparator<PieceWithCoords> {

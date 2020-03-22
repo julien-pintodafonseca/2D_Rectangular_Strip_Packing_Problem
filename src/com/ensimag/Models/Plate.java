@@ -1,7 +1,7 @@
 package com.ensimag.Models;
 
 /**
- * Class Plate (Plaque)
+ * Plaque
  * @author Groupe6
  */
 public class Plate extends Piece {

@@ -9,7 +9,7 @@ import com.ensimag.Models.Piece;
 import com.ensimag.Utils.Checker;
 
 /**
- * Main
+ * Classe principale "Main"
  * @author Groupe6
  */
 public class Main {

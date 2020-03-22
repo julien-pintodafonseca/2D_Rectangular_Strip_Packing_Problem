@@ -10,7 +10,7 @@ import com.ensimag.Models.Piece;
 import java.util.*;
 
 /**
- * Class OptimizedSolver (Algorithme tâche 3)
+ * Algorithme optimisé (tâche 3)
  * @author Groupe6
  */
 public class OptimizedSolver {

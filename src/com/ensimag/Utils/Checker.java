@@ -7,7 +7,7 @@ import com.ensimag.Models.Piece;
 import java.util.Map;
 
 /**
- * Class Checker (Algorithme tâche 4)
+ * Algorithme Checker (tâche 4)
  * @author Groupe6
  */
 public class Checker {

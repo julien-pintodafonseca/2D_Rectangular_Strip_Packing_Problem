@@ -1,7 +1,7 @@
 package com.ensimag.Models;
 
 /**
- * Class Piece (Pièce)
+ * Pièce
  */
 public class Piece {
     private int h; // height

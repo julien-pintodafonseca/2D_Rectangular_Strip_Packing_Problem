@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class CutOptimized (plan de découpe pour l'algorithme OptimizedSolver)
+ * Plan de découpe pour l'algorithme OptimizedSolver
  * @author Groupe6
  */
 public class CutOptimized extends Cut {

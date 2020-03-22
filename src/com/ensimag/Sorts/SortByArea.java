@@ -5,7 +5,7 @@ import com.ensimag.Models.Piece;
 import java.util.Comparator;
 
 /**
- * Class SortByArea
+ * Trie deux pièces en fonction de leur aire, par ordre croissant
  * @author Groupe6
  */
 public class SortByArea implements Comparator<Piece> {

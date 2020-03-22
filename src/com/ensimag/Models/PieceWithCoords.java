@@ -1,7 +1,7 @@
 package com.ensimag.Models;
 
 /**
- * Class PieceWithCoords (Pièce possédant des coordonnées x et y)
+ * Pièce possédant des coordonnées x et y
  * @author Groupe6
  */
 public class PieceWithCoords extends Piece {
@@ -27,7 +27,7 @@ public class PieceWithCoords extends Piece {
     }
 
     /**
-     * Construtueur de PieceWithCoords
+     * Constructeur de PieceWithCoords
      * @param _plate : objet plaque
      * @param _x : coordonnée x de la plaque
      * @param _y : coordonnée y de la plaque

@@ -3,7 +3,7 @@ package com.ensimag.Models;
 import java.util.*;
 
 /**
- * Class CutChecker (plan de découpe pour l'algorithme Checker)
+ * Plan de découpe pour l'algorithme Checker
  * @author Groupe6
  */
 public class CutChecker extends Piece {

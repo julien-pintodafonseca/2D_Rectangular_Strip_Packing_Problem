@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class Cut (plan de découpe pour l'algorithme BL2in1 : BL et BLAdvanced)
+ * Plan de découpe pour l'algorithme BL2in1 (BL et BLAdvanced)
  * @author Groupe6
  */
 public class Cut {

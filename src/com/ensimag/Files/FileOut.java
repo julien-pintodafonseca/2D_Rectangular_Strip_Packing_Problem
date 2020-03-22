@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.util.List;
 
 /**
- * Class FileOut (fichier de sortie / de résultats)
+ * Fichier de sortie/de résultats
  * @author Groupe6
  */
 public class FileOut {

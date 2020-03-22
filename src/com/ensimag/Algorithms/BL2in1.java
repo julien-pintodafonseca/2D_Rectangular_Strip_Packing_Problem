@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class BL2in1 (Algorithmes tâches 1 et 2)
+ * Algorithmes BL et BL avancé (tâches 1 et 2)
  * @author Groupe6
  */
 public class BL2in1 {
